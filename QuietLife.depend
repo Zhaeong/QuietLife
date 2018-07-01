@@ -6,11 +6,12 @@
 	<string>
 	<SDL2/SDL.h>
 
-1530422620 source:d:\cbproj\quietlife\main.cpp
+1530486545 source:d:\cbproj\quietlife\main.cpp
 	<SDL2/SDL.h>
 	<string>
 	<iostream>
-	"EventHandler.h"
+	"SDLHandler.h"
+	"GameObj.h"
 
 1519925811 d:\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -345,4 +346,21 @@
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
+
+1530486755 source:d:\cbproj\quietlife\src\sdlhandler.cpp
+	"SDLHandler.h"
+	<iostream>
+
+1530485169 d:\cbproj\quietlife\include\sdlhandler.h
+	<string>
+	<vector>
+	<SDL2/SDL.h>
+	"GameObj.h"
+
+1530486372 source:d:\cbproj\quietlife\src\gameobj.cpp
+	"GameObj.h"
+
+1530485635 d:\cbproj\quietlife\include\gameobj.h
+	<SDL2/SDL.h>
+	<string>
 
