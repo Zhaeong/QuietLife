@@ -5,23 +5,23 @@ SDLHandler::SDLHandler(int screenWidth, int screenHeight)
 {
     screenWidth = screenWidth;
     screenHeight = screenHeight;
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
-
     }
 
-    if (SDL_CreateWindowAndRenderer(screenWidth, screenHeight, SDL_WINDOW_RESIZABLE, &window, &renderer)) {
+    if (SDL_CreateWindowAndRenderer(screenWidth, screenHeight, SDL_WINDOW_RESIZABLE, &window, &renderer))
+    {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
-
     }
+
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+
+
 }
 
 SDLHandler::~SDLHandler()
 {
-    for(GameObj gObj : gameObjectArray)
-    {
-        SDL_FreeSurface(gObj.surface);
-    }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
@@ -65,14 +65,10 @@ string SDLHandler::getEvent()
                     default:
                         break;
                 }
-
-
                 break;
 
             case SDL_KEYUP:
                 eventName =  "Key release detected\n";
-
-
                 break;
 
             default:
@@ -91,12 +87,10 @@ int SDLHandler::addGameObject(GameObj gameObj)
 
 void SDLHandler::renderGameObjects()
 {
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
-
+    SDL_RenderClear(renderer);
 
     for(GameObj gObj : gameObjectArray)
     {
-
         SDL_Rect srcrect;
         SDL_Rect dstrect;
 
@@ -110,15 +104,10 @@ void SDLHandler::renderGameObjects()
         dstrect.w = gObj.width;
         dstrect.h = gObj.height;
 
-        SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, gObj.surface);
-        if (!texture) {
-            SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture from surface: %s", SDL_GetError());
-        }
-
-        SDL_RenderCopy(renderer, texture, &srcrect, &dstrect);
+        SDL_RenderCopy(renderer, gObj.m_texture, &srcrect, &dstrect);
     }
     SDL_RenderPresent(renderer);
-    SDL_RenderClear(renderer);
+
 
 }
 

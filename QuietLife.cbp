@@ -35,8 +35,7 @@
 			<Add directory="D:/SDL2-2.0.8/i686-w64-mingw32/include" />
 		</Compiler>
 		<Linker>
-			<Add option="-static" />
-			<Add option="-lmingw32 -lSDL2main -lSDL2 -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid -static-libgcc" />
+			<Add option="-lmingw32 -lSDL2main -lSDL2" />
 			<Add library="mingw32" />
 			<Add library="SDL2main" />
 			<Add library="SDL2.dll" />

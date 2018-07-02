@@ -10,28 +10,22 @@ int main(int argc, char *argv[])
 {
     SDLHandler SH(640, 480);
 
-    GameObj playerObj;
-    playerObj.loadSurface("res/bikeMan.bmp");
+    GameObj playerObj(0, 0, SH.renderer);
+    playerObj.loadImage("res/bikeMan.bmp");
 
-    while (1) {
+    SH.addGameObject(playerObj);
 
-        SH.gameObjectArray.clear();
-
+    while (1)
+    {
         string eventName = SH.getEvent();
 
         if(eventName == "MOVE_LEFT")
         {
             cout << eventName;
-            playerObj.x_location += 2;
-
-            cout << playerObj.x_location;
         }
-
-        SH.addGameObject(playerObj);
         SH.renderGameObjects();
-
-
     }
+
 
     return 0;
 }
