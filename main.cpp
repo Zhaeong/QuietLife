@@ -22,6 +22,10 @@ int main(int argc, char *argv[])
         if(eventName == "MOVE_LEFT")
         {
             cout << eventName;
+            GameObj player = SH.gameObjectArray.at(0);
+            player.x_location += 1;
+
+            SH.gameObjectArray[0] = player;
         }
         SH.renderGameObjects();
     }
