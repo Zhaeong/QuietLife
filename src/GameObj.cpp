@@ -20,6 +20,7 @@ void GameObj::loadImage(string imgLocation)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create surface from image: %s", SDL_GetError());
     }
 
+    SDL_SetColorKey( surface, SDL_TRUE, SDL_MapRGB( surface->format, 255, 255, 255 ) );
     m_texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     if (!m_texture)
     {

@@ -15,7 +15,7 @@ SDLHandler::SDLHandler(int screenWidth, int screenHeight)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
     }
 
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
 }
