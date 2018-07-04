@@ -11,18 +11,19 @@ class GameObj
         GameObj(int x_location, int y_location, SDL_Renderer* renderer);
         virtual ~GameObj();
 
-        int x_location;
-        int y_location;
+        int m_xPos;
+        int m_yPos;
 
-        int width;
-        int height;
+        int m_width;
+        int m_height;
 
-        string imageLocation;
+        string m_imageLocation;
 
         SDL_Texture *m_texture;
         SDL_Renderer *m_renderer;
 
-        void loadImage(string imgLocation);
+        void loadImage(string imageLocation);
+        void render(SDL_Rect srcRect, SDL_Rect dstRect);
 
     protected:
 

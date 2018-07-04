@@ -16,23 +16,16 @@ class SDLHandler
         int screenHeight;
         int screenWidth;
 
-
         SDL_Event event;
-
         SDL_Window *window;
         SDL_Renderer *renderer;
-
-        vector<GameObj> gameObjectArray;
-
 
         SDLHandler(int screenWidth, int screenHeight);
         virtual ~SDLHandler();
 
-
         string getEvent();
 
-        int addGameObject(GameObj gameObj);
-        void renderGameObjects();
+        void renderTexture(SDL_Texture *texture, SDL_Rect srcRect, SDL_Rect dstRect);
 
     protected:
 

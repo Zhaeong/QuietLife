@@ -24,7 +24,6 @@ SDLHandler::~SDLHandler()
 {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-
     SDL_Quit();
 }
 
@@ -44,8 +43,6 @@ string SDLHandler::getEvent()
 
             case SDL_KEYDOWN:
                 eventName = "Key press detected\n";
-
-                //printf( ", Name: %s", SDL_GetKeyName( event.key.keysym.sym ) );
 
                 /* Check the SDLKey values and move change the coords */
                 switch( event.key.keysym.sym )
@@ -74,40 +71,14 @@ string SDLHandler::getEvent()
             default:
                 break;
         }
-
     }
     return eventName;
 }
 
-int SDLHandler::addGameObject(GameObj gameObj)
+
+
+void SDLHandler::renderTexture(SDL_Texture *texture, SDL_Rect srcRect, SDL_Rect dstRect)
 {
-    gameObjectArray.push_back(gameObj);
-    return 0;
-}
-
-void SDLHandler::renderGameObjects()
-{
-    SDL_RenderClear(renderer);
-
-    for(GameObj gObj : gameObjectArray)
-    {
-        SDL_Rect srcrect;
-        SDL_Rect dstrect;
-
-        srcrect.x = 0;
-        srcrect.y = 0;
-        srcrect.w = gObj.width;
-        srcrect.h = gObj.height;
-
-        dstrect.x = gObj.x_location;
-        dstrect.y = gObj.y_location;
-        dstrect.w = gObj.width;
-        dstrect.h = gObj.height;
-
-        SDL_RenderCopy(renderer, gObj.m_texture, &srcrect, &dstrect);
-    }
-    SDL_RenderPresent(renderer);
-
-
+    SDL_RenderCopy(renderer, texture, &srcRect, &dstRect);
 }
 

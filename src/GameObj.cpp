@@ -2,8 +2,8 @@
 
 GameObj::GameObj(int x_pos, int y_pos, SDL_Renderer *renderer)
 {
-    x_location = x_pos;
-    y_location = y_pos;
+    m_xPos = x_pos;
+    m_yPos = y_pos;
     m_renderer = renderer;
 }
 
@@ -11,9 +11,9 @@ GameObj::~GameObj()
 {
 }
 
-void GameObj::loadImage(string imgLocation)
+void GameObj::loadImage(string imageLocation)
 {
-    imageLocation = imgLocation;
+    m_imageLocation = imageLocation;
     SDL_Surface *surface = SDL_LoadBMP(imageLocation.c_str());
 
     if (!surface) {
@@ -28,12 +28,24 @@ void GameObj::loadImage(string imgLocation)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture from surface: %s", SDL_GetError());
     }
 
-    width = surface->w;
-    height = surface->h;
+    m_width = surface->w;
+    m_height = surface->h;
 
 
     SDL_FreeSurface(surface);
 
+}
 
+void GameObj::render(SDL_Rect srcRect, SDL_Rect dstRect)
+{
+    /*
+    SDL_Rect srcRect;
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = m_width;
+    srcRect.h = m_height;
+    */
+
+    SDL_RenderCopy(m_renderer, m_texture, &srcRect, &dstRect);
 
 }

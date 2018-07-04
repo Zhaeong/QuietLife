@@ -365,28 +365,37 @@
 	<iostream>
 	<string>
 
-1530576322 source:d:\github\quietlife\main.cpp
+1530679301 source:d:\github\quietlife\main.cpp
 	<SDL2/SDL.h>
 	<string>
 	<iostream>
-	"SDLHandler.h"
-	"GameObj.h"
+	"Game.h"
 
-1530576321 d:\github\quietlife\include\sdlhandler.h
+1530678769 d:\github\quietlife\include\sdlhandler.h
 	<string>
 	<vector>
 	<SDL2/SDL.h>
 	"GameObj.h"
 
-1530576321 d:\github\quietlife\include\gameobj.h
+1530680441 d:\github\quietlife\include\gameobj.h
 	<SDL2/SDL.h>
 	<iostream>
 	<string>
 
-1530585524 source:d:\github\quietlife\src\gameobj.cpp
+1530680429 source:d:\github\quietlife\src\gameobj.cpp
 	"GameObj.h"
 
-1530585589 source:d:\github\quietlife\src\sdlhandler.cpp
+1530678778 source:d:\github\quietlife\src\sdlhandler.cpp
 	"SDLHandler.h"
 	<iostream>
+
+1530679865 d:\github\quietlife\include\game.h
+	<string>
+	<vector>
+	<SDL2/SDL.h>
+	"SDLHandler.h"
+	"GameObj.h"
+
+1530681158 source:d:\github\quietlife\src\game.cpp
+	"Game.h"
 

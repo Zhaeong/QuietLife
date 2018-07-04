@@ -3,12 +3,12 @@
 #include <string>
 #include <iostream>
 
-#include "SDLHandler.h"
-#include "GameObj.h"
+#include "Game.h"
 
 int main(int argc, char *argv[])
 {
-    SDLHandler SH(640, 480);
+
+    Game* mainGame = new Game();
 
     const int FPS = 60;
 
@@ -19,26 +19,12 @@ int main(int argc, char *argv[])
     float frameTime;
 
 
-    GameObj playerObj(0, 0, SH.renderer);
-    playerObj.loadImage("res/bikeMan.bmp");
-
-    SH.addGameObject(playerObj);
-
     while (1)
     {
         frameStart = SDL_GetTicks();
+        mainGame->processEvents();
+        mainGame->render();
 
-        string eventName = SH.getEvent();
-
-        if(eventName == "MOVE_LEFT")
-        {
-            cout << eventName;
-            GameObj player = SH.gameObjectArray.at(0);
-            player.x_location += 5;
-
-            SH.gameObjectArray[0] = player;
-        }
-        SH.renderGameObjects();
 
         frameTime = SDL_GetTicks() - frameStart;
 
