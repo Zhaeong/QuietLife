@@ -28,11 +28,13 @@ void GameObj::loadImage(string imageLocation)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture from surface: %s", SDL_GetError());
     }
 
-    m_width = surface->w;
-    m_height = surface->h;
-
+    //m_width = surface->w;
+    //m_height = surface->h;
 
     SDL_FreeSurface(surface);
+
+    SDL_QueryTexture(m_texture, NULL, NULL, &m_width, &m_height);
+
 
 }
 

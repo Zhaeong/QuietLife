@@ -2,22 +2,28 @@
 
 Game::Game()
 {
-    SH = new SDLHandler(640, 480);
 
+    gameWidth = 640;
+    gameHeight = 480;
+    SH = new SDLHandler(gameWidth, gameHeight);
+
+    //Load Player texture
     playerObj = new GameObj(0, 0, SH->renderer);
     playerObj->loadImage("res/bikeMan.bmp");
 
+
+    //Load background texture
+    backGroundObj = new GameObj(0,0, SH->renderer);
+    backGroundObj->loadImage("res/background.bmp");
+
     //Load camera pos relative to player
-
     cameraRect = new SDL_Rect;
-    cameraRect->h = 500;
-    cameraRect->w = 500;
-    cameraRect->x = playerObj->m_xPos;
-    cameraRect->y = playerObj->m_yPos;
+    cameraRect->h = gameHeight;
+    cameraRect->w = gameWidth;
+    cameraRect->x = 0;
+    cameraRect->y = 0;
 
-    GameObj backGroundObj(0,0, SH->renderer);
-    backGroundObj.loadImage("res/background.bmp");
-    addGameObject(backGroundObj);
+
 }
 
 Game::~Game()
@@ -37,26 +43,51 @@ void Game::processEvents()
     if(eventName == "MOVE_LEFT")
     {
         cout << eventName;
-        playerObj->m_xPos  -= 5;
+        playerObj->m_xPos  -= 4;
     }
 
     if(eventName == "MOVE_RIGHT")
     {
         cout << eventName;
-        playerObj->m_xPos  += 5;
+        playerObj->m_xPos  += 4;
     }
 
     if(eventName == "MOVE_DOWN")
     {
-        playerObj->m_yPos += 5;
+        playerObj->m_yPos += 4;
     }
 
-    //update camera position
-    cameraRect->x = playerObj->m_xPos;
-    cameraRect->y = playerObj->m_yPos;
+    //update camera position based on player position
+    //First the player position needs to be offset by its height and width, then minus the game dimensions
+    cameraRect->x = (playerObj->m_xPos + (playerObj->m_width  /2)) - (gameWidth/2);
+    cameraRect->y = (playerObj->m_yPos + (playerObj->m_height /2)) - (gameHeight/2);
 }
 void Game::render()
 {
+    SDL_RenderClear(SH->renderer);
+
+    //Render background
+    SDL_Rect dstRectBckObj;
+
+    dstRectBckObj.h = cameraRect->h;
+    dstRectBckObj.w = cameraRect->w;
+    dstRectBckObj.x = 0;
+    dstRectBckObj.y = 0;
+    backGroundObj->render(*cameraRect, dstRectBckObj);
+
+    //Render objects in game array
+    for(GameObj gObj : gameObjectArray)
+    {
+        SDL_Rect dstRectObj;
+        dstRectObj.h = cameraRect->h;
+        dstRectObj.w = cameraRect->w;
+        dstRectObj.x = 0;
+        dstRectObj.y = 0;
+        gObj.render(*cameraRect, dstRectObj);
+    }
+
+
+    //Render Player
     SDL_Rect srcRect, dstRect;
 
     srcRect.h = playerObj->m_height;
@@ -66,31 +97,8 @@ void Game::render()
 
     dstRect.h = playerObj->m_height;
     dstRect.w = playerObj->m_width;
-    dstRect.x = 0;
-    dstRect.y = 0;
-
-    SDL_RenderClear(SH->renderer);
-
-
-    for(GameObj gObj : gameObjectArray)
-    {
-
-        SDL_Rect srcRectObj;
-
-        srcRectObj.h = cameraRect->h;
-        srcRectObj.w = cameraRect->w;
-        srcRectObj.x = cameraRect->x;
-        srcRectObj.y = cameraRect->y;
-
-
-        SDL_Rect dstRectObj;
-
-        dstRectObj.h = cameraRect->h;
-        dstRectObj.w = cameraRect->w;
-        dstRectObj.x = 0;
-        dstRectObj.y = 0;
-        gObj.render(srcRectObj, dstRectObj);
-    }
+    dstRect.x = (cameraRect->w / 2) - (playerObj->m_width /2);
+    dstRect.y = (cameraRect->h / 2) - (playerObj->m_height /2);
 
     playerObj->render(srcRect, dstRect);
 

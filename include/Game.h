@@ -18,15 +18,18 @@ class Game
         Game();
         virtual ~Game();
 
-        SDLHandler* SH;
+        int gameHeight;
+        int gameWidth;
 
-        SDL_Rect* cameraRect;
+        SDLHandler *SH;
+
+        SDL_Rect *cameraRect;
+
         GameObj *playerObj;
 
+        GameObj *backGroundObj;
+
         vector<GameObj> gameObjectArray;
-
-
-
 
         void addGameObject(GameObj gameObj);
 
