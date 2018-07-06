@@ -16,6 +16,12 @@ Game::Game()
     backGroundObj = new GameObj(0,0, SH->renderer);
     backGroundObj->loadImage("res/background.bmp");
 
+    minBoundX = 0;
+    minBoundY = 0;
+    maxBoundX = backGroundObj->m_width;
+    maxBoundY = backGroundObj->m_height;
+
+
     //Load camera pos relative to player
     cameraRect = new SDL_Rect;
     cameraRect->h = gameHeight;
@@ -40,22 +46,57 @@ void Game::processEvents()
 {
     string eventName = SH->getEvent();
 
+    int newX = playerObj->m_xPos;
+    int newY = playerObj->m_yPos;
+
     if(eventName == "MOVE_LEFT")
     {
-        cout << eventName;
-        playerObj->m_xPos  -= 4;
+        int nextX = newX - 4;
+        if(hitBoundary(nextX, newY, playerObj->m_width, playerObj->m_height,
+                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "LEFT")
+        {
+            newX  = nextX;
+        }
+        else
+        {
+            cout << "hit left";
+        }
     }
 
     if(eventName == "MOVE_RIGHT")
     {
-        cout << eventName;
-        playerObj->m_xPos  += 4;
+        int nextX = newX + 4;
+        if(hitBoundary(nextX, newY, playerObj->m_width, playerObj->m_height,
+                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "RIGHT")
+        {
+            newX  = nextX;
+        }
     }
 
     if(eventName == "MOVE_DOWN")
     {
-        playerObj->m_yPos += 4;
+        int nextY = newY + 4;
+        if(hitBoundary(newX, nextY, playerObj->m_width, playerObj->m_height,
+                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "BOTTOM")
+        {
+            newY  = nextY;
+        }
     }
+
+    if(eventName == "MOVE_UP")
+    {
+        int nextY = newY - 4;
+        if(hitBoundary(newX, nextY, playerObj->m_width, playerObj->m_height,
+                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "UP")
+        {
+            newY  = nextY;
+        }
+    }
+
+    playerObj->m_xPos = newX;
+    playerObj->m_yPos = newY;
+
+
 
     //update camera position based on player position
     //First the player position needs to be offset by its height and width, then minus the game dimensions

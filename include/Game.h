@@ -10,6 +10,7 @@
 #include "SDLHandler.h"
 #include "GameObj.h"
 
+#include "GameUtil.h"
 
 class Game
 {
@@ -20,6 +21,11 @@ class Game
 
         int gameHeight;
         int gameWidth;
+
+        int minBoundX;
+        int minBoundY;
+        int maxBoundX;
+        int maxBoundY;
 
         SDLHandler *SH;
 
