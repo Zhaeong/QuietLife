@@ -1,8 +1,12 @@
 #ifndef GAMEOBJ_H
 #define GAMEOBJ_H
-#include <SDL2/SDL.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
 #include <iostream>
 #include <string>
+
+
 using namespace std;
 
 class GameObj
@@ -22,8 +26,12 @@ class GameObj
         SDL_Texture *m_texture;
         SDL_Renderer *m_renderer;
 
+        //functions
+
         void loadImage(string imageLocation);
+        void loadText(TTF_Font *font, string fontText, SDL_Color fontColor);
         void render(SDL_Rect srcRect, SDL_Rect dstRect);
+        void free();
 
     protected:
 

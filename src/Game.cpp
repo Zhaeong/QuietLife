@@ -2,19 +2,38 @@
 
 Game::Game()
 {
-
+    cout << "Init Game\n";
     gameWidth = 640;
     gameHeight = 480;
     SH = new SDLHandler(gameWidth, gameHeight);
 
+
+    //Initialize libraries
+    //Initialize PNG loading
+    cout << "Loading IMG Lib\n";
+    int imgFlags = IMG_INIT_PNG;
+    if( !( IMG_Init( imgFlags ) & imgFlags ) )
+    {
+        printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+    }
+
+    cout << "Loading Font Lib\n";
+    //Initialize SDL_ttf
+    if( TTF_Init() == -1 )
+    {
+        printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+    }
+
+    cout << "Loading Player\n";
     //Load Player texture
     playerObj = new GameObj(0, 0, SH->renderer);
-    playerObj->loadImage("res/bikeMan.bmp");
+    playerObj->loadImage("res/bmp/bikeMan.bmp");
 
 
+    cout << "Loading Background\n";
     //Load background texture
     backGroundObj = new GameObj(0,0, SH->renderer);
-    backGroundObj->loadImage("res/background.bmp");
+    backGroundObj->loadImage("res/bmp/background.bmp");
 
     minBoundX = 0;
     minBoundY = 0;
@@ -28,6 +47,16 @@ Game::Game()
     cameraRect->w = gameWidth;
     cameraRect->x = 0;
     cameraRect->y = 0;
+
+
+    gameFont = TTF_OpenFont("res/fonts/AmaticSC-Regular.ttf", 28);
+
+    //Load font texture
+
+    SDL_Color textColor = { 0, 0, 0 };
+
+    fontObj = new GameObj(0, 0, SH->renderer);
+    fontObj->loadText(gameFont, "heyyyyy baby", textColor);
 
 
 }
@@ -91,6 +120,7 @@ void Game::processEvents()
         {
             newY  = nextY;
         }
+
     }
 
     playerObj->m_xPos = newX;
@@ -143,5 +173,23 @@ void Game::render()
 
     playerObj->render(srcRect, dstRect);
 
+    //Render font
+
+    SDL_Rect fontRect;
+
+    fontRect.h = fontObj->m_height;
+    fontRect.w = fontObj->m_width;
+    fontRect.x = 0;
+    fontRect.y = 0;
+
+
+    SDL_Color textColor = { 0, 0, 0 };
+    fontObj->loadText(gameFont, "x:" + to_string(playerObj->m_xPos) + " y:" + to_string(playerObj->m_yPos), textColor);
+
+
+    fontObj->render(fontRect, fontRect);
+
+
     SDL_RenderPresent(SH->renderer);
+
 }

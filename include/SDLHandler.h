@@ -2,7 +2,7 @@
 #define SDLHANDLER_H
 #include <string>
 #include <vector>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "GameObj.h"
 

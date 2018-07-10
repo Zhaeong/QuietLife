@@ -1,5 +1,5 @@
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <string>
 #include <iostream>
 
@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
         frameStart = SDL_GetTicks();
         mainGame->processEvents();
         mainGame->render();
-
 
         frameTime = SDL_GetTicks() - frameStart;
 

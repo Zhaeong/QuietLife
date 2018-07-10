@@ -6,11 +6,16 @@
 #include <vector>
 
 //Project Lib
-#include <SDL2/SDL.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+
 #include "SDLHandler.h"
 #include "GameObj.h"
 
 #include "GameUtil.h"
+
+using namespace std;
 
 class Game
 {
@@ -35,8 +40,13 @@ class Game
 
         GameObj *backGroundObj;
 
+        GameObj *fontObj;
+
         vector<GameObj> gameObjectArray;
 
+        TTF_Font *gameFont;
+
+        //functions
         void addGameObject(GameObj gameObj);
 
         void processEvents();
