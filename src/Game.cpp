@@ -7,8 +7,8 @@ Game::Game()
     gameHeight = 480;
     SH = new SDLHandler(gameWidth, gameHeight);
 
-
     //Initialize libraries
+
     //Initialize PNG loading
     cout << "Loading IMG Lib\n";
     int imgFlags = IMG_INIT_PNG;
@@ -17,47 +17,42 @@ Game::Game()
         printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
     }
 
-    cout << "Loading Font Lib\n";
     //Initialize SDL_ttf
+    cout << "Loading Font Lib\n";
     if( TTF_Init() == -1 )
     {
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
     }
 
-    cout << "Loading Player\n";
     //Load Player texture
+    cout << "Loading Player\n";
     playerObj = new GameObj(1000, 500, SH->renderer);
     playerObj->loadImage("res/bmp/bikeMan.bmp");
 
-
-    cout << "Loading Background\n";
     //Load background texture
+    cout << "Loading Background\n";
     backGroundObj = new GameObj(0,0, SH->renderer);
     backGroundObj->loadImage("res/bmp/background.bmp");
 
+    //Set game bound according to game background
     minBoundX = 0;
     minBoundY = 0;
     maxBoundX = backGroundObj->m_width;
     maxBoundY = backGroundObj->m_height;
 
-
-    //Load camera pos relative to player
+    //Load camera to be same
     cameraRect = new SDL_Rect;
     cameraRect->h = gameHeight;
     cameraRect->w = gameWidth;
     cameraRect->x = 0;
     cameraRect->y = 0;
 
-
+    //Load debug font texture
     gameFont = TTF_OpenFont("res/fonts/AmaticSC-Regular.ttf", 28);
-
-    //Load font texture
-
     SDL_Color textColor = { 0, 0, 0 };
 
     fontObj = new GameObj(0, 0, SH->renderer);
     fontObj->loadText(gameFont, "heyyyyy baby", textColor);
-
 
 }
 
@@ -126,8 +121,6 @@ void Game::processEvents()
 
     //update camera position based on player position
     //First the player position needs to be offset by its height and width, then minus the game dimensions
-
-
     cameraRect->x = convertPlayerXtoCamX(playerObj, cameraRect);
     cameraRect->y = convertPlayerYtoCamY(playerObj, cameraRect);
 }
