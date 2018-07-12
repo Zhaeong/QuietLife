@@ -94,7 +94,6 @@ void Game::processEvents()
     if(eventName == "MOVE_UP")
     {
         nextY = originalY - 4;
-
     }
 
     playerObj->m_xPos = nextX;
@@ -110,6 +109,7 @@ void Game::processEvents()
                                       maxBoundX,
                                       maxBoundY);
 
+    //Depending on where it hit, revert player position to original
     if(hitDirection == "LEFT" || hitDirection == "RIGHT")
     {
         playerObj->m_xPos = originalX;
@@ -119,7 +119,7 @@ void Game::processEvents()
         playerObj->m_yPos = originalY;
     }
 
-    //update camera position based on player position
+    //update camera position based on final player position
     //First the player position needs to be offset by its height and width, then minus the game dimensions
     cameraRect->x = convertPlayerXtoCamX(playerObj, cameraRect);
     cameraRect->y = convertPlayerYtoCamY(playerObj, cameraRect);
