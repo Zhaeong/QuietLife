@@ -43,7 +43,7 @@ void GameObj::loadText(TTF_Font *font, string fontText, SDL_Color fontColor)
 {
     free();
 
-    SDL_Surface* textSurface = TTF_RenderText_Solid( font, fontText.c_str(), fontColor );
+    SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped( font, fontText.c_str(), fontColor, 150 );
     if( textSurface == NULL )
     {
         cout << "Unable to render text surface! SDL_ttf Error: %s\n" << TTF_GetError() ;

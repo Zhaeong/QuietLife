@@ -26,7 +26,7 @@ Game::Game()
 
     cout << "Loading Player\n";
     //Load Player texture
-    playerObj = new GameObj(0, 0, SH->renderer);
+    playerObj = new GameObj(1000, 500, SH->renderer);
     playerObj->loadImage("res/bmp/bikeMan.bmp");
 
 
@@ -75,63 +75,61 @@ void Game::processEvents()
 {
     string eventName = SH->getEvent();
 
-    int newX = playerObj->m_xPos;
-    int newY = playerObj->m_yPos;
+    int originalX = playerObj->m_xPos;
+    int originalY = playerObj->m_yPos;
+
+    int nextX = originalX;
+    int nextY = originalY;
 
     if(eventName == "MOVE_LEFT")
     {
-        int nextX = newX - 4;
-        if(hitBoundary(nextX, newY, playerObj->m_width, playerObj->m_height,
-                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "LEFT")
-        {
-            newX  = nextX;
-        }
-        else
-        {
-            cout << "hit left";
-        }
+        nextX = originalX - 4;
     }
 
     if(eventName == "MOVE_RIGHT")
     {
-        int nextX = newX + 4;
-        if(hitBoundary(nextX, newY, playerObj->m_width, playerObj->m_height,
-                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "RIGHT")
-        {
-            newX  = nextX;
-        }
+        nextX = originalX + 4;
     }
 
     if(eventName == "MOVE_DOWN")
     {
-        int nextY = newY + 4;
-        if(hitBoundary(newX, nextY, playerObj->m_width, playerObj->m_height,
-                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "BOTTOM")
-        {
-            newY  = nextY;
-        }
+        nextY = originalY + 4;
     }
 
     if(eventName == "MOVE_UP")
     {
-        int nextY = newY - 4;
-        if(hitBoundary(newX, nextY, playerObj->m_width, playerObj->m_height,
-                       minBoundX, minBoundY, maxBoundX, maxBoundY) != "UP")
-        {
-            newY  = nextY;
-        }
+        nextY = originalY - 4;
 
     }
 
-    playerObj->m_xPos = newX;
-    playerObj->m_yPos = newY;
+    playerObj->m_xPos = nextX;
+    playerObj->m_yPos = nextY;
 
+    //Check if the camera rect hits the game boundary
+    string hitDirection = hitBoundary(convertPlayerXtoCamX(playerObj, cameraRect),
+                                      convertPlayerYtoCamY(playerObj, cameraRect),
+                                      cameraRect->w,
+                                      cameraRect->h,
+                                      minBoundX,
+                                      minBoundY,
+                                      maxBoundX,
+                                      maxBoundY);
 
+    if(hitDirection == "LEFT" || hitDirection == "RIGHT")
+    {
+        playerObj->m_xPos = originalX;
+    }
+    else if (hitDirection == "TOP" || hitDirection == "BOTTOM")
+    {
+        playerObj->m_yPos = originalY;
+    }
 
     //update camera position based on player position
     //First the player position needs to be offset by its height and width, then minus the game dimensions
-    cameraRect->x = (playerObj->m_xPos + (playerObj->m_width  /2)) - (gameWidth/2);
-    cameraRect->y = (playerObj->m_yPos + (playerObj->m_height /2)) - (gameHeight/2);
+
+
+    cameraRect->x = convertPlayerXtoCamX(playerObj, cameraRect);
+    cameraRect->y = convertPlayerYtoCamY(playerObj, cameraRect);
 }
 void Game::render()
 {
@@ -184,7 +182,10 @@ void Game::render()
 
 
     SDL_Color textColor = { 0, 0, 0 };
-    fontObj->loadText(gameFont, "x:" + to_string(playerObj->m_xPos) + " y:" + to_string(playerObj->m_yPos), textColor);
+    fontObj->loadText(gameFont,
+                      "pla - x:" + to_string(playerObj->m_xPos) + " y:" + to_string(playerObj->m_yPos) + "\n" +
+                      "cam - x:" + to_string(cameraRect->x) + " y:" + to_string(cameraRect->y),
+                      textColor);
 
 
     fontObj->render(fontRect, fontRect);
