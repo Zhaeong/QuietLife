@@ -157,10 +157,11 @@ void Game::render()
     srcRect.x = 0;
     srcRect.y = 0;
 
-    dstRect.h = playerObj->m_height;
-    dstRect.w = playerObj->m_width;
+    //Set player output render box to middle of screen
     dstRect.x = (cameraRect->w / 2) - (playerObj->m_width /2);
     dstRect.y = (cameraRect->h / 2) - (playerObj->m_height /2);
+    dstRect.h = playerObj->m_height;
+    dstRect.w = playerObj->m_width;
 
     playerObj->render(srcRect, dstRect);
 
