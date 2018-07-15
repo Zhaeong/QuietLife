@@ -1,11 +1,11 @@
 #include "GameObj.h"
 
-GameObj::GameObj(int x_pos, int y_pos, SDL_Renderer *renderer)
+GameObj::GameObj(int x_pos, int y_pos, SDLHandler *SH)
 {
     m_texture = NULL;
     m_xPos = x_pos;
     m_yPos = y_pos;
-    m_renderer = renderer;
+    m_SH = SH;
 }
 
 GameObj::~GameObj()
@@ -26,7 +26,7 @@ void GameObj::loadImage(string imageLocation)
     }
 
     SDL_SetColorKey( surface, SDL_TRUE, SDL_MapRGB( surface->format, 255, 255, 255 ) );
-    m_texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    m_texture = SDL_CreateTextureFromSurface(m_SH->renderer, surface);
     if (!m_texture)
     {
         cout << "texture error";
@@ -50,7 +50,7 @@ void GameObj::loadText(TTF_Font *font, string fontText, SDL_Color fontColor)
     }
     else
     { //Create texture from surface pixels
-        m_texture =  SDL_CreateTextureFromSurface( m_renderer, textSurface );
+        m_texture =  SDL_CreateTextureFromSurface( m_SH->renderer, textSurface );
         if( m_texture == NULL )
         {
             cout << "Unable to create texture from rendered text! SDL Error: %s\n" << SDL_GetError() ;
@@ -61,9 +61,60 @@ void GameObj::loadText(TTF_Font *font, string fontText, SDL_Color fontColor)
 
     SDL_QueryTexture(m_texture, NULL, NULL, &m_width, &m_height);
 
-
 }
 
+void GameObj::loadEditImage(string imageLocation)
+{
+    free();
+
+    SDL_Surface* loadedSurface = IMG_Load( imageLocation.c_str() );
+
+    if( loadedSurface == NULL )
+	{
+		printf( "Unable to load image %s! SDL_image Error: %s\n", imageLocation.c_str(), IMG_GetError() );
+	}
+	else
+	{
+		//Convert surface to display format
+		SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface, SDL_GetWindowPixelFormat( m_SH->window ), 0 );
+		if( formattedSurface == NULL )
+		{
+			printf( "Unable to convert loaded surface to display format! SDL Error: %s\n", SDL_GetError() );
+		}
+		else
+		{
+			//Create blank streamable texture
+			m_texture = SDL_CreateTexture( m_SH->renderer, SDL_GetWindowPixelFormat( m_SH->window ), SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
+			if( m_texture == NULL )
+			{
+				printf( "Unable to create blank texture! SDL Error: %s\n", SDL_GetError() );
+			}
+			else
+			{
+				//Lock texture for manipulation
+				SDL_LockTexture( m_texture, NULL, &m_pixels, &m_pitch );
+
+				//Copy loaded/formatted surface pixels
+				memcpy( m_pixels, formattedSurface->pixels, formattedSurface->pitch * formattedSurface->h );
+
+				//Unlock texture to update
+				SDL_UnlockTexture( m_texture );
+				m_pixels = NULL;
+
+				//Get image dimensions
+				m_width = formattedSurface->w;
+				m_height = formattedSurface->h;
+			}
+
+			//Get rid of old formatted surface
+			SDL_FreeSurface( formattedSurface );
+		}
+
+		//Get rid of old loaded surface
+		SDL_FreeSurface( loadedSurface );
+	}
+
+}
 void GameObj::free()
 {
     if( m_texture != NULL )
@@ -88,6 +139,6 @@ void GameObj::render(SDL_Rect srcRect, SDL_Rect dstRect)
     srcRect.h = m_height;
     */
 
-    SDL_RenderCopy(m_renderer, m_texture, &srcRect, &dstRect);
+    SDL_RenderCopy(m_SH->renderer, m_texture, &srcRect, &dstRect);
 
 }

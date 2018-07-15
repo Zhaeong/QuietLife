@@ -26,13 +26,17 @@ Game::Game()
 
     //Load Player texture
     cout << "Loading Player\n";
-    playerObj = new GameObj(1000, 500, SH->renderer);
+    playerObj = new GameObj(1000, 500, SH);
     playerObj->loadImage("res/bmp/bikeMan.bmp");
 
     //Load background texture
     cout << "Loading Background\n";
-    backGroundObj = new GameObj(0,0, SH->renderer);
+    backGroundObj = new GameObj(0,0, SH);
     backGroundObj->loadImage("res/bmp/background.bmp");
+
+    GameObj testGame(500, 500, SH);
+    testGame.loadEditImage("res/png/testObj.png");
+    gameObjectArray.push_back(testGame);
 
     //Set game bound according to game background
     minBoundX = 0;
@@ -51,8 +55,12 @@ Game::Game()
     gameFont = TTF_OpenFont("res/fonts/AmaticSC-Regular.ttf", 28);
     SDL_Color textColor = { 0, 0, 0 };
 
-    fontObj = new GameObj(0, 0, SH->renderer);
+    fontObj = new GameObj(0, 0, SH);
     fontObj->loadText(gameFont, "heyyyyy baby", textColor);
+
+
+    //Playing with pixels
+
 
 }
 
@@ -140,12 +148,27 @@ void Game::render()
     //Render objects in game array
     for(GameObj gObj : gameObjectArray)
     {
+        //should do a boundary check to see if object is in view before rendering
+
+
+        //Need to convert position of obj to cameras position
+        SDL_Rect srcRect;
         SDL_Rect dstRectObj;
-        dstRectObj.h = cameraRect->h;
-        dstRectObj.w = cameraRect->w;
-        dstRectObj.x = 0;
-        dstRectObj.y = 0;
-        gObj.render(*cameraRect, dstRectObj);
+
+        srcRect.x=0;
+        srcRect.y=0;
+        srcRect.h=gObj.m_height;
+        srcRect.w=gObj.m_width;
+
+        dstRectObj.h = gObj.m_height;
+        dstRectObj.w = gObj.m_width;
+
+        //The position is the objects position minus the camera position
+        //in order to get the object's place in accordance with the camera
+        dstRectObj.x = gObj.m_xPos - cameraRect->x ;
+        dstRectObj.y = gObj.m_yPos - cameraRect->y;
+
+        gObj.render(srcRect, dstRectObj);
     }
 
 

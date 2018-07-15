@@ -4,7 +4,6 @@
 #include <vector>
 #include <SDL.h>
 
-#include "GameObj.h"
 
 using namespace std;
 

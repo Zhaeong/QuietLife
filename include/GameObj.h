@@ -1,10 +1,14 @@
 #ifndef GAMEOBJ_H
 #define GAMEOBJ_H
+
+#include <cstring>
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <iostream>
 #include <string>
+
+#include "SDLHandler.h"
 
 
 using namespace std;
@@ -12,7 +16,9 @@ using namespace std;
 class GameObj
 {
     public:
-        GameObj(int x_location, int y_location, SDL_Renderer* renderer);
+
+        GameObj(int x_pos, int y_pos, SDLHandler *SH);
+
         virtual ~GameObj();
 
         int m_xPos;
@@ -21,15 +27,23 @@ class GameObj
         int m_width;
         int m_height;
 
+
+
         string m_imageLocation;
 
         SDL_Texture *m_texture;
-        SDL_Renderer *m_renderer;
+
+        //void pointer to pixels
+        void* m_pixels;
+		int m_pitch;
+
+		SDLHandler *m_SH;
 
         //functions
-
         void loadImage(string imageLocation);
         void loadText(TTF_Font *font, string fontText, SDL_Color fontColor);
+
+        void loadEditImage(string imageLocation);
         void render(SDL_Rect srcRect, SDL_Rect dstRect);
         void free();
 

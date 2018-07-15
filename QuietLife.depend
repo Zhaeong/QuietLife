@@ -6,12 +6,11 @@
 	<string>
 	<SDL2/SDL.h>
 
-1530514808 source:d:\cbproj\quietlife\main.cpp
-	<SDL2/SDL.h>
+1531599586 source:d:\cbproj\quietlife\main.cpp
+	<SDL.h>
 	<string>
 	<iostream>
-	"SDLHandler.h"
-	"GameObj.h"
+	"Game.h"
 
 1519925811 d:\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -347,23 +346,26 @@
 	"begin_code.h"
 	"close_code.h"
 
-1530514943 source:d:\cbproj\quietlife\src\sdlhandler.cpp
+1531004369 source:d:\cbproj\quietlife\src\sdlhandler.cpp
 	"SDLHandler.h"
 	<iostream>
 
-1530485169 d:\cbproj\quietlife\include\sdlhandler.h
+1531693653 d:\cbproj\quietlife\include\sdlhandler.h
 	<string>
 	<vector>
-	<SDL2/SDL.h>
+	<SDL.h>
+
+1531694166 source:d:\cbproj\quietlife\src\gameobj.cpp
 	"GameObj.h"
 
-1530514873 source:d:\cbproj\quietlife\src\gameobj.cpp
-	"GameObj.h"
-
-1530513951 d:\cbproj\quietlife\include\gameobj.h
-	<SDL2/SDL.h>
+1531694318 d:\cbproj\quietlife\include\gameobj.h
+	<cstring>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
 	<iostream>
 	<string>
+	"SDLHandler.h"
 
 1531194682 source:d:\github\quietlife\main.cpp
 	<SDL.h>
@@ -765,4 +767,23 @@
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
+
+1531603191 d:\cbproj\quietlife\include\game.h
+	<string>
+	<vector>
+	<SDL.h>
+	<SDL_ttf.h>
+	<SDL_image.h>
+	"SDLHandler.h"
+	"GameObj.h"
+	"GameUtil.h"
+
+1531599586 d:\cbproj\quietlife\include\gameutil.h
+	<string>
+	<SDL.h>
+	<SDL_ttf.h>
+	<GameObj.h>
+
+1531694628 source:d:\cbproj\quietlife\src\game.cpp
+	"Game.h"
 

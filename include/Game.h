@@ -37,9 +37,7 @@ class Game
         SDL_Rect *cameraRect;
 
         GameObj *playerObj;
-
         GameObj *backGroundObj;
-
         GameObj *fontObj;
 
         vector<GameObj> gameObjectArray;
