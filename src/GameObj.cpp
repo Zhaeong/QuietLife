@@ -111,6 +111,11 @@ void GameObj::loadEditImage(string imageLocation)
 		}
 
 		//Get rid of old loaded surface
+
+		//This block of code saves the surface as a png to location
+		//const char * location = "res/png/out.png";
+        //IMG_SavePNG(loadedSurface, location);
+
 		SDL_FreeSurface( loadedSurface );
 	}
 
