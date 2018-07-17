@@ -47,4 +47,7 @@ inline int convertPlayerYtoCamY(GameObj *playerObj, SDL_Rect *camRect)
     return (playerObj->m_yPos + (playerObj->m_height  /2)) - (camRect->h/2);
 }
 
+
+
+
 #endif // GAMEUTIL_H_INCLUDED

@@ -12,6 +12,13 @@ GameObj::~GameObj()
 {
 }
 
+//Getters and Setters
+
+void* GameObj::getPixels()
+{
+    return m_pixels;
+}
+
 void GameObj::loadImage(string imageLocation)
 {
     cout << "Loading Image: " + imageLocation + "\n";
@@ -120,6 +127,53 @@ void GameObj::loadEditImage(string imageLocation)
 	}
 
 }
+
+
+bool GameObj::lockTexture()
+{
+	bool success = true;
+
+	//Texture is already locked
+	if( m_pixels != NULL )
+	{
+		cout << "Texture is already locked!\n";
+		success = false;
+	}
+	//Lock texture
+	else
+	{
+		if( SDL_LockTexture( m_texture, NULL, &m_pixels, &m_pitch ) != 0 )
+		{
+			cout << "Unable to lock texture! %s\n" << SDL_GetError();
+			success = false;
+		}
+	}
+
+	return success;
+}
+
+bool GameObj::unlockTexture()
+{
+	bool success = true;
+
+	//Texture is not locked
+	if( m_pixels == NULL )
+	{
+		cout << "Texture is not locked!\n";
+		success = false;
+	}
+	//Unlock texture
+	else
+	{
+		SDL_UnlockTexture( m_texture );
+		m_pixels = NULL;
+		m_pitch = 0;
+	}
+
+	return success;
+}
+
+
 void GameObj::free()
 {
     if( m_texture != NULL )
@@ -131,6 +185,9 @@ void GameObj::free()
 
         m_width = 0;
         m_height = 0;
+
+        m_pixels = NULL;
+		m_pitch = 0;
 	}
 }
 

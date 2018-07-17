@@ -34,9 +34,7 @@ Game::Game()
     backGroundObj = new GameObj(0,0, SH);
     backGroundObj->loadImage("res/bmp/background.bmp");
 
-    GameObj testGame(500, 500, SH);
-    testGame.loadEditImage("res/png/testObj.png");
-    gameObjectArray.push_back(testGame);
+
 
     //Set game bound according to game background
     minBoundX = 0;
@@ -61,17 +59,21 @@ Game::Game()
 
     //Playing with pixels
 
+    GameObj testGame(500, 500, SH);
+    testGame.loadEditImage("res/png/testObj.png");
+
+    processTexture(&testGame);
+
+    gameObjectArray.push_back(testGame);
+
+
+
 
 }
 
 Game::~Game()
 {
     //dtor
-}
-
-void Game::addGameObject(GameObj gameObj)
-{
-    gameObjectArray.push_back(gameObj);
 }
 
 void Game::processEvents()
@@ -210,4 +212,60 @@ void Game::render()
 
     SDL_RenderPresent(SH->renderer);
 
+}
+
+//Helper functions
+
+void Game::addGameObject(GameObj gameObj)
+{
+    gameObjectArray.push_back(gameObj);
+}
+
+
+bool Game::processTexture(GameObj *gObj)
+{
+    bool result = false;
+
+    if(gObj->lockTexture())
+    {
+        //Allocate format from window
+        Uint32 format = SDL_GetWindowPixelFormat( SH->window );
+        SDL_PixelFormat* mappingFormat = SDL_AllocFormat( format );
+
+        //Get pixel data
+        Uint32* pixels = (Uint32*)gObj->getPixels();
+
+        //4 bytes per pixel
+        int pixelCount = ( gObj->m_pitch / 4 ) * gObj->m_height;
+
+        //Map colors
+        Uint32 colorKey = SDL_MapRGB( mappingFormat, 0, 0, 0 );
+        //Uint32 transparent = SDL_MapRGBA( mappingFormat, 0xFF, 0xFF, 0xFF, 0x00 );
+
+        Uint32 white = SDL_MapRGB( mappingFormat, 255, 255, 255 );
+
+        //Color key pixels
+        for( int i = 0; i < pixelCount; ++i )
+        {
+            if( pixels[ i ] == colorKey )
+            {
+                pixels[ i ] = white;
+            }
+        }
+
+        //Unlock texture
+        if(gObj->unlockTexture())
+        {
+            result = true;
+        }
+
+        //Free format
+        SDL_FreeFormat( mappingFormat );
+    }
+    else
+    {
+        cout << "Issue with locking texture" << gObj->m_imageLocation;
+    }
+
+    return result;
 }

@@ -20,7 +20,6 @@ using namespace std;
 class Game
 {
     public:
-
         Game();
         virtual ~Game();
 
@@ -45,10 +44,17 @@ class Game
         TTF_Font *gameFont;
 
         //functions
-        void addGameObject(GameObj gameObj);
 
         void processEvents();
         void render();
+
+
+
+        //helper functions
+        void addGameObject(GameObj gameObj);
+
+        bool processTexture(GameObj *gObj);
+
 
     protected:
 

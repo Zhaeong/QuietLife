@@ -39,11 +39,17 @@ class GameObj
 
 		SDLHandler *m_SH;
 
+		//Getters and setter functions
+		void* getPixels();
+
         //functions
         void loadImage(string imageLocation);
         void loadText(TTF_Font *font, string fontText, SDL_Color fontColor);
 
         void loadEditImage(string imageLocation);
+
+        bool lockTexture();
+        bool unlockTexture();
         void render(SDL_Rect srcRect, SDL_Rect dstRect);
         void free();
 
