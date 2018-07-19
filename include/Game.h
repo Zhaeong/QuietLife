@@ -4,15 +4,18 @@
 //Standard Lib
 #include <string>
 #include <vector>
+#include <algorithm>
 
 //Project Lib
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 
+//Game Libs
+
 #include "SDLHandler.h"
 #include "GameObj.h"
-
+#include "PixelObj.h"
 #include "GameUtil.h"
 
 using namespace std;
@@ -41,6 +44,8 @@ class Game
 
         vector<GameObj> gameObjectArray;
 
+        vector<PixelObj> gameGroundArray;
+
         TTF_Font *gameFont;
 
         //functions
@@ -48,7 +53,8 @@ class Game
         void processEvents();
         void render();
 
-
+        int currentPixelPos;
+        PixelObj *currentPixel;
 
         //helper functions
         void addGameObject(GameObj gameObj);

@@ -394,24 +394,27 @@
 	"SDLHandler.h"
 	<iostream>
 
-1531801920 d:\github\quietlife\include\game.h
+1531976516 d:\github\quietlife\include\game.h
 	<string>
 	<vector>
+	<algorithm>
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_image.h>
 	"SDLHandler.h"
 	"GameObj.h"
+	"PixelObj.h"
 	"GameUtil.h"
 
-1531801663 source:d:\github\quietlife\src\game.cpp
+1531976674 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1531801891 d:\github\quietlife\include\gameutil.h
+1531975455 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
-	<GameObj.h>
+	"GameObj.h"
+	"PixelObj.h"
 
 1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -787,4 +790,10 @@
 
 1531698203 source:d:\cbproj\quietlife\src\game.cpp
 	"Game.h"
+
+1531974907 source:d:\github\quietlife\src\pixelobj.cpp
+	"PixelObj.h"
+
+1531974876 d:\github\quietlife\include\pixelobj.h
+	<SDL.h>
 

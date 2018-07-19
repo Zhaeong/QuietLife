@@ -24,17 +24,38 @@ Game::Game()
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
     }
 
-    //Load Player texture
-    cout << "Loading Player\n";
-    playerObj = new GameObj(1000, 500, SH);
-    playerObj->loadImage("res/bmp/bikeMan.bmp");
+
+    //Playing with pixels
+/*
+    GameObj testGame(500, 500, SH);
+    testGame.loadEditImage("res/png/testObj.png");
+
+    processTexture(&testGame);
+
+    gameObjectArray.push_back(testGame);
+
+
+    */
 
     //Load background texture
     cout << "Loading Background\n";
     backGroundObj = new GameObj(0,0, SH);
-    backGroundObj->loadImage("res/bmp/background.bmp");
+    backGroundObj->loadEditImage("res/png/testObj.png");
+    processTexture(backGroundObj);
 
 
+    //Load Player texture
+    cout << "Loading Player\n";
+
+    cout << "Spawning Player at X:" << gameGroundArray.at(0).m_X << "Y:" << gameGroundArray.at(0).m_Y << "\n";
+
+    playerObj = new GameObj(gameGroundArray.at(0).m_X, gameGroundArray.at(0).m_Y, SH);
+    playerObj->loadImage("res/bmp/bikeMan.bmp");
+
+    playerObj->m_yPos = gameGroundArray.at(0).m_Y - playerObj->m_height;
+
+    currentPixel = &gameGroundArray.at(0);
+    currentPixelPos = 0;
 
     //Set game bound according to game background
     minBoundX = 0;
@@ -57,17 +78,6 @@ Game::Game()
     fontObj->loadText(gameFont, "heyyyyy baby", textColor);
 
 
-    //Playing with pixels
-
-    GameObj testGame(500, 500, SH);
-    testGame.loadEditImage("res/png/testObj.png");
-
-    processTexture(&testGame);
-
-    gameObjectArray.push_back(testGame);
-
-
-
 
 }
 
@@ -88,7 +98,11 @@ void Game::processEvents()
 
     if(eventName == "MOVE_LEFT")
     {
-        nextX = originalX - 4;
+        //nextX = originalX - 4;
+        nextX = currentPixel->m_X;
+        nextY = currentPixel->m_Y - playerObj->m_height;
+        currentPixelPos += 4;
+        currentPixel = &gameGroundArray.at(currentPixelPos);
     }
 
     if(eventName == "MOVE_RIGHT")
@@ -236,7 +250,9 @@ bool Game::processTexture(GameObj *gObj)
         Uint32* pixels = (Uint32*)gObj->getPixels();
 
         //4 bytes per pixel
-        int pixelCount = ( gObj->m_pitch / 4 ) * gObj->m_height;
+
+        int pixelWidth = ( gObj->m_pitch / 4 );
+        int pixelCount = pixelWidth * gObj->m_height;
 
         //Map colors
         Uint32 colorKey = SDL_MapRGB( mappingFormat, 0, 0, 0 );
@@ -245,13 +261,35 @@ bool Game::processTexture(GameObj *gObj)
         Uint32 white = SDL_MapRGB( mappingFormat, 255, 255, 255 );
 
         //Color key pixels
-        for( int i = 0; i < pixelCount; ++i )
+
+        int pixelX = 0;
+        int pixelY = 0;
+
+        for( int i = 0; i < pixelCount; i++ )
         {
             if( pixels[ i ] == colorKey )
             {
+                PixelObj colorPix(pixelX, pixelY, pixels[i]);
+                gameGroundArray.push_back(colorPix);
+
                 pixels[ i ] = white;
             }
+
+
+            //Set the next pixel's X and Y position
+            pixelX += 1;
+            if(pixelX == pixelWidth)
+            {
+                pixelX = 0;
+                pixelY += 1;
+            }
+
         }
+        sort(gameGroundArray.begin(), gameGroundArray.end(), sortByX);
+        cout << "Number of items:" << gameGroundArray.size();
+
+
+
 
         //Unlock texture
         if(gObj->unlockTexture())

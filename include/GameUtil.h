@@ -5,8 +5,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include <GameObj.h>
-
+#include "GameObj.h"
+#include "PixelObj.h"
 //Checks the source rect and see if it hits the targetrect
 inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, int xTarget, int yTarget, int wTarget, int hTarget)
 {
@@ -47,7 +47,7 @@ inline int convertPlayerYtoCamY(GameObj *playerObj, SDL_Rect *camRect)
     return (playerObj->m_yPos + (playerObj->m_height  /2)) - (camRect->h/2);
 }
 
-
+inline bool sortByX(const PixelObj &lhs, const PixelObj &rhs) { return lhs.m_X < rhs.m_X; }
 
 
 #endif // GAMEUTIL_H_INCLUDED
