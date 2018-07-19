@@ -101,7 +101,7 @@ void Game::processEvents()
         //nextX = originalX - 4;
         nextX = currentPixel->m_X;
         nextY = currentPixel->m_Y - playerObj->m_height;
-        currentPixelPos += 4;
+        currentPixelPos += 10;
         currentPixel = &gameGroundArray.at(currentPixelPos);
     }
 
