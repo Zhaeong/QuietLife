@@ -355,10 +355,10 @@
 	<vector>
 	<SDL.h>
 
-1531694166 source:d:\cbproj\quietlife\src\gameobj.cpp
+1532227939 source:d:\cbproj\quietlife\src\gameobj.cpp
 	"GameObj.h"
 
-1531694318 d:\cbproj\quietlife\include\gameobj.h
+1532227854 d:\cbproj\quietlife\include\gameobj.h
 	<cstring>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -772,23 +772,26 @@
 	"begin_code.h"
 	"close_code.h"
 
-1531603191 d:\cbproj\quietlife\include\game.h
+1532204188 d:\cbproj\quietlife\include\game.h
 	<string>
 	<vector>
+	<algorithm>
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_image.h>
 	"SDLHandler.h"
 	"GameObj.h"
+	"PixelObj.h"
 	"GameUtil.h"
 
-1531599586 d:\cbproj\quietlife\include\gameutil.h
+1532204188 d:\cbproj\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
-	<GameObj.h>
+	"GameObj.h"
+	"PixelObj.h"
 
-1531698203 source:d:\cbproj\quietlife\src\game.cpp
+1532227829 source:d:\cbproj\quietlife\src\game.cpp
 	"Game.h"
 
 1531974907 source:d:\github\quietlife\src\pixelobj.cpp
@@ -796,4 +799,10 @@
 
 1531974876 d:\github\quietlife\include\pixelobj.h
 	<SDL.h>
+
+1532204188 d:\cbproj\quietlife\include\pixelobj.h
+	<SDL.h>
+
+1532204188 source:d:\cbproj\quietlife\src\pixelobj.cpp
+	"PixelObj.h"
 

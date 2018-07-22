@@ -204,3 +204,18 @@ void GameObj::render(SDL_Rect srcRect, SDL_Rect dstRect)
     SDL_RenderCopy(m_SH->renderer, m_texture, &srcRect, &dstRect);
 
 }
+
+void GameObj::renderEx(SDL_Rect srcRect, SDL_Rect dstRect)
+{
+    /*
+    SDL_Rect srcRect;
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = m_width;
+    srcRect.h = m_height;
+    */
+    //Flip type
+    SDL_RendererFlip flipType = SDL_FLIP_NONE;
+    SDL_RenderCopyEx(m_SH->renderer, m_texture, &srcRect, &dstRect, 30, NULL, flipType);
+
+}

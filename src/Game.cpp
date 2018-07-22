@@ -202,7 +202,7 @@ void Game::render()
     dstRect.h = playerObj->m_height;
     dstRect.w = playerObj->m_width;
 
-    playerObj->render(srcRect, dstRect);
+    playerObj->renderEx(srcRect, dstRect);
 
     //Render font
 

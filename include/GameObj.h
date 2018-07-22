@@ -51,6 +51,7 @@ class GameObj
         bool lockTexture();
         bool unlockTexture();
         void render(SDL_Rect srcRect, SDL_Rect dstRect);
+        void renderEx(SDL_Rect srcRect, SDL_Rect dstRect);
         void free();
 
     protected:
