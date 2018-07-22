@@ -55,11 +55,13 @@
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameObj.h" />
 		<Unit filename="include/GameUtil.h" />
+		<Unit filename="include/PixelObj.h" />
 		<Unit filename="include/SDLHandler.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="res/bikeMan.bmp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameObj.cpp" />
+		<Unit filename="src/PixelObj.cpp" />
 		<Unit filename="src/SDLHandler.cpp" />
 		<Extensions>
 			<code_completion />
