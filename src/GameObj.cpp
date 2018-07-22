@@ -6,6 +6,8 @@ GameObj::GameObj(int x_pos, int y_pos, SDLHandler *SH)
     m_xPos = x_pos;
     m_yPos = y_pos;
     m_SH = SH;
+
+    m_rotation = 0;
 }
 
 GameObj::~GameObj()
@@ -214,8 +216,10 @@ void GameObj::renderEx(SDL_Rect srcRect, SDL_Rect dstRect)
     srcRect.w = m_width;
     srcRect.h = m_height;
     */
+
+    m_rotation += 1;
     //Flip type
     SDL_RendererFlip flipType = SDL_FLIP_NONE;
-    SDL_RenderCopyEx(m_SH->renderer, m_texture, &srcRect, &dstRect, 30, NULL, flipType);
+    SDL_RenderCopyEx(m_SH->renderer, m_texture, &srcRect, &dstRect, m_rotation, NULL, flipType);
 
 }

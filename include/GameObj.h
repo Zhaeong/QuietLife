@@ -37,6 +37,7 @@ class GameObj
         void* m_pixels;
 		int m_pitch;
 
+        int m_rotation;
 		SDLHandler *m_SH;
 
 		//Getters and setter functions
