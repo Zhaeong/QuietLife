@@ -52,17 +52,21 @@
 		<ExtraCommands>
 			<Add after="XCOPY $(#sdl2)\bin\*.dll $(TARGET_OUTPUT_DIR) /D /Y" />
 		</ExtraCommands>
+		<Unit filename="include/CharacterObj.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameObj.h" />
 		<Unit filename="include/GameUtil.h" />
 		<Unit filename="include/PixelObj.h" />
 		<Unit filename="include/SDLHandler.h" />
+		<Unit filename="include/TextureObj.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="res/bikeMan.bmp" />
+		<Unit filename="src/CharacterObj.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameObj.cpp" />
 		<Unit filename="src/PixelObj.cpp" />
 		<Unit filename="src/SDLHandler.cpp" />
+		<Unit filename="src/TextureObj.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
