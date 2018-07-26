@@ -43,17 +43,6 @@ Game::Game()
     backGroundObj->loadEditImage("res/png/testObj.png");
     processTexture(backGroundObj);
 
-
-    //Load Player texture
-    cout << "Loading Player\n";
-
-    cout << "Spawning Player at X:" << gameGroundArray.at(0).m_X << "Y:" << gameGroundArray.at(0).m_Y << "\n";
-
-    playerObj = new GameObj(gameGroundArray.at(0).m_X, gameGroundArray.at(0).m_Y, SH);
-    playerObj->loadImage("res/bmp/bikeMan.bmp");
-
-    playerObj->m_yPos = gameGroundArray.at(0).m_Y - playerObj->m_height;
-
     currentPixel = &gameGroundArray.at(0);
     currentPixelPos = 0;
 
@@ -78,6 +67,20 @@ Game::Game()
     fontObj->loadText(gameFont, "heyyyyy baby", textColor);
 
 
+    cout << "Creating CharObj\n";
+    //player char
+    playerChar = new CharacterObj(SH, "Player");
+
+    playerChar->setPos(gameGroundArray.at(0).m_X, gameGroundArray.at(0).m_Y);
+    playerChar->setDimension(180, 140);
+
+
+    TextureObj bikeTexture(SH, "res/bmp/bike.bmp");
+    TextureObj manTexture(SH, "res/bmp/man.bmp");
+
+    playerChar->addTexture(bikeTexture);
+    playerChar->addTexture(manTexture);
+
 
 }
 
@@ -90,8 +93,8 @@ void Game::processEvents()
 {
     string eventName = SH->getEvent();
 
-    int originalX = playerObj->m_xPos;
-    int originalY = playerObj->m_yPos;
+    int originalX = playerChar->mXpos;
+    int originalY = playerChar->mYpos;
 
     int nextX = originalX;
     int nextY = originalY;
@@ -100,7 +103,7 @@ void Game::processEvents()
     {
         //nextX = originalX - 4;
         nextX = currentPixel->m_X;
-        nextY = currentPixel->m_Y - playerObj->m_height;
+        nextY = currentPixel->m_Y - playerChar->mHeight;
         currentPixelPos += 10;
         currentPixel = &gameGroundArray.at(currentPixelPos);
     }
@@ -120,12 +123,20 @@ void Game::processEvents()
         nextY = originalY - 4;
     }
 
-    playerObj->m_xPos = nextX;
-    playerObj->m_yPos = nextY;
+    playerChar->mXpos = nextX;
+    playerChar->mYpos = nextY;
+
+    SDL_Rect playerRect;
+    playerRect.x = playerChar->mXpos;
+    playerRect.y = playerChar->mYpos;
+    playerRect.w = playerChar->mWidth;
+    playerRect.h = playerChar->mHeight;
+
 
     //Check if the camera rect hits the game boundary
-    string hitDirection = hitBoundary(convertPlayerXtoCamX(playerObj, cameraRect),
-                                      convertPlayerYtoCamY(playerObj, cameraRect),
+
+    string hitDirection = hitBoundary(convertPlayerXtoCamX(&playerRect, cameraRect),
+                                      convertPlayerYtoCamY(&playerRect, cameraRect),
                                       cameraRect->w,
                                       cameraRect->h,
                                       minBoundX,
@@ -133,20 +144,22 @@ void Game::processEvents()
                                       maxBoundX,
                                       maxBoundY);
 
+
     //Depending on where it hit, revert player position to original
     if(hitDirection == "LEFT" || hitDirection == "RIGHT")
     {
-        playerObj->m_xPos = originalX;
+        playerChar->mXpos = originalX;
     }
     else if (hitDirection == "TOP" || hitDirection == "BOTTOM")
     {
-        playerObj->m_yPos = originalY;
+        playerChar->mYpos = originalY;
     }
 
     //update camera position based on final player position
     //First the player position needs to be offset by its height and width, then minus the game dimensions
-    cameraRect->x = convertPlayerXtoCamX(playerObj, cameraRect);
-    cameraRect->y = convertPlayerYtoCamY(playerObj, cameraRect);
+
+    cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect);
+    cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
 }
 void Game::render()
 {
@@ -189,20 +202,12 @@ void Game::render()
 
 
     //Render Player
-    SDL_Rect srcRect, dstRect;
-
-    srcRect.h = playerObj->m_height;
-    srcRect.w = playerObj->m_width;
-    srcRect.x = 0;
-    srcRect.y = 0;
 
     //Set player output render box to middle of screen
-    dstRect.x = (cameraRect->w / 2) - (playerObj->m_width /2);
-    dstRect.y = (cameraRect->h / 2) - (playerObj->m_height /2);
-    dstRect.h = playerObj->m_height;
-    dstRect.w = playerObj->m_width;
+    int playerX = (cameraRect->w / 2) - (playerChar->mWidth /2);
+    int playerY = (cameraRect->h / 2) - (playerChar->mHeight /2);
 
-    playerObj->renderEx(srcRect, dstRect);
+    playerChar->render(playerX, playerY);
 
     //Render font
 
@@ -216,13 +221,12 @@ void Game::render()
 
     SDL_Color textColor = { 0, 0, 0 };
     fontObj->loadText(gameFont,
-                      "pla - x:" + to_string(playerObj->m_xPos) + " y:" + to_string(playerObj->m_yPos) + "\n" +
+                      "pla - x:" + to_string(playerChar->mXpos) + " y:" + to_string(playerChar->mYpos) + "\n" +
                       "cam - x:" + to_string(cameraRect->x) + " y:" + to_string(cameraRect->y),
                       textColor);
 
 
     fontObj->render(fontRect, fontRect);
-
 
     SDL_RenderPresent(SH->renderer);
 

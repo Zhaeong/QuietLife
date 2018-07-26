@@ -18,6 +18,9 @@
 #include "PixelObj.h"
 #include "GameUtil.h"
 
+#include "CharacterObj.h"
+#include "TextureObj.h"
+
 using namespace std;
 
 class Game
@@ -38,7 +41,8 @@ class Game
 
         SDL_Rect *cameraRect;
 
-        GameObj *playerObj;
+        CharacterObj *playerChar;
+
         GameObj *backGroundObj;
         GameObj *fontObj;
 

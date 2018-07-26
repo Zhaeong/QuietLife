@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "TextureObj.h"
 #include "SDLHandler.h"
@@ -20,8 +21,19 @@ class CharacterObj
         SDLHandler *mSH;
         vector<TextureObj> mTextureArray;
 
+        int mXpos;
+        int mYpos;
+
+
+        int mWidth;
+        int mHeight;
+
 
         void addTexture(TextureObj textureObj);
+        void render(int xPos, int yPos);
+
+        void setPos(int xPos, int yPos);
+        void setDimension(int width, int height);
 
     protected:
 

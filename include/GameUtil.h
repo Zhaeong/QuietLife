@@ -37,14 +37,14 @@ inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, in
 }
 
 
-inline int convertPlayerXtoCamX(GameObj *playerObj, SDL_Rect *camRect)
+inline int convertPlayerXtoCamX(SDL_Rect *playerRect, SDL_Rect *camRect)
 {
-    return (playerObj->m_xPos + (playerObj->m_width  /2)) - (camRect->w/2);
+    return (playerRect->x + (playerRect->w  /2)) - (camRect->w/2);
 }
 
-inline int convertPlayerYtoCamY(GameObj *playerObj, SDL_Rect *camRect)
+inline int convertPlayerYtoCamY(SDL_Rect *playerRect, SDL_Rect *camRect)
 {
-    return (playerObj->m_yPos + (playerObj->m_height  /2)) - (camRect->h/2);
+    return (playerRect->y + (playerRect->h  /2)) - (camRect->h/2);
 }
 
 inline bool sortByX(const PixelObj &lhs, const PixelObj &rhs) { return lhs.m_X < rhs.m_X; }

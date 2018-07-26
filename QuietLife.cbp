@@ -32,6 +32,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-Wuninitialized" />
 			<Add directory="D:/MinGWLibs/SDL2-2.0.8/i686-w64-mingw32/include/SDL2" />
 			<Add directory="D:/MinGWLibs/SDL2_image-2.0.3/i686-w64-mingw32/include/SDL2" />
 			<Add directory="D:/MinGWLibs/SDL2_ttf-2.0.14/i686-w64-mingw32/include/SDL2" />
