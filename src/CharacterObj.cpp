@@ -24,10 +24,10 @@ void CharacterObj::addTexture(TextureObj textureObj)
 void CharacterObj::render(int xPos, int yPos)
 {
     //Render objects in game array
-    for(TextureObj tObj : mTextureArray)
+    for(unsigned int i = 0; i < mTextureArray.size(); i++)
     {
-        //should do a boundary check to see if object is in view before rendering
-        //Need to convert position of obj to cameras position
+        TextureObj& tObj = mTextureArray[i];
+
         SDL_Rect srcRect;
         SDL_Rect dstRect;
 
@@ -40,8 +40,6 @@ void CharacterObj::render(int xPos, int yPos)
         dstRect.y = yPos;
         dstRect.h = tObj.mHeight;
         dstRect.w = tObj.mWidth;
-
-
 
 
         tObj.renderTexture(srcRect, dstRect);

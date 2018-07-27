@@ -5,17 +5,6 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
     cout << "Loading: " << imgLocation << "\n";
     mSH = SH;
 
-
-    mTexture = NULL;
-
-    mWidth = 0;
-    mHeight = 0;
-
-    mPixels = NULL;
-    mPitch = 0;
-
-    mRotation = 0;
-
     //Make sure to initialize texture to null or else SDL_DestroyTexture will crash program
     mTexture = NULL;
 
@@ -93,17 +82,17 @@ void TextureObj::free()
     if( mTexture != NULL )
 	{
 		SDL_DestroyTexture( mTexture );
-
-		mTexture = NULL;
-
-        mWidth = 0;
-        mHeight = 0;
-
-        mPixels = NULL;
-		mPitch = 0;
-
-		mRotation = 0;
 	}
+    mTexture = NULL;
+    mWidth = 0;
+    mHeight = 0;
+    mPixels = NULL;
+    mPitch = 0;
+
+    mRotation = 0;
+    mRotateStart = 0;
+    mRotateEnd = 0;
+    mRotationDirection = true;
 
 }
 
@@ -115,10 +104,44 @@ void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect)
     middle.x = mWidth / 2;
     middle.y = mHeight /2;
 
-
+    getRotation();
 
     SDL_RenderCopyEx(mSH->renderer, mTexture, &srcRect, &dstRect, mRotation, &middle, flipType);
 
     //SDL_RenderCopy(mSH->renderer, mTexture, &srcRect, &dstRect);
 
+}
+
+
+void TextureObj::setRotateTargets(int Start, int End)
+{
+    mRotateStart = Start;
+    mRotateEnd = End;
+}
+
+
+void TextureObj::getRotation()
+{
+    if(mRotationDirection)
+    {
+        if(mRotation < mRotateEnd)
+        {
+            mRotation += 1;
+        }
+        else
+        {
+            mRotationDirection = false;
+        }
+    }
+    else
+    {
+        if(mRotation > mRotateStart)
+        {
+            mRotation -= 1;
+        }
+        else
+        {
+            mRotationDirection = true;
+        }
+    }
 }

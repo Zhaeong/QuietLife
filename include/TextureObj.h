@@ -26,7 +26,7 @@ class TextureObj
         int mHeight;
         void* mPixels;
 		int mPitch;
-        int mRotation;
+
 
 
         //func
@@ -34,6 +34,17 @@ class TextureObj
         void free();
 
         void renderTexture(SDL_Rect srcRect, SDL_Rect dstRect);
+
+
+        //Rotation Controls
+        int mRotation;
+        int mRotateStart;
+        int mRotateEnd;
+
+        bool mRotationDirection;
+
+        void setRotateTargets(int Start, int End);
+        void getRotation();
 
 
 

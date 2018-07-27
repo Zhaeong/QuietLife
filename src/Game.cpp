@@ -78,8 +78,11 @@ Game::Game()
     TextureObj bikeTexture(SH, "res/bmp/bike.bmp");
     TextureObj manTexture(SH, "res/bmp/man.bmp");
 
+    manTexture.setRotateTargets(-30, 30);
     playerChar->addTexture(bikeTexture);
     playerChar->addTexture(manTexture);
+
+
 
 
 }
