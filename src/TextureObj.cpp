@@ -3,6 +3,8 @@
 TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 {
     cout << "Loading: " << imgLocation << "\n";
+
+    mImgLocation = imgLocation;
     mSH = SH;
 
     //Make sure to initialize texture to null or else SDL_DestroyTexture will crash program
@@ -23,7 +25,7 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 	{
 
 		//Convert surface to display format
-		SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface, SDL_GetWindowPixelFormat( mSH->window ), 0 );
+		SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface,SDL_PIXELFORMAT_ARGB8888, 0 );
 		if( formattedSurface == NULL )
 		{
 			printf( "Unable to convert loaded surface to display format! SDL Error: %s\n", SDL_GetError() );
@@ -32,7 +34,7 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 		{
 
 			//Create blank streamable texture
-			mTexture = SDL_CreateTexture( mSH->renderer, SDL_GetWindowPixelFormat( mSH->window ), SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
+			mTexture = SDL_CreateTexture( mSH->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
 			if( mTexture == NULL )
 			{
 				printf( "Unable to create blank texture! SDL Error: %s\n", SDL_GetError() );
@@ -145,3 +147,127 @@ void TextureObj::getRotation()
         }
     }
 }
+
+
+bool TextureObj::lockTexture()
+{
+	bool success = true;
+
+	//Texture is already locked
+	if( mPixels != NULL )
+	{
+		cout << "Texture is already locked!\n";
+		success = false;
+	}
+	//Lock texture
+	else
+	{
+		if( SDL_LockTexture( mTexture, NULL, &mPixels, &mPitch ) != 0 )
+		{
+			cout << "Unable to lock texture! %s\n" << SDL_GetError();
+			success = false;
+		}
+	}
+
+	return success;
+}
+
+bool TextureObj::unlockTexture()
+{
+	bool success = true;
+
+	//Texture is not locked
+	if( mPixels == NULL )
+	{
+		cout << "Texture is not locked!\n";
+		success = false;
+	}
+	//Unlock texture
+	else
+	{
+		SDL_UnlockTexture( mTexture );
+		mPixels = NULL;
+		mPitch = 0;
+	}
+
+	return success;
+}
+
+bool TextureObj::removeWhitespace()
+{
+    bool result = false;
+
+    if(lockTexture())
+    {
+        SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
+        //Allocate format from window
+        Uint32 format = SDL_GetWindowPixelFormat( mSH->window );
+
+        SDL_PixelFormat* mappingFormat = SDL_AllocFormat( SDL_PIXELFORMAT_ARGB8888 );
+
+        //Get pixel data
+        Uint32* pixels = (Uint32*)mPixels;
+        //4 bytes per pixel
+
+        int pixelWidth = ( mPitch / 4 );
+        int pixelCount = pixelWidth * mHeight;
+
+        //Map colorsmImgLocation
+        //Uint32 colorKey = SDL_MapRGB( mappingFormat, 0, 0, 0 );
+        //Uint32 transparent = SDL_MapRGBA( mappingFormat, 0xFF, 0xFF, 0xFF, 0x00 );
+
+        Uint32 white = SDL_MapRGBA( mappingFormat, 0xFF, 0xFF, 0xFF, 0xFF );
+        Uint32 transparent = SDL_MapRGBA( mappingFormat, 0xFF, 0xFF, 0xFF, 0 );
+
+        //Color key pixels
+
+        int pixelX = 0;
+        int pixelY = 0;
+
+        for( int i = 0; i < pixelCount; i++ )
+        {
+
+            Uint8 * colors = (Uint8 *) pixels[ i ];
+            Uint32 thepixel;
+            Uint8 red, green, blue, alpha;
+
+            //SDL_GetRGBA(pixels[ i ],mappingFormat,&red,&green,&blue,&alpha);
+            //cout << "Before \n";
+            //cout << "R:" << (int)red << "G:" << (int)green<< "B:" << (int)blue<< "A:" << (int)alpha << "\n" ;
+
+            if( pixels[ i ] == white )
+            {
+                pixels[ i ] = transparent;
+            }
+
+
+            SDL_GetRGBA(pixels[ i ],mappingFormat,&red,&green,&blue,&alpha);
+
+
+            //Set the next pixel's X and Y position
+            pixelX += 1;
+            if(pixelX == pixelWidth)
+            {
+                pixelX = 0;
+                pixelY += 1;
+            }
+
+        }
+
+        //Unlock texture
+        if(unlockTexture())
+        {
+            result = true;
+        }
+
+        //Free format
+        SDL_FreeFormat( mappingFormat );
+    }
+    else
+    {
+        cout << "Issue with locking texture" << mImgLocation;
+    }
+
+    return result;
+}
+

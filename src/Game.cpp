@@ -79,6 +79,10 @@ Game::Game()
     TextureObj manTexture(SH, "res/bmp/man.bmp");
 
     manTexture.setRotateTargets(-30, 30);
+
+    manTexture.removeWhitespace();
+    bikeTexture.removeWhitespace();
+
     playerChar->addTexture(bikeTexture);
     playerChar->addTexture(manTexture);
 

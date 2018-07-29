@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "SDLHandler.h"
+#include "PixelObj.h"
 
 
 class TextureObj
@@ -18,21 +19,21 @@ class TextureObj
         virtual ~TextureObj();
 
 
+        string mImgLocation;
         SDLHandler *mSH;
+
 
         SDL_Texture *mTexture;
 
         int mWidth;
         int mHeight;
-        void* mPixels;
-		int mPitch;
+
 
 
 
         //func
 
         void free();
-
         void renderTexture(SDL_Rect srcRect, SDL_Rect dstRect);
 
 
@@ -45,6 +46,17 @@ class TextureObj
 
         void setRotateTargets(int Start, int End);
         void getRotation();
+
+
+        //Texture manipulation
+
+        void* mPixels;
+		int mPitch;
+
+        bool lockTexture();
+        bool unlockTexture();
+
+        bool removeWhitespace();
 
 
 
