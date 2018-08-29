@@ -75,8 +75,8 @@ Game::Game()
     playerChar->setDimension(180, 140);
 
 
-    TextureObj bikeTexture(SH, "res/bmp/bike.bmp");
-    TextureObj manTexture(SH, "res/bmp/man.bmp");
+    TextureObj bikeTexture(SH, "res/png/manBody.png");
+    TextureObj manTexture(SH, "res/png/leg.png");
 
     manTexture.setRotateTargets(-30, 30);
 
