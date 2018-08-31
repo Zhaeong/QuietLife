@@ -96,19 +96,20 @@ void TextureObj::free()
     mRotateEnd = 0;
     mRotationDirection = true;
 
+    mMiddle.x = mWidth / 2;
+    mMiddle.y = mHeight /2;
+
 }
 
 void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect)
 {
     SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
-    SDL_Point middle;
-    middle.x = mWidth / 2;
-    middle.y = mHeight /2;
+
 
     getRotation();
 
-    SDL_RenderCopyEx(mSH->renderer, mTexture, &srcRect, &dstRect, mRotation, &middle, flipType);
+    SDL_RenderCopyEx(mSH->renderer, mTexture, &srcRect, &dstRect, mRotation, &mMiddle, flipType);
 
     //SDL_RenderCopy(mSH->renderer, mTexture, &srcRect, &dstRect);
 
@@ -119,6 +120,12 @@ void TextureObj::setRotateTargets(int Start, int End)
 {
     mRotateStart = Start;
     mRotateEnd = End;
+}
+
+void TextureObj::setMiddle(int xVal, int yVal)
+{
+    mMiddle.x = xVal;
+    mMiddle.y = yVal;
 }
 
 

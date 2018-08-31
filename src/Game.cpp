@@ -79,6 +79,7 @@ Game::Game()
     TextureObj manTexture(SH, "res/png/leg.png");
 
     manTexture.setRotateTargets(-30, 30);
+    manTexture.setMiddle(15,0);
 
     manTexture.removeWhitespace();
     bikeTexture.removeWhitespace();

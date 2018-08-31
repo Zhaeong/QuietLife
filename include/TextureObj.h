@@ -41,10 +41,12 @@ class TextureObj
         int mRotation;
         int mRotateStart;
         int mRotateEnd;
+        SDL_Point mMiddle;
 
         bool mRotationDirection;
 
         void setRotateTargets(int Start, int End);
+        void setMiddle(int xVal, int yVal);
         void getRotation();
 
 
