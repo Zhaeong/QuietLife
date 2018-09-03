@@ -75,17 +75,28 @@ Game::Game()
     playerChar->setDimension(180, 140);
 
 
-    TextureObj bikeTexture(SH, "res/png/manBody.png");
-    TextureObj manTexture(SH, "res/png/leg.png");
+    TextureObj bodyTexture(SH, "res/png/manBody.png");
+    TextureObj leftLegTexture(SH, "res/png/leg.png");
+    TextureObj rightLegTexture(SH, "res/png/leg.png");
 
-    manTexture.setRotateTargets(-30, 30);
-    manTexture.setMiddle(15,0);
+    leftLegTexture.setRotateTargets(-30, 30);
+    leftLegTexture.setMiddle(15,0);
+    leftLegTexture.setPos(20, 94);
 
-    manTexture.removeWhitespace();
-    bikeTexture.removeWhitespace();
+    rightLegTexture.setRotateTargets(-30, 30);
+    rightLegTexture.setMiddle(15,0);
+    rightLegTexture.setPos(10, 94);
+    rightLegTexture.mRotationDirection = false;
 
-    playerChar->addTexture(bikeTexture);
-    playerChar->addTexture(manTexture);
+
+    leftLegTexture.removeWhitespace();
+    rightLegTexture.removeWhitespace();
+
+    bodyTexture.removeWhitespace();
+
+    playerChar->addTexture(bodyTexture);
+    playerChar->addTexture(leftLegTexture);
+    playerChar->addTexture(rightLegTexture);
 
 
 

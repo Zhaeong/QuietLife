@@ -36,8 +36,8 @@ void CharacterObj::render(int xPos, int yPos)
         srcRect.h=tObj.mHeight;
         srcRect.w=tObj.mWidth;
 
-        dstRect.x = xPos;
-        dstRect.y = yPos;
+        dstRect.x = xPos + tObj.mPosition.x;
+        dstRect.y = yPos + tObj.mPosition.y;
         dstRect.h = tObj.mHeight;
         dstRect.w = tObj.mWidth;
 

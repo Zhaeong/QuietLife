@@ -29,8 +29,6 @@ class TextureObj
         int mHeight;
 
 
-
-
         //func
 
         void free();
@@ -43,8 +41,11 @@ class TextureObj
         int mRotateEnd;
         SDL_Point mMiddle;
 
+        SDL_Point mPosition;
+
         bool mRotationDirection;
 
+        void setPos(int xVal, int yVal);
         void setRotateTargets(int Start, int End);
         void setMiddle(int xVal, int yVal);
         void getRotation();

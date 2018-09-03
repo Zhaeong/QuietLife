@@ -99,6 +99,9 @@ void TextureObj::free()
     mMiddle.x = mWidth / 2;
     mMiddle.y = mHeight /2;
 
+    mPosition.x = 0;
+    mPosition.y = 0;
+
 }
 
 void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect)
@@ -128,6 +131,11 @@ void TextureObj::setMiddle(int xVal, int yVal)
     mMiddle.y = yVal;
 }
 
+void TextureObj::setPos(int xVal, int yVal)
+{
+    mPosition.x = xVal;
+    mPosition.y = yVal;
+}
 
 void TextureObj::getRotation()
 {
