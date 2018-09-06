@@ -81,12 +81,12 @@ Game::Game()
 
     leftLegTexture.setRotateTargets(-30, 30);
     leftLegTexture.setMiddle(15,0);
-    leftLegTexture.setPos(20, 94);
+    leftLegTexture.setPos(20, 94, -30);
 
     rightLegTexture.setRotateTargets(-30, 30);
     rightLegTexture.setMiddle(15,0);
-    rightLegTexture.setPos(10, 94);
-    rightLegTexture.mRotationDirection = false;
+    rightLegTexture.setPos(10, 94, 30);
+    //rightLegTexture.mRotationDirection = false;
 
 
     leftLegTexture.removeWhitespace();

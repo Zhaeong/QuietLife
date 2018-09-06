@@ -131,10 +131,11 @@ void TextureObj::setMiddle(int xVal, int yVal)
     mMiddle.y = yVal;
 }
 
-void TextureObj::setPos(int xVal, int yVal)
+void TextureObj::setPos(int xVal, int yVal, int rotation)
 {
     mPosition.x = xVal;
     mPosition.y = yVal;
+    mRotation = rotation;
 }
 
 void TextureObj::getRotation()
