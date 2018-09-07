@@ -6,6 +6,8 @@
 #include <vector>
 #include <algorithm>
 
+#include <dirent.h>
+
 //Project Lib
 #include <SDL.h>
 #include <SDL_ttf.h>

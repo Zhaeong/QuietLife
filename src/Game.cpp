@@ -2,6 +2,20 @@
 
 Game::Game()
 {
+
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir ("res/png")) != NULL) {
+      /* print all the files and directories within directory */
+      while ((ent = readdir (dir)) != NULL) {
+        printf ("%s\n", ent->d_name);
+      }
+      closedir (dir);
+    } else {
+      /* could not open directory */
+      perror ("");
+      //return EXIT_FAILURE;
+    }
     cout << "Init Game\n";
     gameWidth = 640;
     gameHeight = 480;
@@ -78,6 +92,7 @@ Game::Game()
     TextureObj bodyTexture(SH, "res/png/manBody.png");
     TextureObj leftLegTexture(SH, "res/png/leg.png");
     TextureObj rightLegTexture(SH, "res/png/leg.png");
+    TextureObj leftArmTexture(SH, "res/png/arm.png");
 
     leftLegTexture.setRotateTargets(-30, 30);
     leftLegTexture.setMiddle(15,0);
@@ -86,17 +101,21 @@ Game::Game()
     rightLegTexture.setRotateTargets(-30, 30);
     rightLegTexture.setMiddle(15,0);
     rightLegTexture.setPos(10, 94, 30);
-    //rightLegTexture.mRotationDirection = false;
 
+    leftArmTexture.setRotateTargets(-30, 30);
+    leftArmTexture.setMiddle(6,0);
+    leftArmTexture.setPos(10, 56, 10);
 
     leftLegTexture.removeWhitespace();
     rightLegTexture.removeWhitespace();
+    leftArmTexture.removeWhitespace();
 
     bodyTexture.removeWhitespace();
 
     playerChar->addTexture(bodyTexture);
     playerChar->addTexture(leftLegTexture);
     playerChar->addTexture(rightLegTexture);
+    playerChar->addTexture(leftArmTexture);
 
 
 
