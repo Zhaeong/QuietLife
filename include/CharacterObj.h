@@ -5,6 +5,11 @@
 #include <string>
 #include <iostream>
 
+//For opening directories
+#include <dirent.h>
+
+#include <fstream>
+
 #include "TextureObj.h"
 #include "SDLHandler.h"
 
@@ -34,6 +39,8 @@ class CharacterObj
 
         void setPos(int xPos, int yPos);
         void setDimension(int width, int height);
+
+        void getAnimate(string dirPath);
 
     protected:
 

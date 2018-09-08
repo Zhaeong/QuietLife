@@ -3,19 +3,7 @@
 Game::Game()
 {
 
-    DIR *dir;
-    struct dirent *ent;
-    if ((dir = opendir ("res/png")) != NULL) {
-      /* print all the files and directories within directory */
-      while ((ent = readdir (dir)) != NULL) {
-        printf ("%s\n", ent->d_name);
-      }
-      closedir (dir);
-    } else {
-      /* could not open directory */
-      perror ("");
-      //return EXIT_FAILURE;
-    }
+
     cout << "Init Game\n";
     gameWidth = 640;
     gameHeight = 480;
@@ -117,7 +105,7 @@ Game::Game()
     playerChar->addTexture(rightLegTexture);
     playerChar->addTexture(leftArmTexture);
 
-
+    playerChar->getAnimate("res/png");
 
 
 }
