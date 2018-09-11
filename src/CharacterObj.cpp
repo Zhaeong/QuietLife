@@ -88,8 +88,31 @@ void CharacterObj::getAnimate(string dirPath)
                 {
                     while ( getline (myfile,line) )
                     {
-                      cout << line << '\n';
+                        if(line == "STARTTEXTURE")
+                        {
+
+                            while (line != "ENDTEXTURE" && !myfile.eof())
+                            {
+                                getline (myfile,line);
+                                cout << "The current line is:" << line << "\n";
+
+                                //The npos checks if the string line contains :
+                                //Because if not then it is not a variable line
+                                if(line.length() > 0 && line.find(':') != string::npos)
+                                {
+                                    string param = line.substr(0, line.find(":"));
+                                    string value = line.substr(line.find(":"), line.length());
+                                    cout << "param:" << param << " val:" << value << "\n";
+                                }
+                                else
+                                {
+                                    cout << "ERROR Parsing anim file" << fullPath;
+                                }
+                            }
+                        }
+                        cout << "END" << line << '\n';
                     }
+
                     myfile.close();
                 }
                 else
