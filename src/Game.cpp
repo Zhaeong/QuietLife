@@ -76,35 +76,6 @@ Game::Game()
     playerChar->setPos(gameGroundArray.at(0).m_X, gameGroundArray.at(0).m_Y);
     playerChar->setDimension(180, 140);
 
-
-    TextureObj bodyTexture(SH, "res/png/manBody.png");
-    TextureObj leftLegTexture(SH, "res/png/leg.png");
-    TextureObj rightLegTexture(SH, "res/png/leg.png");
-    TextureObj leftArmTexture(SH, "res/png/arm.png");
-
-    leftLegTexture.setRotateTargets(-30, 30);
-    leftLegTexture.setMiddle(15,0);
-    leftLegTexture.setPos(20, 94, -30);
-
-    rightLegTexture.setRotateTargets(-30, 30);
-    rightLegTexture.setMiddle(15,0);
-    rightLegTexture.setPos(10, 94, 30);
-
-    leftArmTexture.setRotateTargets(-30, 30);
-    leftArmTexture.setMiddle(6,0);
-    leftArmTexture.setPos(10, 56, 10);
-
-    leftLegTexture.removeWhitespace();
-    rightLegTexture.removeWhitespace();
-    leftArmTexture.removeWhitespace();
-
-    bodyTexture.removeWhitespace();
-
-    playerChar->addTexture(bodyTexture);
-    playerChar->addTexture(leftLegTexture);
-    playerChar->addTexture(rightLegTexture);
-    playerChar->addTexture(leftArmTexture);
-
     playerChar->getAnimate("res/png");
 
 

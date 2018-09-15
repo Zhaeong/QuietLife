@@ -90,9 +90,19 @@ void CharacterObj::getAnimate(string dirPath)
                     {
                         if(line == "STARTTEXTURE")
                         {
-
+                            string texturePath;
+                            int xPos;
+                            int yPos;
+                            int rot;
+                            int xMid;
+                            int yMid;
+                            int rotStart;
+                            int rotEnd;
+                            //Start Texture means getting a single texture info
                             while (line != "ENDTEXTURE" && !myfile.eof())
                             {
+
+
                                 getline (myfile,line);
                                 cout << "The current line is:" << line << "\n";
 
@@ -101,14 +111,68 @@ void CharacterObj::getAnimate(string dirPath)
                                 if(line.length() > 0 && line.find(':') != string::npos)
                                 {
                                     string param = line.substr(0, line.find(":"));
-                                    string value = line.substr(line.find(":"), line.length());
+
+                                    // + 1 because without it we include the : in the string
+                                    string value = line.substr(line.find(":") + 1, line.length());
                                     cout << "param:" << param << " val:" << value << "\n";
+
+                                    if(param == "NAME")
+                                    {
+                                        texturePath = dirPath + "\\" + value;
+                                    }
+                                    else if (param == "XPOS")
+                                    {
+                                        xPos = stoi(value);
+                                    }
+                                    else if (param == "YPOS")
+                                    {
+                                        yPos = stoi(value);
+                                    }
+                                    else if (param == "ROTATION")
+                                    {
+                                        rot = stoi(value);
+                                    }
+                                    else if (param == "XMID")
+                                    {
+                                        xMid = stoi(value);
+                                    }
+                                    else if (param == "YMID")
+                                    {
+                                        yMid = stoi(value);
+                                    }
+                                    else if (param == "ROTSTART")
+                                    {
+                                        rotStart = stoi(value);
+                                    }
+                                    else if (param == "ROTEND")
+                                    {
+                                        rotEnd = stoi(value);
+                                    }
+                                    else
+                                    {
+                                        cout << "Warning INVALID Param" + param + "\n";
+                                    }
+
                                 }
                                 else
                                 {
                                     cout << "ERROR Parsing anim file" << fullPath;
                                 }
                             }
+
+                            //After while loop it should contain all the relevant fields for passing into animation
+
+                            string fullPath = dirPath + "\\" + fileName;
+
+                            TextureObj fileTexture(mSH, texturePath);
+                            fileTexture.setRotateTargets(rotStart, rotEnd);
+                            fileTexture.setMiddle(xMid, yMid);
+                            fileTexture.setPos(xPos, yPos, rot);
+                            fileTexture.removeWhitespace();
+
+
+                            addTexture(fileTexture);
+
                         }
                         cout << "END" << line << '\n';
                     }
