@@ -110,6 +110,7 @@ void CharacterObj::getAnimate(string dirPath)
                                 //Because if not then it is not a variable line
                                 if(line.length() > 0 && line.find(':') != string::npos)
                                 {
+                                    line = delSpaces(line);
                                     string param = line.substr(0, line.find(":"));
 
                                     // + 1 because without it we include the : in the string
@@ -162,15 +163,11 @@ void CharacterObj::getAnimate(string dirPath)
 
                             //After while loop it should contain all the relevant fields for passing into animation
 
-                            string fullPath = dirPath + "\\" + fileName;
-
                             TextureObj fileTexture(mSH, texturePath);
                             fileTexture.setRotateTargets(rotStart, rotEnd);
                             fileTexture.setMiddle(xMid, yMid);
                             fileTexture.setPos(xPos, yPos, rot);
                             fileTexture.removeWhitespace();
-
-
                             addTexture(fileTexture);
 
                         }

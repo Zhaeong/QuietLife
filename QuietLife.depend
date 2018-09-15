@@ -408,10 +408,10 @@
 	"CharacterObj.h"
 	"TextureObj.h"
 
-1536985191 source:d:\github\quietlife\src\game.cpp
+1536985799 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1532582165 d:\github\quietlife\include\gameutil.h
+1536986345 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -822,10 +822,10 @@
 1536209632 source:d:\github\quietlife\src\textureobj.cpp
 	"TextureObj.h"
 
-1536985448 source:d:\github\quietlife\src\characterobj.cpp
+1536986294 source:d:\github\quietlife\src\characterobj.cpp
 	"CharacterObj.h"
 
-1536380456 d:\github\quietlife\include\characterobj.h
+1536985968 d:\github\quietlife\include\characterobj.h
 	<vector>
 	<string>
 	<iostream>
@@ -833,6 +833,7 @@
 	<fstream>
 	"TextureObj.h"
 	"SDLHandler.h"
+	"GameUtil.h"
 
 1532810343 d:\cbproj\quietlife\include\characterobj.h
 	<vector>

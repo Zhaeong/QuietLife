@@ -12,6 +12,7 @@
 
 #include "TextureObj.h"
 #include "SDLHandler.h"
+#include "GameUtil.h"
 
 using namespace std;
 

@@ -49,5 +49,16 @@ inline int convertPlayerYtoCamY(SDL_Rect *playerRect, SDL_Rect *camRect)
 
 inline bool sortByX(const PixelObj &lhs, const PixelObj &rhs) { return lhs.m_X < rhs.m_X; }
 
+inline string delSpaces(string &str)
+{
+   for(unsigned int i=0; i<str.length(); i++)
+   {
+       if(str[i] == ' ' || str[i] == '\t')
+       {
+            str.erase(i,1);
+       }
+   }
 
+   return str;
+}
 #endif // GAMEUTIL_H_INCLUDED
