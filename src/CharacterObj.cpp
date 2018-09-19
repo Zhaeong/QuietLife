@@ -59,6 +59,48 @@ void CharacterObj::setDimension(int width, int height)
     mHeight = height;
 }
 
+void CharacterObj::getTextures(string dirPath)
+{
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir (dirPath.c_str())) != NULL)
+    {
+        /* print all the files and directories within directory */
+        while ((ent = readdir (dir)) != NULL)
+        {
+            string fileName = ent->d_name;
+            //cout << fileName;
+
+
+            string filePrefix = fileName.substr(0, fileName.find("."));
+            string fileSuffix = fileName.substr(fileName.find("."), fileName.length());
+
+            if(fileSuffix == ".png")
+            {
+                cout << "\nFound Texture: " + filePrefix + "\n";
+
+                string fullPath = dirPath + "\\" + fileName;
+
+                TextureObj fileTexture(mSH, fullPath);
+                fileTexture.setRotateTargets(0, 0);
+                fileTexture.setMiddle(0, 0);
+                fileTexture.setPos(0, 0, 0);
+                fileTexture.removeWhitespace();
+                addTexture(fileTexture);
+
+            }
+        }
+        closedir (dir);
+    }
+    else
+    {
+        /* could not open directory */
+        string errorMsg = "Couldn't open:" + dirPath;
+        perror (errorMsg.c_str());
+        //return EXIT_FAILURE;
+    }
+}
+
 void CharacterObj::getAnimate(string dirPath)
 {
     DIR *dir;
@@ -81,6 +123,8 @@ void CharacterObj::getAnimate(string dirPath)
 
                 string fullPath = dirPath + "\\" + fileName;
 
+                AnimDef newAnimation(filePrefix);
+
 
                 string line;
                 ifstream myfile (fullPath);
@@ -101,8 +145,6 @@ void CharacterObj::getAnimate(string dirPath)
                             //Start Texture means getting a single texture info
                             while (line != "ENDTEXTURE" && !myfile.eof())
                             {
-
-
                                 getline (myfile,line);
                                 cout << "The current line is:" << line << "\n";
 
@@ -155,24 +197,33 @@ void CharacterObj::getAnimate(string dirPath)
                                     }
 
                                 }
+                                else if(line == "ENDTEXTURE")
+                                {
+                                    cout << "Reached end of Texture Def for" + texturePath + "\n";
+                                }
                                 else
                                 {
-                                    cout << "ERROR Parsing anim file" << fullPath;
+                                    cout << "ERROR Parsing anim file:" << fullPath;
                                 }
                             }
 
                             //After while loop it should contain all the relevant fields for passing into animation
 
-                            TextureObj fileTexture(mSH, texturePath);
-                            fileTexture.setRotateTargets(rotStart, rotEnd);
-                            fileTexture.setMiddle(xMid, yMid);
-                            fileTexture.setPos(xPos, yPos, rot);
-                            fileTexture.removeWhitespace();
-                            addTexture(fileTexture);
+                            SpriteAnimDef SAD(texturePath);
+
+                            SAD.setPos(xPos, yPos);
+                            SAD.setMid(xMid, yMid);
+                            SAD.setRot(rot);
+                            SAD.setRotBound(rotStart, rotEnd);
+
+                            newAnimation.addSpriteAnime(SAD);
+
 
                         }
                         cout << "END" << line << '\n';
                     }
+
+                    mAnimArray.push_back(newAnimation);
 
                     myfile.close();
                 }
@@ -191,5 +242,42 @@ void CharacterObj::getAnimate(string dirPath)
         string errorMsg = "Couldn't open:" + dirPath;
         perror (errorMsg.c_str());
         //return EXIT_FAILURE;
+    }
+}
+
+void CharacterObj::loadAnimation(string animationName)
+{
+
+    for(unsigned int i = 0; i < mAnimArray.size(); i++)
+    {
+        AnimDef& animDefine = mAnimArray[i];
+        string animName = animDefine.animName;
+        if(animationName == animName)
+        {
+            cout << "Found Animation: " + animName;
+            //Found the correct animation definition
+            //Now go through all texture def and update their animations
+
+            for(unsigned int j = 0; j < mTextureArray.size(); j++)
+            {
+                TextureObj& tObj = mTextureArray[j];
+
+                for(unsigned int k = 0; k < animDefine.mSpriteAnimArray.size(); k++)
+                {
+                    SpriteAnimDef& SAD = animDefine.mSpriteAnimArray[k];
+                    if(SAD.picName == tObj.mImgLocation)
+                    {
+                        cout << "Found sprite definitions for:" << tObj.mImgLocation << "\n";
+
+                        tObj.setRotateTargets(SAD.rotStart, SAD.rotEnd);
+                        tObj.setMiddle(SAD.xMid, SAD.yMid);
+                        tObj.setPos(SAD.xPos, SAD.yPos, SAD.rot);
+
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 }

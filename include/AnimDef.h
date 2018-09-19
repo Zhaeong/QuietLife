@@ -3,20 +3,25 @@
 
 #include <string>
 
+#include <vector>
+
+#include "SpriteAnimDef.h"
+
 using namespace std;
 
 class AnimDef
 {
     public:
-        AnimDef();
+        AnimDef(string aName);
         virtual ~AnimDef();
 
         string animName;
 
-        //Rotation Controls
-        int mRotation;
-        int mRotateStart;
-        int mRotateEnd;
+        vector<SpriteAnimDef> mSpriteAnimArray;
+
+        void addSpriteAnime(SpriteAnimDef SAD);
+
+
 
     protected:
 

@@ -76,7 +76,11 @@ Game::Game()
     playerChar->setPos(gameGroundArray.at(0).m_X, gameGroundArray.at(0).m_Y);
     playerChar->setDimension(180, 140);
 
-    playerChar->getAnimate("res/png");
+    playerChar->getTextures("res/png/steve");
+
+    playerChar->getAnimate("res/png/steve");
+
+    //playerChar->loadAnimation("walk");
 
 
 }
@@ -113,10 +117,12 @@ void Game::processEvents()
     if(eventName == "MOVE_DOWN")
     {
         nextY = originalY + 4;
+        playerChar->loadAnimation("walk");
     }
 
     if(eventName == "MOVE_UP")
     {
+        playerChar->loadAnimation("idle");
         nextY = originalY - 4;
     }
 

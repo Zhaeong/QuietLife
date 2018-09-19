@@ -408,7 +408,7 @@
 	"CharacterObj.h"
 	"TextureObj.h"
 
-1536985799 source:d:\github\quietlife\src\game.cpp
+1537328068 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
 1536986345 d:\github\quietlife\include\gameutil.h
@@ -822,10 +822,10 @@
 1536209632 source:d:\github\quietlife\src\textureobj.cpp
 	"TextureObj.h"
 
-1536986438 source:d:\github\quietlife\src\characterobj.cpp
+1537327923 source:d:\github\quietlife\src\characterobj.cpp
 	"CharacterObj.h"
 
-1536985968 d:\github\quietlife\include\characterobj.h
+1537326896 d:\github\quietlife\include\characterobj.h
 	<vector>
 	<string>
 	<iostream>
@@ -834,6 +834,8 @@
 	"TextureObj.h"
 	"SDLHandler.h"
 	"GameUtil.h"
+	"AnimDef.h"
+	"SpriteAnimDef.h"
 
 1532810343 d:\cbproj\quietlife\include\characterobj.h
 	<vector>
@@ -856,4 +858,18 @@
 
 1536008853 source:d:\cbproj\quietlife\src\textureobj.cpp
 	"TextureObj.h"
+
+1537326221 source:d:\github\quietlife\src\animdef.cpp
+	"AnimDef.h"
+
+1537326140 d:\github\quietlife\include\animdef.h
+	<string>
+	<vector>
+	"SpriteAnimDef.h"
+
+1537325949 d:\github\quietlife\include\spriteanimdef.h
+	<string>
+
+1537325884 source:d:\github\quietlife\src\spriteanimdef.cpp
+	"SpriteAnimDef.h"
 
