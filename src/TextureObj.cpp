@@ -104,9 +104,9 @@ void TextureObj::free()
 
 }
 
-void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect)
+void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect, SDL_RendererFlip flipType)
 {
-    SDL_RendererFlip flipType = SDL_FLIP_NONE;
+    //SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
 
 

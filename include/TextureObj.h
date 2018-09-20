@@ -32,7 +32,7 @@ class TextureObj
         //func
 
         void free();
-        void renderTexture(SDL_Rect srcRect, SDL_Rect dstRect);
+        void renderTexture(SDL_Rect srcRect, SDL_Rect dstRect, SDL_RendererFlip flipType);
 
 
         //Rotation Controls

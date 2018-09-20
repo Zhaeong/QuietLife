@@ -39,6 +39,8 @@ class CharacterObj
         int mWidth;
         int mHeight;
 
+        SDL_RendererFlip mFlipType;
+
 
         void addTexture(TextureObj textureObj);
         void render(int xPos, int yPos);

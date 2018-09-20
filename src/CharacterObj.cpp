@@ -8,6 +8,8 @@ CharacterObj::CharacterObj(SDLHandler *SH, string name)
     mSH = SH;
 
     setPos(0,0);
+
+    mFlipType = SDL_FLIP_NONE;
 }
 
 CharacterObj::~CharacterObj()
@@ -43,7 +45,7 @@ void CharacterObj::render(int xPos, int yPos)
         dstRect.w = tObj.mWidth;
 
 
-        tObj.renderTexture(srcRect, dstRect);
+        tObj.renderTexture(srcRect, dstRect, mFlipType);
     }
 }
 
