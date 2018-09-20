@@ -102,16 +102,16 @@ void Game::processEvents()
 
     if(eventName == "MOVE_LEFT")
     {
-        //nextX = originalX - 4;
-        nextX = currentPixel->m_X;
-        nextY = currentPixel->m_Y - playerChar->mHeight;
-        currentPixelPos += 10;
-        currentPixel = &gameGroundArray.at(currentPixelPos);
+        nextX = originalX - 4;
+
+
+        playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
     }
 
     if(eventName == "MOVE_RIGHT")
     {
         nextX = originalX + 4;
+        playerChar->mFlipType = SDL_FLIP_NONE;
     }
 
     if(eventName == "MOVE_DOWN")
