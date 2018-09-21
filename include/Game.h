@@ -45,12 +45,12 @@ class Game
 
         CharacterObj *playerChar;
 
-        GameObj *backGroundObj;
+        TextureObj *backGroundObj;
         GameObj *fontObj;
 
         vector<GameObj> gameObjectArray;
 
-        vector<PixelObj> gameGroundArray;
+        //vector<PixelObj> gameGroundArray;
 
         TTF_Font *gameFont;
 
@@ -65,7 +65,7 @@ class Game
         //helper functions
         void addGameObject(GameObj gameObj);
 
-        bool processTexture(GameObj *gObj);
+        //bool processTexture(GameObj *gObj);
 
 
     protected:

@@ -55,6 +55,8 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 				//Get image dimensions
 				mWidth = formattedSurface->w;
 				mHeight = formattedSurface->h;
+
+				cout << "image is w:" << mWidth << " h:" << mHeight << "\n";
 			}
 
 			//Get rid of old formatted surface

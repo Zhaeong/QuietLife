@@ -27,32 +27,15 @@ Game::Game()
     }
 
 
-    //Playing with pixels
-/*
-    GameObj testGame(500, 500, SH);
-    testGame.loadEditImage("res/png/testObj.png");
-
-    processTexture(&testGame);
-
-    gameObjectArray.push_back(testGame);
-
-
-    */
-
     //Load background texture
     cout << "Loading Background\n";
-    backGroundObj = new GameObj(0,0, SH);
-    backGroundObj->loadEditImage("res/png/testObj.png");
-    processTexture(backGroundObj);
-
-    currentPixel = &gameGroundArray.at(0);
-    currentPixelPos = 0;
+    backGroundObj = new TextureObj(SH, "res/png/testObj.png");
 
     //Set game bound according to game background
     minBoundX = 0;
     minBoundY = 0;
-    maxBoundX = backGroundObj->m_width;
-    maxBoundY = backGroundObj->m_height;
+    maxBoundX = backGroundObj->mWidth;
+    maxBoundY = backGroundObj->mHeight;
 
     //Load camera to be same
     cameraRect = new SDL_Rect;
@@ -73,14 +56,12 @@ Game::Game()
     //player char
     playerChar = new CharacterObj(SH, "Player");
 
-    playerChar->setPos(gameGroundArray.at(0).m_X, gameGroundArray.at(0).m_Y);
+    playerChar->setPos(400, 400);
     playerChar->setDimension(180, 140);
 
     playerChar->getTextures("res/png/steve");
 
     playerChar->getAnimate("res/png/steve");
-
-    //playerChar->loadAnimation("walk");
 
 
 }
@@ -103,8 +84,6 @@ void Game::processEvents()
     if(eventName == "MOVE_LEFT")
     {
         nextX = originalX - 4;
-
-
         playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
     }
 
@@ -175,14 +154,15 @@ void Game::render()
     dstRectBckObj.w = cameraRect->w;
     dstRectBckObj.x = 0;
     dstRectBckObj.y = 0;
-    backGroundObj->render(*cameraRect, dstRectBckObj);
+    //backGroundObj->render(*cameraRect, dstRectBckObj);
 
+    backGroundObj->renderTexture(*cameraRect, dstRectBckObj, SDL_FLIP_NONE);
     //Render objects in game array
+
+
     for(GameObj gObj : gameObjectArray)
     {
         //should do a boundary check to see if object is in view before rendering
-
-
         //Need to convert position of obj to cameras position
         SDL_Rect srcRect;
         SDL_Rect dstRectObj;
@@ -200,8 +180,9 @@ void Game::render()
         dstRectObj.x = gObj.m_xPos - cameraRect->x ;
         dstRectObj.y = gObj.m_yPos - cameraRect->y;
 
-        gObj.render(srcRect, dstRectObj);
+        gObj.renderEx(srcRect, dstRectObj);
     }
+
 
 
     //Render Player
@@ -229,7 +210,7 @@ void Game::render()
                       textColor);
 
 
-    fontObj->render(fontRect, fontRect);
+    fontObj->renderEx(fontRect, fontRect);
 
     SDL_RenderPresent(SH->renderer);
 
@@ -240,77 +221,4 @@ void Game::render()
 void Game::addGameObject(GameObj gameObj)
 {
     gameObjectArray.push_back(gameObj);
-}
-
-
-bool Game::processTexture(GameObj *gObj)
-{
-    bool result = false;
-
-    if(gObj->lockTexture())
-    {
-        //Allocate format from window
-        Uint32 format = SDL_GetWindowPixelFormat( SH->window );
-        SDL_PixelFormat* mappingFormat = SDL_AllocFormat( format );
-
-        //Get pixel data
-        Uint32* pixels = (Uint32*)gObj->getPixels();
-
-        //4 bytes per pixel
-
-        int pixelWidth = ( gObj->m_pitch / 4 );
-        int pixelCount = pixelWidth * gObj->m_height;
-
-        //Map colors
-        Uint32 colorKey = SDL_MapRGB( mappingFormat, 0, 0, 0 );
-        //Uint32 transparent = SDL_MapRGBA( mappingFormat, 0xFF, 0xFF, 0xFF, 0x00 );
-
-        Uint32 white = SDL_MapRGB( mappingFormat, 255, 255, 255 );
-
-        //Color key pixels
-
-        int pixelX = 0;
-        int pixelY = 0;
-
-        for( int i = 0; i < pixelCount; i++ )
-        {
-            if( pixels[ i ] == colorKey )
-            {
-                PixelObj colorPix(pixelX, pixelY, pixels[i]);
-                gameGroundArray.push_back(colorPix);
-
-                pixels[ i ] = white;
-            }
-
-
-            //Set the next pixel's X and Y position
-            pixelX += 1;
-            if(pixelX == pixelWidth)
-            {
-                pixelX = 0;
-                pixelY += 1;
-            }
-
-        }
-        sort(gameGroundArray.begin(), gameGroundArray.end(), sortByX);
-        cout << "Number of items:" << gameGroundArray.size();
-
-
-
-
-        //Unlock texture
-        if(gObj->unlockTexture())
-        {
-            result = true;
-        }
-
-        //Free format
-        SDL_FreeFormat( mappingFormat );
-    }
-    else
-    {
-        cout << "Issue with locking texture" << gObj->m_imageLocation;
-    }
-
-    return result;
 }
