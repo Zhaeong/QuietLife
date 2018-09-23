@@ -6,7 +6,7 @@
 	<string>
 	<SDL2/SDL.h>
 
-1531599586 source:d:\cbproj\quietlife\main.cpp
+1537588529 source:d:\cbproj\quietlife\main.cpp
 	<SDL.h>
 	<string>
 	<iostream>
@@ -355,7 +355,7 @@
 	<vector>
 	<SDL.h>
 
-1532228226 source:d:\cbproj\quietlife\src\gameobj.cpp
+1537588529 source:d:\cbproj\quietlife\src\gameobj.cpp
 	"GameObj.h"
 
 1532228190 d:\cbproj\quietlife\include\gameobj.h
@@ -774,7 +774,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1532810343 d:\cbproj\quietlife\include\game.h
+1537588529 d:\cbproj\quietlife\include\game.h
 	<string>
 	<vector>
 	<algorithm>
@@ -788,14 +788,14 @@
 	"CharacterObj.h"
 	"TextureObj.h"
 
-1532810343 d:\cbproj\quietlife\include\gameutil.h
+1537588529 d:\cbproj\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
 	"GameObj.h"
 	"PixelObj.h"
 
-1536009178 source:d:\cbproj\quietlife\src\game.cpp
+1537588529 source:d:\cbproj\quietlife\src\game.cpp
 	"Game.h"
 
 1531974907 source:d:\github\quietlife\src\pixelobj.cpp
@@ -837,14 +837,19 @@
 	"AnimDef.h"
 	"SpriteAnimDef.h"
 
-1532810343 d:\cbproj\quietlife\include\characterobj.h
+1537588529 d:\cbproj\quietlife\include\characterobj.h
 	<vector>
 	<string>
 	<iostream>
+	<dirent.h>
+	<fstream>
 	"TextureObj.h"
 	"SDLHandler.h"
+	"GameUtil.h"
+	"AnimDef.h"
+	"SpriteAnimDef.h"
 
-1536008842 d:\cbproj\quietlife\include\textureobj.h
+1537588529 d:\cbproj\quietlife\include\textureobj.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_image.h>
@@ -853,10 +858,10 @@
 	"SDLHandler.h"
 	"PixelObj.h"
 
-1536008782 source:d:\cbproj\quietlife\src\characterobj.cpp
+1537588529 source:d:\cbproj\quietlife\src\characterobj.cpp
 	"CharacterObj.h"
 
-1536008853 source:d:\cbproj\quietlife\src\textureobj.cpp
+1537588529 source:d:\cbproj\quietlife\src\textureobj.cpp
 	"TextureObj.h"
 
 1537326221 source:d:\github\quietlife\src\animdef.cpp
@@ -871,5 +876,19 @@
 	<string>
 
 1537325884 source:d:\github\quietlife\src\spriteanimdef.cpp
+	"SpriteAnimDef.h"
+
+1537588529 d:\cbproj\quietlife\include\animdef.h
+	<string>
+	<vector>
+	"SpriteAnimDef.h"
+
+1537588529 d:\cbproj\quietlife\include\spriteanimdef.h
+	<string>
+
+1537588529 source:d:\cbproj\quietlife\src\animdef.cpp
+	"AnimDef.h"
+
+1537588529 source:d:\cbproj\quietlife\src\spriteanimdef.cpp
 	"SpriteAnimDef.h"
 

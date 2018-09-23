@@ -48,6 +48,8 @@ class Game
         TextureObj *backGroundObj;
         GameObj *fontObj;
 
+        GameObj *dialogPanel;
+
         vector<GameObj> gameObjectArray;
 
         //vector<PixelObj> gameGroundArray;
