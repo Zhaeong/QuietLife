@@ -49,7 +49,7 @@ Game::Game()
     SDL_Color textColor = { 0, 0, 0 };
 
     fontObj = new GameObj(0, 0, SH);
-    fontObj->loadText(gameFont, "heyyyyy baby", textColor);
+    fontObj->loadText(gameFont, "heyyyyy baby", textColor, 200);
 
 
     cout << "Creating CharObj\n";
@@ -62,6 +62,13 @@ Game::Game()
     playerChar->getTextures("res/png/steve");
 
     playerChar->getAnimate("res/png/steve");
+
+    cout << "Loading Dialog Panel";
+    dialogPanel = new TextureObj(SH, "res/png/dialogPanel.png");
+
+    dialogText = new GameObj(0,0, SH);
+
+
 
 
 }
@@ -193,7 +200,7 @@ void Game::render()
 
     playerChar->render(playerX, playerY);
 
-    //Render font
+    //Render debug font
 
     SDL_Rect fontRect;
 
@@ -207,11 +214,51 @@ void Game::render()
     fontObj->loadText(gameFont,
                       "pla - x:" + to_string(playerChar->mXpos) + " y:" + to_string(playerChar->mYpos) + "\n" +
                       "cam - x:" + to_string(cameraRect->x) + " y:" + to_string(cameraRect->y),
-                      textColor);
+                      textColor,
+                      200);
 
 
     fontObj->renderEx(fontRect, fontRect);
 
+    //////////////////////
+    //Render Dialog Panel
+    //////////////////////
+
+    SDL_Rect dialogRectSrc, dialogRectTarget;
+
+    dialogRectSrc.h = dialogPanel->mHeight;
+    dialogRectSrc.w = dialogPanel->mWidth;
+    dialogRectSrc.x = 0;
+    dialogRectSrc.y = 0;
+
+    //make it so that it takes up a third of the bottom screen
+    dialogRectTarget.h = gameHeight / 3 ;
+    dialogRectTarget.w = gameWidth;
+    dialogRectTarget.x = 0;
+    dialogRectTarget.y = (gameHeight / 3 ) * 2;
+
+    dialogPanel->renderTexture(dialogRectSrc, dialogRectTarget, SDL_FLIP_NONE);
+
+    //Render text on top of the dialog panel
+
+    SDL_Rect dialogFontRectSrc, dialogFontRectTarget;
+
+    dialogFontRectSrc.h = dialogText->m_height;
+    dialogFontRectSrc.w = dialogText->m_width;
+    dialogFontRectSrc.x = 0;
+    dialogFontRectSrc.y = 0;
+
+    dialogFontRectTarget.h = dialogText->m_height;
+    dialogFontRectTarget.w = dialogText->m_width;
+    dialogFontRectTarget.x = 0;
+    dialogFontRectTarget.y = (gameHeight / 3 ) * 2;
+
+    dialogText->loadText(gameFont, "I live because of you o mighty creator!", textColor, gameWidth);
+
+    dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
+
+
+    //Swap buffers
     SDL_RenderPresent(SH->renderer);
 
 }

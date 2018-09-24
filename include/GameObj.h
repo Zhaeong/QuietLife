@@ -45,7 +45,7 @@ class GameObj
 
         //functions
         void loadImage(string imageLocation);
-        void loadText(TTF_Font *font, string fontText, SDL_Color fontColor);
+        void loadText(TTF_Font *font, string fontText, SDL_Color fontColor, int maxWidth);
 
         void loadEditImage(string imageLocation);
 
