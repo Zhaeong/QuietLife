@@ -28,12 +28,14 @@ class SpriteAnimDef
         int rotEnd;
 
         int zVal;
+        int moveSpeed;
 
         void setPos(int x, int y);
         void setRot(int rot);
         void setMid(int x, int y);
         void setRotBound(int start, int end);
         void setZval(int zval);
+        void setSpeed(int speed);
 
     protected:
 

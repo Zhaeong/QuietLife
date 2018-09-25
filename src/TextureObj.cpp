@@ -104,6 +104,9 @@ void TextureObj::free()
     mPosition.x = 0;
     mPosition.y = 0;
 
+    mZval = 0;
+    mSpeed = 1;
+
 }
 
 void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect, SDL_RendererFlip flipType)
@@ -146,7 +149,7 @@ void TextureObj::getRotation()
     {
         if(mRotation < mRotateEnd)
         {
-            mRotation += 1;
+            mRotation += mSpeed;
         }
         else
         {
@@ -157,7 +160,7 @@ void TextureObj::getRotation()
     {
         if(mRotation > mRotateStart)
         {
-            mRotation -= 1;
+            mRotation -= mSpeed;
         }
         else
         {
@@ -293,6 +296,11 @@ bool TextureObj::removeWhitespace()
 void TextureObj::setZval(int zval)
 {
     mZval = zval;
+}
+
+void TextureObj::setSpeed(int speed)
+{
+    mSpeed = speed;
 }
 
 

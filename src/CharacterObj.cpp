@@ -145,6 +145,7 @@ void CharacterObj::getAnimate(string dirPath)
                             int rotStart;
                             int rotEnd;
                             int zVal;
+                            int speed;
                             //Start Texture means getting a single texture info
                             while (line != "ENDTEXTURE" && !myfile.eof())
                             {
@@ -160,7 +161,7 @@ void CharacterObj::getAnimate(string dirPath)
 
                                     // + 1 because without it we include the : in the string
                                     string value = line.substr(line.find(":") + 1, line.length());
-                                    cout << "param:" << param << " val:" << value << "\n";
+                                    //cout << "param:" << param << " val:" << value << "\n";
 
                                     if(param == "NAME")
                                     {
@@ -198,6 +199,11 @@ void CharacterObj::getAnimate(string dirPath)
                                     {
                                         zVal = stoi(value);
                                     }
+                                    else if (param == "SPEED")
+                                    {
+                                        cout << "\n setting speed\n";
+                                        speed = stoi(value);
+                                    }
                                     else
                                     {
                                         cout << "Warning INVALID Param" + param + "\n";
@@ -223,6 +229,7 @@ void CharacterObj::getAnimate(string dirPath)
                             SAD.setRot(rot);
                             SAD.setRotBound(rotStart, rotEnd);
                             SAD.setZval(zVal);
+                            SAD.setSpeed(speed);
                             newAnimation.addSpriteAnime(SAD);
 
 
@@ -261,7 +268,7 @@ void CharacterObj::loadAnimation(string animationName)
         string animName = animDefine.animName;
         if(animationName == animName)
         {
-            cout << "Found Animation: " + animName;
+
             //Found the correct animation definition
             //Now go through all texture def and update their animations
 
@@ -274,20 +281,27 @@ void CharacterObj::loadAnimation(string animationName)
                     SpriteAnimDef& SAD = animDefine.mSpriteAnimArray[k];
                     if(SAD.picName == tObj.mImgLocation)
                     {
-                        cout << "Found sprite definitions for:" << tObj.mImgLocation << "\n";
+
 
                         tObj.setRotateTargets(SAD.rotStart, SAD.rotEnd);
                         tObj.setMiddle(SAD.xMid, SAD.yMid);
                         tObj.setPos(SAD.xPos, SAD.yPos, SAD.rot);
                         tObj.setZval(SAD.zVal);
+                        tObj.setSpeed(SAD.moveSpeed);
 
                         break;
                     }
                 }
+
             }
+
+            cout << "\nLoading Animation:" << animName<< "\n";
+            break;
         }
     }
 
     //sort the texture array by the zval so that the texture order is established
     sort(mTextureArray.begin(), mTextureArray.end(), sortByZval);
+
+    cout << "Texture:" << mTextureArray[1].mImgLocation << " zVal:" << mTextureArray[1].mZval << " speed:" << mTextureArray[1].mSpeed  <<"\n";
 }

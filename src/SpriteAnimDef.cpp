@@ -44,3 +44,8 @@ void SpriteAnimDef::setZval(int zval)
 {
     zVal = zval;
 }
+
+void SpriteAnimDef::setSpeed(int speed)
+{
+    moveSpeed = speed;
+}

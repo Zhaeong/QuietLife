@@ -63,10 +63,10 @@ class TextureObj
         bool removeWhitespace();
 
         int mZval;
-
         void setZval(int zval);
 
-
+        int mSpeed;
+        void setSpeed(int speed);
 
     protected:
 
