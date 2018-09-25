@@ -408,15 +408,16 @@
 	"CharacterObj.h"
 	"TextureObj.h"
 
-1537760251 source:d:\github\quietlife\src\game.cpp
+1537760467 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1536986345 d:\github\quietlife\include\gameutil.h
+1537848718 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
 	"GameObj.h"
 	"PixelObj.h"
+	"TextureObj.h"
 
 1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -810,7 +811,7 @@
 1532204188 source:d:\cbproj\quietlife\src\pixelobj.cpp
 	"PixelObj.h"
 
-1537415097 d:\github\quietlife\include\textureobj.h
+1537848536 d:\github\quietlife\include\textureobj.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_image.h>
@@ -819,16 +820,17 @@
 	"SDLHandler.h"
 	"PixelObj.h"
 
-1537501830 source:d:\github\quietlife\src\textureobj.cpp
+1537848519 source:d:\github\quietlife\src\textureobj.cpp
 	"TextureObj.h"
 
 1537415150 source:d:\github\quietlife\src\characterobj.cpp
 	"CharacterObj.h"
 
-1537415144 d:\github\quietlife\include\characterobj.h
+1537848747 d:\github\quietlife\include\characterobj.h
 	<vector>
 	<string>
 	<iostream>
+	<algorithm>
 	<dirent.h>
 	<fstream>
 	"TextureObj.h"
@@ -872,10 +874,10 @@
 	<vector>
 	"SpriteAnimDef.h"
 
-1537325949 d:\github\quietlife\include\spriteanimdef.h
+1537848390 d:\github\quietlife\include\spriteanimdef.h
 	<string>
 
-1537325884 source:d:\github\quietlife\src\spriteanimdef.cpp
+1537848420 source:d:\github\quietlife\src\spriteanimdef.cpp
 	"SpriteAnimDef.h"
 
 1537588529 d:\cbproj\quietlife\include\animdef.h

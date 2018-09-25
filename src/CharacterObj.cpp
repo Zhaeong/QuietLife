@@ -144,6 +144,7 @@ void CharacterObj::getAnimate(string dirPath)
                             int yMid;
                             int rotStart;
                             int rotEnd;
+                            int zVal;
                             //Start Texture means getting a single texture info
                             while (line != "ENDTEXTURE" && !myfile.eof())
                             {
@@ -193,6 +194,10 @@ void CharacterObj::getAnimate(string dirPath)
                                     {
                                         rotEnd = stoi(value);
                                     }
+                                    else if (param == "ZVAL")
+                                    {
+                                        zVal = stoi(value);
+                                    }
                                     else
                                     {
                                         cout << "Warning INVALID Param" + param + "\n";
@@ -217,7 +222,7 @@ void CharacterObj::getAnimate(string dirPath)
                             SAD.setMid(xMid, yMid);
                             SAD.setRot(rot);
                             SAD.setRotBound(rotStart, rotEnd);
-
+                            SAD.setZval(zVal);
                             newAnimation.addSpriteAnime(SAD);
 
 
@@ -274,12 +279,15 @@ void CharacterObj::loadAnimation(string animationName)
                         tObj.setRotateTargets(SAD.rotStart, SAD.rotEnd);
                         tObj.setMiddle(SAD.xMid, SAD.yMid);
                         tObj.setPos(SAD.xPos, SAD.yPos, SAD.rot);
+                        tObj.setZval(SAD.zVal);
 
                         break;
                     }
                 }
             }
         }
-
     }
+
+    //sort the texture array by the zval so that the texture order is established
+    sort(mTextureArray.begin(), mTextureArray.end(), sortByZval);
 }

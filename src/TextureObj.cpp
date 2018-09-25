@@ -219,7 +219,8 @@ bool TextureObj::removeWhitespace()
     {
         SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
         //Allocate format from window
-        Uint32 format = SDL_GetWindowPixelFormat( mSH->window );
+        //For some reason only this format works
+        //Uint32 format = SDL_GetWindowPixelFormat( mSH->window );
 
         SDL_PixelFormat* mappingFormat = SDL_AllocFormat( SDL_PIXELFORMAT_ARGB8888 );
 
@@ -245,8 +246,8 @@ bool TextureObj::removeWhitespace()
         for( int i = 0; i < pixelCount; i++ )
         {
 
-            Uint8 * colors = (Uint8 *) pixels[ i ];
-            Uint32 thepixel;
+            //Uint8 * colors = (Uint8 *) pixels[ i ];
+            //Uint32 thepixel;
             Uint8 red, green, blue, alpha;
 
             //SDL_GetRGBA(pixels[ i ],mappingFormat,&red,&green,&blue,&alpha);
@@ -288,4 +289,10 @@ bool TextureObj::removeWhitespace()
 
     return result;
 }
+
+void TextureObj::setZval(int zval)
+{
+    mZval = zval;
+}
+
 

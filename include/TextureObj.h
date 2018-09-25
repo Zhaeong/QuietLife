@@ -51,6 +51,7 @@ class TextureObj
         void getRotation();
 
 
+
         //Texture manipulation
 
         void* mPixels;
@@ -60,6 +61,10 @@ class TextureObj
         bool unlockTexture();
 
         bool removeWhitespace();
+
+        int mZval;
+
+        void setZval(int zval);
 
 
 

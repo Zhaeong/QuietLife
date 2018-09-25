@@ -39,3 +39,8 @@ void SpriteAnimDef::setRotBound(int rStart, int rEnd)
     rotStart = rStart;
     rotEnd = rEnd;
 }
+
+void SpriteAnimDef::setZval(int zval)
+{
+    zVal = zval;
+}

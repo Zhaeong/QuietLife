@@ -7,6 +7,7 @@
 
 #include "GameObj.h"
 #include "PixelObj.h"
+#include "TextureObj.h"
 //Checks the source rect and see if it hits the targetrect
 inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, int xTarget, int yTarget, int wTarget, int hTarget)
 {
@@ -47,7 +48,10 @@ inline int convertPlayerYtoCamY(SDL_Rect *playerRect, SDL_Rect *camRect)
     return (playerRect->y + (playerRect->h  /2)) - (camRect->h/2);
 }
 
-inline bool sortByX(const PixelObj &lhs, const PixelObj &rhs) { return lhs.m_X < rhs.m_X; }
+inline bool sortByZval(const TextureObj &lhs, const TextureObj &rhs)
+{
+    return lhs.mZval < rhs.mZval;
+}
 
 inline string delSpaces(string &str)
 {
