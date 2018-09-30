@@ -5,6 +5,8 @@ Game::Game()
 
 
     cout << "Init Game\n";
+
+    //Temple OS H and W
     gameWidth = 640;
     gameHeight = 480;
     SH = new SDLHandler(gameWidth, gameHeight);
