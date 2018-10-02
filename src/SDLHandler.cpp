@@ -47,6 +47,9 @@ string SDLHandler::getEvent()
                 /* Check the SDLKey values and move change the coords */
                 switch( event.key.keysym.sym )
                 {
+                    case SDLK_ESCAPE:
+                        eventName = "EXIT";
+                        break;
                     case SDLK_LEFT:
                         eventName = "MOVE_LEFT";
                         break;

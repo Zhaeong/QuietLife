@@ -32,6 +32,11 @@ int main(int argc, char *argv[])
         {
             SDL_Delay(frameDelay - frameTime);
         }
+
+        if(!mainGame->bRunGame)
+        {
+            break;
+        }
     }
 
 

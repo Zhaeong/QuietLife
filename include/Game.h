@@ -30,6 +30,7 @@ class Game
     public:
         Game();
         virtual ~Game();
+        bool bRunGame;
 
         int gameHeight;
         int gameWidth;

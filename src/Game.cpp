@@ -6,6 +6,7 @@ Game::Game()
 
     cout << "Init Game\n";
 
+    bRunGame = true;
     //Temple OS H and W
     gameWidth = 640;
     gameHeight = 480;
@@ -31,7 +32,7 @@ Game::Game()
 
     //Load background texture
     cout << "Loading Background\n";
-    backGroundObj = new TextureObj(SH, "res/png/testObj.png");
+    backGroundObj = new TextureObj(SH, "res/png/scenes/bedroom.png");
 
     //Set game bound according to game background
     minBoundX = 0;
@@ -90,6 +91,10 @@ void Game::processEvents()
     int nextX = originalX;
     int nextY = originalY;
 
+    if(eventName == "EXIT")
+    {
+        bRunGame = false;
+    }
     if(eventName == "MOVE_LEFT")
     {
         nextX = originalX - 4;
