@@ -60,6 +60,7 @@
 		<Unit filename="include/GameUtil.h" />
 		<Unit filename="include/PixelObj.h" />
 		<Unit filename="include/SDLHandler.h" />
+		<Unit filename="include/SceneLoader.h" />
 		<Unit filename="include/SpriteAnimDef.h" />
 		<Unit filename="include/TextureObj.h" />
 		<Unit filename="main.cpp" />
@@ -70,6 +71,7 @@
 		<Unit filename="src/GameObj.cpp" />
 		<Unit filename="src/PixelObj.cpp" />
 		<Unit filename="src/SDLHandler.cpp" />
+		<Unit filename="src/SceneLoader.cpp" />
 		<Unit filename="src/SpriteAnimDef.cpp" />
 		<Unit filename="src/TextureObj.cpp" />
 		<Extensions>

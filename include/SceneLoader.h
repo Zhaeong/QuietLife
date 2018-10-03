@@ -1,7 +1,16 @@
 #ifndef SCENELOADER_H
 #define SCENELOADER_H
 
+#include <vector>
+#include <string>
+
+#include <dirent.h>
+#include <fstream>
+
+#include "GameUtil.h"
 #include "TextureObj.h"
+#include "SceneObj.h"
+using namespace std;
 
 class SceneLoader
 {
@@ -15,6 +24,11 @@ class SceneLoader
         int minBoundY;
         int maxBoundX;
         int maxBoundY;
+
+        vector<SceneObj> mSceneObjArray;
+
+        void loadScenesFromDirectory(string dirPath);
+
 
     protected:
 

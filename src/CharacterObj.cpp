@@ -150,7 +150,6 @@ void CharacterObj::getAnimate(string dirPath)
                             while (line != "ENDTEXTURE" && !myfile.eof())
                             {
                                 getline (myfile,line);
-                                cout << "The current line is:" << line << "\n";
 
                                 //The npos checks if the string line contains :
                                 //Because if not then it is not a variable line
@@ -201,7 +200,7 @@ void CharacterObj::getAnimate(string dirPath)
                                     }
                                     else if (param == "SPEED")
                                     {
-                                        cout << "\n setting speed\n";
+
                                         speed = stoi(value);
                                     }
                                     else
@@ -234,7 +233,7 @@ void CharacterObj::getAnimate(string dirPath)
 
 
                         }
-                        cout << "END" << line << '\n';
+
                     }
 
                     mAnimArray.push_back(newAnimation);

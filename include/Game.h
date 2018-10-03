@@ -23,6 +23,7 @@
 #include "CharacterObj.h"
 #include "TextureObj.h"
 
+#include "SceneLoader.h"
 using namespace std;
 
 class Game
@@ -41,6 +42,8 @@ class Game
         int maxBoundY;
 
         SDLHandler *SH;
+
+        SceneLoader *mSceneLoader;
 
         SDL_Rect *cameraRect;
 

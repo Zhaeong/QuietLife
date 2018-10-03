@@ -11,6 +11,7 @@ Game::Game()
     gameWidth = 640;
     gameHeight = 480;
     SH = new SDLHandler(gameWidth, gameHeight);
+    mSceneLoader = new SceneLoader();
 
     //Initialize libraries
 
@@ -32,6 +33,8 @@ Game::Game()
 
     //Load background texture
     cout << "Loading Background\n";
+
+    mSceneLoader->loadScenesFromDirectory("res/png/scenes");
     backGroundObj = new TextureObj(SH, "res/png/scenes/bedroom.png");
 
     //Set game bound according to game background
