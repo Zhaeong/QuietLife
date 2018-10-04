@@ -15,19 +15,28 @@ using namespace std;
 class SceneLoader
 {
     public:
-        SceneLoader();
+        SceneLoader(SDLHandler *SH);
         virtual ~SceneLoader();
 
-        TextureObj *backGroundObj;
+        SDLHandler *mSH;
+
+        TextureObj *backGroundTexture;
 
         int minBoundX;
         int minBoundY;
         int maxBoundX;
         int maxBoundY;
 
+        int playerInitX;
+        int playerInitY;
+
         vector<SceneObj> mSceneObjArray;
 
         void loadScenesFromDirectory(string dirPath);
+
+        void loadScene(string sceneName);
+
+        void renderScene(SDL_Rect cameraRect);
 
 
     protected:

@@ -1,6 +1,6 @@
 #include "SceneObj.h"
 
-SceneObj::SceneObj(string name, string imgPath, int top, int bottom, int left, int right)
+SceneObj::SceneObj(string name, string imgPath, int top, int bottom, int left, int right, int playerX, int playerY)
 {
     mName = name;
     mPath = imgPath;
@@ -8,6 +8,9 @@ SceneObj::SceneObj(string name, string imgPath, int top, int bottom, int left, i
     mBottom = bottom;
     mLeft = left;
     mRight = right;
+
+    mPlayerX = playerX;
+    mPlayerY = playerY;
 }
 
 SceneObj::~SceneObj()

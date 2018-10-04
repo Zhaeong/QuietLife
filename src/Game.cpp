@@ -11,7 +11,7 @@ Game::Game()
     gameWidth = 640;
     gameHeight = 480;
     SH = new SDLHandler(gameWidth, gameHeight);
-    mSceneLoader = new SceneLoader();
+
 
     //Initialize libraries
 
@@ -33,15 +33,15 @@ Game::Game()
 
     //Load background texture
     cout << "Loading Background\n";
-
+    mSceneLoader = new SceneLoader(SH);
     mSceneLoader->loadScenesFromDirectory("res/png/scenes");
-    backGroundObj = new TextureObj(SH, "res/png/scenes/bedroom.png");
+    mSceneLoader->loadScene("bedroom.png");
 
     //Set game bound according to game background
-    minBoundX = 0;
-    minBoundY = 0;
-    maxBoundX = backGroundObj->mWidth;
-    maxBoundY = backGroundObj->mHeight;
+    minBoundX = mSceneLoader->minBoundX;
+    minBoundY = mSceneLoader->minBoundY;
+    maxBoundX = mSceneLoader->maxBoundX;
+    maxBoundY = mSceneLoader->maxBoundY;
 
     //Load camera to be same
     cameraRect = new SDL_Rect;
@@ -62,7 +62,7 @@ Game::Game()
     //player char
     playerChar = new CharacterObj(SH, "Player");
 
-    playerChar->setPos(400, 400);
+    playerChar->setPos(mSceneLoader->playerInitX, mSceneLoader->playerInitY);
     playerChar->setDimension(180, 140);
 
     playerChar->getTextures("res/png/steve");
@@ -165,15 +165,9 @@ void Game::render()
     SDL_RenderClear(SH->renderer);
 
     //Render background
-    SDL_Rect dstRectBckObj;
+    mSceneLoader->renderScene(*cameraRect);
 
-    dstRectBckObj.h = cameraRect->h;
-    dstRectBckObj.w = cameraRect->w;
-    dstRectBckObj.x = 0;
-    dstRectBckObj.y = 0;
-    //backGroundObj->render(*cameraRect, dstRectBckObj);
 
-    backGroundObj->renderTexture(*cameraRect, dstRectBckObj, SDL_FLIP_NONE);
     //Render objects in game array
 
 

@@ -1,8 +1,8 @@
 #include "SceneLoader.h"
 
-SceneLoader::SceneLoader()
+SceneLoader::SceneLoader(SDLHandler *SH)
 {
-    //ctor
+    mSH = SH;
 }
 
 SceneLoader::~SceneLoader()
@@ -48,6 +48,8 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                             int bottom;
                             int left;
                             int right;
+                            int playerX;
+                            int playerY;
 
                             //Start Texture means getting a single texture info
                             while (line != "ENDDEF" && !myfile.eof())
@@ -87,6 +89,14 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                                     {
                                         right = stoi(value);
                                     }
+                                    else if (param == "PLAYERX")
+                                    {
+                                        playerX = stoi(value);
+                                    }
+                                    else if (param == "PLAYERY")
+                                    {
+                                        playerY = stoi(value);
+                                    }
                                     else
                                     {
                                         cout << "Warning INVALID Param" + param + "\n";
@@ -95,7 +105,7 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                                 }
                                 else if(line == "ENDDEF")
                                 {
-                                    cout << "Reached end of Scene Def for" + fullPath + "\n";
+                                    //cout << "Reached end of Scene Def for" + fullPath + "\n";
                                 }
                                 else
                                 {
@@ -105,7 +115,7 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
 
                             //After while loop it should contain all the relevant fields for passing into animation
 
-                            SceneObj newScene(sceneName, scenePath, top, bottom, left, right);
+                            SceneObj newScene(sceneName, scenePath, top, bottom, left, right, playerX, playerY);
 
 
                             mSceneObjArray.push_back(newScene);
@@ -133,5 +143,48 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
         perror (errorMsg.c_str());
         //return EXIT_FAILURE;
     }
+
+}
+
+void SceneLoader::loadScene(string sceneName)
+{
+    bool sceneFound = false;
+    for(unsigned int i = 0; i < mSceneObjArray.size(); i++)
+    {
+        SceneObj& sObj = mSceneObjArray[i];
+        string sObjName = sObj.mName;
+        if(sceneName == sObjName)
+        {
+            sceneFound = true;
+            backGroundTexture = new TextureObj(mSH, sObj.mPath);
+            minBoundX = sObj.mLeft;
+            minBoundY = sObj.mTop;
+            maxBoundX = sObj.mRight;
+            maxBoundY = sObj.mBottom;
+            playerInitX = sObj.mPlayerX;
+            playerInitY = sObj.mPlayerY;
+            cout << "Loaded Scene: " << sceneName << " Path: " + sObj.mPath << "\n";
+            break;
+        }
+    }
+    if (!sceneFound)
+    {
+        cout << "Couldn't find scene:" << sceneName << "\n";
+    }
+}
+
+void SceneLoader::renderScene(SDL_Rect cameraRect)
+{
+    //cout << "rendering scene" << backGroundTexture->mImgLocation << " here";
+    //Render background
+    SDL_Rect dstRectBckObj;
+
+    dstRectBckObj.h = cameraRect.h;
+    dstRectBckObj.w = cameraRect.w;
+    dstRectBckObj.x = 0;
+    dstRectBckObj.y = 0;
+
+
+    backGroundTexture->renderTexture(cameraRect, dstRectBckObj, SDL_FLIP_NONE);
 
 }

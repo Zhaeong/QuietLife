@@ -6,7 +6,7 @@ using namespace std;
 class SceneObj
 {
     public:
-        SceneObj(string name, string imgPath, int top, int bottom, int left, int right);
+        SceneObj(string name, string imgPath, int top, int bottom, int left, int right, int playerX, int playerY);
         virtual ~SceneObj();
 
         string mName;
@@ -16,6 +16,9 @@ class SceneObj
         int mBottom;
         int mLeft;
         int mRight;
+
+        int mPlayerX;
+        int mPlayerY;
 
 
 

@@ -49,7 +49,6 @@ class Game
 
         CharacterObj *playerChar;
 
-        TextureObj *backGroundObj;
         GameObj *fontObj;
 
         TextureObj *dialogPanel;
