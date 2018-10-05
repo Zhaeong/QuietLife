@@ -23,7 +23,7 @@ inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, in
     {
         outPut = "RIGHT";
     }
-
+/*
     if(ySource < yTarget)
     {
         outPut = "TOP";
@@ -33,7 +33,7 @@ inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, in
     {
         outPut = "BOTTOM";
     }
-
+*/
     return outPut;
 }
 

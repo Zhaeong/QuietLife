@@ -43,12 +43,7 @@ Game::Game()
     maxBoundX = mSceneLoader->maxBoundX;
     maxBoundY = mSceneLoader->maxBoundY;
 
-    //Load camera to be same
-    cameraRect = new SDL_Rect;
-    cameraRect->h = gameHeight;
-    cameraRect->w = gameWidth;
-    cameraRect->x = 0;
-    cameraRect->y = 0;
+
 
     //Load debug font texture
     gameFont = TTF_OpenFont("res/fonts/AmaticSC-Regular.ttf", 28);
@@ -63,11 +58,26 @@ Game::Game()
     playerChar = new CharacterObj(SH, "Player");
 
     playerChar->setPos(mSceneLoader->playerInitX, mSceneLoader->playerInitY);
-    playerChar->setDimension(180, 140);
+    playerChar->setDimension(100, 140);
 
     playerChar->getTextures("res/png/steve");
 
     playerChar->getAnimate("res/png/steve");
+
+
+    //cameraRect
+
+    //Load camera to be same
+    cameraRect = new SDL_Rect;
+
+    cameraRect->w = gameWidth;
+    cameraRect->h = gameHeight;
+
+    cameraRect->x = playerChar->mXpos + (playerChar->mWidth  /2) - (cameraRect->w/2);
+    cameraRect->y = playerChar->mYpos + (playerChar->mHeight  /2) - (cameraRect->h/2);
+
+    cout << "player width: " << playerChar->mWidth << "\n";
+
 
     cout << "Loading Dialog Panel";
     dialogPanel = new TextureObj(SH, "res/png/dialogPanel.png");
@@ -88,11 +98,14 @@ void Game::processEvents()
 {
     string eventName = SH->getEvent();
 
-    int originalX = playerChar->mXpos;
-    int originalY = playerChar->mYpos;
+    int originalPlayerX = playerChar->mXpos;
+    int originalPlayerY = playerChar->mYpos;
 
-    int nextX = originalX;
-    int nextY = originalY;
+    int originalCamX = cameraRect->x;
+    int originalCamY = cameraRect->y;
+
+    int nextX = originalPlayerX;
+    int nextY = originalPlayerY;
 
     if(eventName == "EXIT")
     {
@@ -100,16 +113,17 @@ void Game::processEvents()
     }
     if(eventName == "MOVE_LEFT")
     {
-        nextX = originalX - 4;
+        nextX = originalPlayerX - 4;
         playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
     }
 
     if(eventName == "MOVE_RIGHT")
     {
-        nextX = originalX + 4;
+        nextX = originalPlayerX + 4;
         playerChar->mFlipType = SDL_FLIP_NONE;
     }
 
+    /*
     if(eventName == "MOVE_DOWN")
     {
         nextY = originalY + 4;
@@ -121,6 +135,7 @@ void Game::processEvents()
         playerChar->loadAnimation("idle");
         nextY = originalY - 4;
     }
+    */
 
     playerChar->mXpos = nextX;
     playerChar->mYpos = nextY;
@@ -134,7 +149,7 @@ void Game::processEvents()
 
     //Check if the camera rect hits the game boundary
 
-    string hitDirection = hitBoundary(convertPlayerXtoCamX(&playerRect, cameraRect),
+    string playerHitDirection = hitBoundary(convertPlayerXtoCamX(&playerRect, cameraRect),
                                       convertPlayerYtoCamY(&playerRect, cameraRect),
                                       cameraRect->w,
                                       cameraRect->h,
@@ -143,34 +158,64 @@ void Game::processEvents()
                                       maxBoundX,
                                       maxBoundY);
 
+    string cameraHitDirectrion = hitBoundary(cameraRect->x,
+                                      cameraRect->y,
+                                      cameraRect->w,
+                                      cameraRect->h,
+                                      minBoundX,
+                                      minBoundY,
+                                      maxBoundX,
+                                      maxBoundY);
 
     //Depending on where it hit, revert player position to original
-    if(hitDirection == "LEFT" || hitDirection == "RIGHT")
+
+    if(playerHitDirection == "LEFT" || playerHitDirection == "RIGHT")
     {
-        playerChar->mXpos = originalX;
+        //playerChar->mXpos = originalX;
     }
-    else if (hitDirection == "TOP" || hitDirection == "BOTTOM")
+    else if (playerHitDirection == "TOP" || playerHitDirection == "BOTTOM")
     {
-        playerChar->mYpos = originalY;
+        //playerChar->mYpos = originalY;
     }
+
+
+    //Check to see if camera has hit scene boundary
+    if(cameraHitDirectrion == "NONE")
+    {
+        //cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect) + 4;
+        //cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
+
+        //cameraRect->x = playerChar->mXpos + (playerChar->mWidth / 2) - (cameraRect->w/2);
+
+        cameraRect->x = playerChar->mXpos;
+        cameraRect->y = playerChar->mYpos;
+
+    }
+    else
+    {
+        cout << "hit:" << cameraHitDirectrion << "\n";
+        cameraRect->x = originalCamX;
+        cameraRect->y = originalCamY;
+    }
+
 
     //update camera position based on final player position
     //First the player position needs to be offset by its height and width, then minus the game dimensions
 
-    cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect);
-    cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
+
 }
 void Game::render()
 {
     SDL_RenderClear(SH->renderer);
 
     //Render background
+
     mSceneLoader->renderScene(*cameraRect);
 
 
     //Render objects in game array
 
-
+/*
     for(GameObj gObj : gameObjectArray)
     {
         //should do a boundary check to see if object is in view before rendering
@@ -193,17 +238,18 @@ void Game::render()
 
         gObj.renderEx(srcRect, dstRectObj);
     }
-
+*/
 
 
     //Render Player
 
     //Set player output render box to middle of screen
-    int playerX = (cameraRect->w / 2) - (playerChar->mWidth /2);
-    int playerY = (cameraRect->h / 2) - (playerChar->mHeight /2);
+    //int playerX = (cameraRect->w / 2) - (playerChar->mWidth /2);
+    //int playerY = (cameraRect->h / 2) - (playerChar->mHeight /2);
 
-    playerChar->render(playerX, playerY);
+    playerChar->render(playerChar->mXpos, playerChar->mYpos);
 
+    //playerChar->render(playerX, playerY);
     //Render debug font
 
     SDL_Rect fontRect;
