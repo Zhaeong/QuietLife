@@ -23,8 +23,13 @@ void CharacterObj::addTexture(TextureObj textureObj)
     mTextureArray.push_back(textureObj);
 }
 
-void CharacterObj::render(int xPos, int yPos)
+void CharacterObj::render(SDL_Rect cameraRect)
 {
+    //Convert character world coord to screen coord
+    int xPos = mXpos - cameraRect.x;
+    int yPos = mYpos - cameraRect.y;
+
+
     //Render objects in game array
     for(unsigned int i = 0; i < mTextureArray.size(); i++)
     {

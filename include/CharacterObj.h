@@ -44,7 +44,9 @@ class CharacterObj
 
 
         void addTexture(TextureObj textureObj);
-        void render(int xPos, int yPos);
+        //void render(int xPos, int yPos);
+
+        void render(SDL_Rect cameraRect);
 
         void setPos(int xPos, int yPos);
         void setDimension(int width, int height);

@@ -409,7 +409,7 @@
 	"TextureObj.h"
 	"SceneLoader.h"
 
-1538712170 source:d:\github\quietlife\src\game.cpp
+1538715539 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
 1538711761 d:\github\quietlife\include\gameutil.h
@@ -824,10 +824,10 @@
 1537849038 source:d:\github\quietlife\src\textureobj.cpp
 	"TextureObj.h"
 
-1538540716 source:d:\github\quietlife\src\characterobj.cpp
+1538715585 source:d:\github\quietlife\src\characterobj.cpp
 	"CharacterObj.h"
 
-1537848747 d:\github\quietlife\include\characterobj.h
+1538715563 d:\github\quietlife\include\characterobj.h
 	<vector>
 	<string>
 	<iostream>

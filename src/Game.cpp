@@ -178,18 +178,11 @@ void Game::processEvents()
         //playerChar->mYpos = originalY;
     }
 
-
     //Check to see if camera has hit scene boundary
     if(cameraHitDirectrion == "NONE")
     {
-        //cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect) + 4;
-        //cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
-
-        //cameraRect->x = playerChar->mXpos + (playerChar->mWidth / 2) - (cameraRect->w/2);
-
-        cameraRect->x = playerChar->mXpos;
-        cameraRect->y = playerChar->mYpos;
-
+        cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect);
+        cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
     }
     else
     {
@@ -197,12 +190,6 @@ void Game::processEvents()
         cameraRect->x = originalCamX;
         cameraRect->y = originalCamY;
     }
-
-
-    //update camera position based on final player position
-    //First the player position needs to be offset by its height and width, then minus the game dimensions
-
-
 }
 void Game::render()
 {
@@ -242,14 +229,8 @@ void Game::render()
 
 
     //Render Player
+    playerChar->render(*cameraRect);
 
-    //Set player output render box to middle of screen
-    //int playerX = (cameraRect->w / 2) - (playerChar->mWidth /2);
-    //int playerY = (cameraRect->h / 2) - (playerChar->mHeight /2);
-
-    playerChar->render(playerChar->mXpos, playerChar->mYpos);
-
-    //playerChar->render(playerX, playerY);
     //Render debug font
 
     SDL_Rect fontRect;
