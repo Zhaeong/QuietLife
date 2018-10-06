@@ -70,7 +70,7 @@ string SDLHandler::getEvent()
                 break;
 
             case SDL_KEYUP:
-                eventName =  "Key release detected\n";
+                eventName =  "KEYUP";
                 break;
 
             case SDL_MOUSEBUTTONDOWN:

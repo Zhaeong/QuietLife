@@ -27,6 +27,8 @@ class CharacterObj
         virtual ~CharacterObj();
 
         string mName;
+
+        string currAnim;
         SDLHandler *mSH;
         vector<TextureObj> mTextureArray;
 

@@ -265,47 +265,49 @@ void CharacterObj::getAnimate(string dirPath)
 
 void CharacterObj::loadAnimation(string animationName)
 {
-
-    for(unsigned int i = 0; i < mAnimArray.size(); i++)
+    if(animationName != currAnim)
     {
-        AnimDef& animDefine = mAnimArray[i];
-        string animName = animDefine.animName;
-        if(animationName == animName)
+        for(unsigned int i = 0; i < mAnimArray.size(); i++)
         {
-
-            //Found the correct animation definition
-            //Now go through all texture def and update their animations
-
-            for(unsigned int j = 0; j < mTextureArray.size(); j++)
+            AnimDef& animDefine = mAnimArray[i];
+            string animName = animDefine.animName;
+            if(animationName == animName)
             {
-                TextureObj& tObj = mTextureArray[j];
+                currAnim = animationName;
+                //Found the correct animation definition
+                //Now go through all texture def and update their animations
 
-                for(unsigned int k = 0; k < animDefine.mSpriteAnimArray.size(); k++)
+                for(unsigned int j = 0; j < mTextureArray.size(); j++)
                 {
-                    SpriteAnimDef& SAD = animDefine.mSpriteAnimArray[k];
-                    if(SAD.picName == tObj.mImgLocation)
+                    TextureObj& tObj = mTextureArray[j];
+
+                    for(unsigned int k = 0; k < animDefine.mSpriteAnimArray.size(); k++)
                     {
+                        SpriteAnimDef& SAD = animDefine.mSpriteAnimArray[k];
+                        if(SAD.picName == tObj.mImgLocation)
+                        {
 
 
-                        tObj.setRotateTargets(SAD.rotStart, SAD.rotEnd);
-                        tObj.setMiddle(SAD.xMid, SAD.yMid);
-                        tObj.setPos(SAD.xPos, SAD.yPos, SAD.rot);
-                        tObj.setZval(SAD.zVal);
-                        tObj.setSpeed(SAD.moveSpeed);
+                            tObj.setRotateTargets(SAD.rotStart, SAD.rotEnd);
+                            tObj.setMiddle(SAD.xMid, SAD.yMid);
+                            tObj.setPos(SAD.xPos, SAD.yPos, SAD.rot);
+                            tObj.setZval(SAD.zVal);
+                            tObj.setSpeed(SAD.moveSpeed);
 
-                        break;
+                            break;
+                        }
                     }
+
                 }
 
+                //cout << "\nLoading Animation:" << animName<< "\n";
+                break;
             }
-
-            cout << "\nLoading Animation:" << animName<< "\n";
-            break;
         }
+
+        //sort the texture array by the zval so that the texture order is established
+        sort(mTextureArray.begin(), mTextureArray.end(), sortByZval);
+
+    //cout << "Texture:" << mTextureArray[1].mImgLocation << " zVal:" << mTextureArray[1].mZval << " speed:" << mTextureArray[1].mSpeed  <<"\n";
     }
-
-    //sort the texture array by the zval so that the texture order is established
-    sort(mTextureArray.begin(), mTextureArray.end(), sortByZval);
-
-    cout << "Texture:" << mTextureArray[1].mImgLocation << " zVal:" << mTextureArray[1].mZval << " speed:" << mTextureArray[1].mSpeed  <<"\n";
 }

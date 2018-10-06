@@ -115,12 +115,19 @@ void Game::processEvents()
     {
         nextX = originalPlayerX - 4;
         playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
+        playerChar->loadAnimation("walk");
     }
 
     if(eventName == "MOVE_RIGHT")
     {
         nextX = originalPlayerX + 4;
         playerChar->mFlipType = SDL_FLIP_NONE;
+        playerChar->loadAnimation("walk");
+    }
+
+    if(eventName == "KEYUP")
+    {
+        playerChar->loadAnimation("idle");
     }
 
     /*
@@ -171,24 +178,14 @@ void Game::processEvents()
 
     if(playerHitDirection == "LEFT" || playerHitDirection == "RIGHT")
     {
-        //playerChar->mXpos = originalX;
-    }
-    else if (playerHitDirection == "TOP" || playerHitDirection == "BOTTOM")
-    {
-        //playerChar->mYpos = originalY;
-    }
-
-    //Check to see if camera has hit scene boundary
-    if(cameraHitDirectrion == "NONE")
-    {
-        cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect);
-        cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
+        //cout << "hit:" << playerHitDirection << "\n";
+        cameraRect->x = originalCamX;
+        cameraRect->y = originalCamY;
     }
     else
     {
-        cout << "hit:" << cameraHitDirectrion << "\n";
-        cameraRect->x = originalCamX;
-        cameraRect->y = originalCamY;
+        cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect);
+        cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
     }
 }
 void Game::render()
