@@ -58,6 +58,7 @@
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameObj.h" />
 		<Unit filename="include/GameUtil.h" />
+		<Unit filename="include/LinkObj.h" />
 		<Unit filename="include/PixelObj.h" />
 		<Unit filename="include/SDLHandler.h" />
 		<Unit filename="include/SceneLoader.h" />
@@ -66,16 +67,17 @@
 		<Unit filename="include/TextureObj.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="res/bikeMan.bmp" />
-		<Unit filename="src/AnimDef.cpp" />
-		<Unit filename="src/CharacterObj.cpp" />
 		<Unit filename="src/Game.cpp" />
-		<Unit filename="src/GameObj.cpp" />
-		<Unit filename="src/PixelObj.cpp" />
+		<Unit filename="src/ObjDefs/AnimDef.cpp" />
+		<Unit filename="src/ObjDefs/CharacterObj.cpp" />
+		<Unit filename="src/ObjDefs/GameObj.cpp" />
+		<Unit filename="src/ObjDefs/LinkObj.cpp" />
+		<Unit filename="src/ObjDefs/PixelObj.cpp" />
+		<Unit filename="src/ObjDefs/SceneObj.cpp" />
+		<Unit filename="src/ObjDefs/SpriteAnimDef.cpp" />
+		<Unit filename="src/ObjDefs/TextureObj.cpp" />
 		<Unit filename="src/SDLHandler.cpp" />
 		<Unit filename="src/SceneLoader.cpp" />
-		<Unit filename="src/SceneObj.cpp" />
-		<Unit filename="src/SpriteAnimDef.cpp" />
-		<Unit filename="src/TextureObj.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
