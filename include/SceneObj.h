@@ -2,11 +2,18 @@
 #define SCENEOBJ_H
 
 #include <string>
+#include <vector>
+#include "LinkObj.h"
+
 using namespace std;
+
+
 class SceneObj
 {
     public:
-        SceneObj(string name, string imgPath, int top, int bottom, int left, int right, int playerX, int playerY);
+        //SceneObj(string name, string imgPath, int top, int bottom, int left, int right, int playerX, int playerY);
+
+        SceneObj();
         virtual ~SceneObj();
 
         string mName;
@@ -20,7 +27,9 @@ class SceneObj
         int mPlayerX;
         int mPlayerY;
 
+        vector<LinkObj> mLinkObjArray;
 
+        void addLinkObj(LinkObj lObj);
 
 
     protected:

@@ -65,4 +65,19 @@ inline string delSpaces(string &str)
 
    return str;
 }
+
+inline bool horizontalColDetector(int xPos1, int width1, int xPos2, int width2)
+{
+    if( (xPos1 + width1) < xPos2)
+    {
+        return false;
+    }
+
+    if ((xPos2 + width2) < xPos1)
+    {
+        return false;
+    }
+
+    return true;
+}
 #endif // GAMEUTIL_H_INCLUDED

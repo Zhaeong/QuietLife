@@ -64,6 +64,9 @@ string SDLHandler::getEvent()
                     case SDLK_DOWN:
                         eventName = "MOVE_DOWN";
                         break;
+                    case SDLK_e:
+                        eventName = "KEY_E";
+                        break;
                     default:
                         break;
                 }

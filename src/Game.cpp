@@ -104,6 +104,20 @@ void Game::processEvents()
     int originalCamX = cameraRect->x;
     int originalCamY = cameraRect->y;
 
+
+    //Check if player is currently over a link transition obj
+    string sceneCol = "NONE";
+    for(unsigned int i = 0; i < mSceneLoader->mCurrentScene.mLinkObjArray.size(); i++)
+    {
+        LinkObj& lObj = mSceneLoader->mCurrentScene.mLinkObjArray[i];
+
+        if(horizontalColDetector(originalPlayerX, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
+        {
+            cout << "Collided with: " << lObj.mName << "\n";
+            sceneCol = lObj.mName;
+        }
+    }
+
     int nextX = originalPlayerX;
     int nextY = originalPlayerY;
 
@@ -128,6 +142,16 @@ void Game::processEvents()
     if(eventName == "KEYUP")
     {
         playerChar->loadAnimation("idle");
+    }
+
+    if(eventName == "KEY_E")
+    {
+        cout << "Pressed E" << "\n";
+        if(sceneCol != "NONE")
+        {
+            mSceneLoader->loadScene(sceneCol);
+        }
+
     }
 
     /*

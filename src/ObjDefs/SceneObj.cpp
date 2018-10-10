@@ -1,5 +1,6 @@
 #include "SceneObj.h"
 
+/*
 SceneObj::SceneObj(string name, string imgPath, int top, int bottom, int left, int right, int playerX, int playerY)
 {
     mName = name;
@@ -12,8 +13,19 @@ SceneObj::SceneObj(string name, string imgPath, int top, int bottom, int left, i
     mPlayerX = playerX;
     mPlayerY = playerY;
 }
+*/
+
+SceneObj::SceneObj()
+{
+}
 
 SceneObj::~SceneObj()
 {
     //dtor
+}
+
+
+void SceneObj::addLinkObj(LinkObj lObj)
+{
+    mLinkObjArray.push_back(lObj);
 }

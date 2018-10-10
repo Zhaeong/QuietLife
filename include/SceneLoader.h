@@ -10,6 +10,9 @@
 #include "GameUtil.h"
 #include "TextureObj.h"
 #include "SceneObj.h"
+
+#include "LinkObj.h"
+
 using namespace std;
 
 class SceneLoader
@@ -21,6 +24,8 @@ class SceneLoader
         SDLHandler *mSH;
 
         TextureObj *backGroundTexture;
+
+        SceneObj mCurrentScene;
 
         int minBoundX;
         int minBoundY;

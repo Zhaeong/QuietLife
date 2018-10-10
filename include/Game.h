@@ -45,6 +45,7 @@ class Game
 
         SceneLoader *mSceneLoader;
 
+
         SDL_Rect *cameraRect;
 
         CharacterObj *playerChar;
@@ -56,17 +57,12 @@ class Game
 
         vector<GameObj> gameObjectArray;
 
-        //vector<PixelObj> gameGroundArray;
-
         TTF_Font *gameFont;
 
         //functions
 
         void processEvents();
         void render();
-
-        int currentPixelPos;
-        PixelObj *currentPixel;
 
         //helper functions
         void addGameObject(GameObj gameObj);
