@@ -234,7 +234,7 @@ void SceneLoader::loadScene(string sceneName)
             playerInitY = sObj.mPlayerY;
             cout << "Loaded Scene: " << sceneName << " Path: " + sObj.mPath << "\n";
             mCurrentScene = sObj;
-            break;
+            return;
         }
     }
 
