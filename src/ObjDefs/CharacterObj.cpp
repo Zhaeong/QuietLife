@@ -51,7 +51,23 @@ void CharacterObj::render(SDL_Rect cameraRect)
 
 
         tObj.renderTexture(srcRect, dstRect, mFlipType);
+
+
+
     }
+
+
+    if(DEBUGMODE)
+    {
+        //Drawing player bounding box
+        SDL_SetRenderDrawColor(mSH->renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderDrawLine(mSH->renderer, xPos, yPos, xPos + mWidth, yPos);
+        SDL_RenderDrawLine(mSH->renderer, xPos, yPos, xPos, yPos + mHeight);
+        SDL_RenderDrawLine(mSH->renderer, xPos + mWidth, yPos, xPos + mWidth, yPos + mHeight);
+        SDL_RenderDrawLine(mSH->renderer, xPos, yPos + mHeight, xPos + mWidth, yPos + mHeight);
+
+    }
+
 }
 
 void CharacterObj::setPos(int xPos, int yPos)
@@ -307,7 +323,5 @@ void CharacterObj::loadAnimation(string animationName)
 
         //sort the texture array by the zval so that the texture order is established
         sort(mTextureArray.begin(), mTextureArray.end(), sortByZval);
-
-    //cout << "Texture:" << mTextureArray[1].mImgLocation << " zVal:" << mTextureArray[1].mZval << " speed:" << mTextureArray[1].mSpeed  <<"\n";
     }
 }

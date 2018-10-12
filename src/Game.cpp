@@ -1,5 +1,8 @@
 #include "Game.h"
 
+
+
+
 Game::Game()
 {
 
@@ -58,7 +61,7 @@ Game::Game()
     playerChar = new CharacterObj(SH, "Player");
 
     playerChar->setPos(mSceneLoader->playerInitX, mSceneLoader->playerInitY);
-    playerChar->setDimension(40, 140);
+    playerChar->setDimension(15, 70);
 
     playerChar->getTextures("res/png/steve");
 

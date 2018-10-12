@@ -409,10 +409,10 @@
 	"TextureObj.h"
 	"SceneLoader.h"
 
-1539320893 source:d:\github\quietlife\src\game.cpp
+1539322010 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1539149053 d:\github\quietlife\include\gameutil.h
+1539321975 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -968,7 +968,7 @@
 1537326221 source:d:\github\quietlife\src\objdefs\animdef.cpp
 	"AnimDef.h"
 
-1539035892 source:d:\github\quietlife\src\objdefs\characterobj.cpp
+1539322230 source:d:\github\quietlife\src\objdefs\characterobj.cpp
 	"CharacterObj.h"
 
 1537760418 source:d:\github\quietlife\src\objdefs\gameobj.cpp
