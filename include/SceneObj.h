@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "LinkObj.h"
-
+#include "TextureObj.h"
 using namespace std;
 
 
@@ -29,7 +29,11 @@ class SceneObj
 
         vector<LinkObj> mLinkObjArray;
 
+        vector<TextureObj> mTextureObjectArray;
+
         void addLinkObj(LinkObj lObj);
+
+        void addTextureObj(TextureObj tObj);
 
 
     protected:

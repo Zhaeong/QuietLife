@@ -58,7 +58,7 @@ Game::Game()
     playerChar = new CharacterObj(SH, "Player");
 
     playerChar->setPos(mSceneLoader->playerInitX, mSceneLoader->playerInitY);
-    playerChar->setDimension(100, 140);
+    playerChar->setDimension(40, 140);
 
     playerChar->getTextures("res/png/steve");
 
@@ -216,38 +216,9 @@ void Game::render()
 {
     SDL_RenderClear(SH->renderer);
 
-    //Render background
+    //Render background and Scene Textures
 
     mSceneLoader->renderScene(*cameraRect);
-
-
-    //Render objects in game array
-
-/*
-    for(GameObj gObj : gameObjectArray)
-    {
-        //should do a boundary check to see if object is in view before rendering
-        //Need to convert position of obj to cameras position
-        SDL_Rect srcRect;
-        SDL_Rect dstRectObj;
-
-        srcRect.x=0;
-        srcRect.y=0;
-        srcRect.h=gObj.m_height;
-        srcRect.w=gObj.m_width;
-
-        dstRectObj.h = gObj.m_height;
-        dstRectObj.w = gObj.m_width;
-
-        //The position is the objects position minus the camera position
-        //in order to get the object's place in accordance with the camera
-        dstRectObj.x = gObj.m_xPos - cameraRect->x ;
-        dstRectObj.y = gObj.m_yPos - cameraRect->y;
-
-        gObj.renderEx(srcRect, dstRectObj);
-    }
-*/
-
 
     //Render Player
     playerChar->render(*cameraRect);

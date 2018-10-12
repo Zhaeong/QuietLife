@@ -409,7 +409,7 @@
 	"TextureObj.h"
 	"SceneLoader.h"
 
-1539151734 source:d:\github\quietlife\src\game.cpp
+1539320893 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
 1539149053 d:\github\quietlife\include\gameutil.h
@@ -898,10 +898,10 @@
 1538198016 source:d:\cbproj\quietlife\src\spriteanimdef.cpp
 	"SpriteAnimDef.h"
 
-1539151073 source:d:\github\quietlife\src\sceneloader.cpp
+1539320623 source:d:\github\quietlife\src\sceneloader.cpp
 	"SceneLoader.h"
 
-1539151022 d:\github\quietlife\include\sceneloader.h
+1539319920 d:\github\quietlife\include\sceneloader.h
 	<vector>
 	<string>
 	<dirent.h>
@@ -914,10 +914,11 @@
 1538628102 source:d:\github\quietlife\src\sceneobj.cpp
 	"SceneObj.h"
 
-1539150346 d:\github\quietlife\include\sceneobj.h
+1539320102 d:\github\quietlife\include\sceneobj.h
 	<string>
 	<vector>
 	"LinkObj.h"
+	"TextureObj.h"
 
 1538850876 d:\cbproj\quietlife\include\sceneloader.h
 	<vector>
@@ -979,7 +980,7 @@
 1539146739 source:d:\github\quietlife\src\objdefs\pixelobj.cpp
 	"PixelObj.h"
 
-1539150381 source:d:\github\quietlife\src\objdefs\sceneobj.cpp
+1539320136 source:d:\github\quietlife\src\objdefs\sceneobj.cpp
 	"SceneObj.h"
 
 1537849077 source:d:\github\quietlife\src\objdefs\spriteanimdef.cpp

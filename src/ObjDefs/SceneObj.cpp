@@ -29,3 +29,10 @@ void SceneObj::addLinkObj(LinkObj lObj)
 {
     mLinkObjArray.push_back(lObj);
 }
+
+void SceneObj::addTextureObj(TextureObj tObj)
+{
+    mTextureObjectArray.push_back(tObj);
+
+    cout << "ADDED: " << tObj.mImgLocation;
+}

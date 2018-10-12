@@ -182,10 +182,65 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                             }
 
                             //After while loop it should contain all the relevant fields for passing into animation
-
                             LinkObj newLink(linkName, xPos, width);
                             newScene.addLinkObj(newLink);
-                            //mLinkObjArray.push_back(newLink);
+                        }
+                        else if(line == "TEXTURESTART")
+                        {
+                            string texturePath;
+
+
+                            int xPos;
+                            int yPos;
+
+                            //Start Texture means getting a single texture info
+                            while (line != "TEXTUREEND" && !myfile.eof())
+                            {
+                                getline (myfile,line);
+
+                                //The npos checks if the string line contains :
+                                //Because if not then it is not a variable line
+                                if(line.length() > 0 && line.find(':') != string::npos)
+                                {
+                                    line = delSpaces(line);
+                                    string param = line.substr(0, line.find(":"));
+
+                                    // + 1 because without it we include the : in the string
+                                    string value = line.substr(line.find(":") + 1, line.length());
+                                    //cout << "param:" << param << " val:" << value << "\n";
+
+                                    if(param == "PATH")
+                                    {
+                                        texturePath = dirPath + "\\" + value;
+                                    }
+                                    else if (param == "XPOS")
+                                    {
+                                        xPos = stoi(value);
+                                    }
+                                    else if (param == "YPOS")
+                                    {
+                                        yPos = stoi(value);
+                                    }
+                                    else
+                                    {
+                                        cout << "Warning INVALID Param" + param + "\n";
+                                    }
+
+                                }
+                                else if(line == "TEXTUREEND")
+                                {
+                                    //cout << "Reached end of Scene Def for" + fullPath + "\n";
+                                }
+                                else
+                                {
+                                    cout << "ERROR Parsing scene file:" << fullPath;
+                                }
+                            }
+
+                            //After while loop it should contain all the relevant fields for passing into animation
+                            TextureObj newTexObj(mSH, texturePath);
+                            newTexObj.setPos(xPos, yPos, 0);
+                            newScene.addTextureObj(newTexObj);
                         }
 
 
@@ -254,7 +309,32 @@ void SceneLoader::renderScene(SDL_Rect cameraRect)
     dstRectBckObj.x = 0;
     dstRectBckObj.y = 0;
 
-
     backGroundTexture->renderTexture(cameraRect, dstRectBckObj, SDL_FLIP_NONE);
+
+    for(TextureObj tObj : mCurrentScene.mTextureObjectArray)
+    {
+        //should do a boundary check to see if object is in view before rendering
+        //Need to convert position of obj to cameras position
+        SDL_Rect srcRect;
+        SDL_Rect dstRectObj;
+
+        srcRect.x=0;
+        srcRect.y=0;
+        srcRect.h=tObj.mHeight;
+        srcRect.w=tObj.mWidth;
+
+        dstRectObj.h = tObj.mHeight;
+        dstRectObj.w = tObj.mWidth;
+
+        //The position is the objects position minus the camera position
+        //in order to get the object's place in accordance with the camera
+        dstRectObj.x = tObj.mPosition.x - cameraRect.x ;
+        dstRectObj.y = tObj.mPosition.y - cameraRect.y;
+
+        tObj.renderTexture(srcRect, dstRectObj, SDL_FLIP_NONE);
+    }
+
+
+
 
 }

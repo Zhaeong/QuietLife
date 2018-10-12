@@ -37,6 +37,8 @@ class SceneLoader
 
         vector<SceneObj> mSceneObjArray;
 
+
+
         void loadScenesFromDirectory(string dirPath);
 
         void loadScene(string sceneName);
