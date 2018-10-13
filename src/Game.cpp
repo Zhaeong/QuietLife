@@ -5,8 +5,6 @@
 
 Game::Game()
 {
-
-
     cout << "Init Game\n";
 
     bRunGame = true;
@@ -14,6 +12,8 @@ Game::Game()
     gameWidth = 640;
     gameHeight = 480;
     SH = new SDLHandler(gameWidth, gameHeight);
+
+    mUIHandler = new UIHandler(SH);
 
 
     //Initialize libraries
@@ -110,7 +110,7 @@ Game::~Game()
 
 void Game::processEvents()
 {
-    string eventName = SH->getEvent();
+    string eventName = mUIHandler->getUserInput();
 
     int originalPlayerX = playerChar->mXpos;
     int originalPlayerY = playerChar->mYpos;

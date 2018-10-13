@@ -77,11 +77,8 @@ string SDLHandler::getEvent()
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
-
                 int x, y;
                 SDL_GetMouseState( &x, &y );
-
-
                 cout << "mouse down, x:" << x << " y:" << y;
                 break;
 

@@ -65,6 +65,7 @@
 		<Unit filename="include/SceneObj.h" />
 		<Unit filename="include/SpriteAnimDef.h" />
 		<Unit filename="include/TextureObj.h" />
+		<Unit filename="include/UIHandler.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="res/bikeMan.bmp" />
 		<Unit filename="src/Game.cpp" />
@@ -78,6 +79,7 @@
 		<Unit filename="src/ObjDefs/TextureObj.cpp" />
 		<Unit filename="src/SDLHandler.cpp" />
 		<Unit filename="src/SceneLoader.cpp" />
+		<Unit filename="src/UIHandler.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

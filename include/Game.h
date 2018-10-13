@@ -24,6 +24,10 @@
 #include "TextureObj.h"
 
 #include "SceneLoader.h"
+
+#include "UIHandler.h"
+
+
 using namespace std;
 
 class Game
@@ -45,6 +49,7 @@ class Game
 
         SceneLoader *mSceneLoader;
 
+        UIHandler *mUIHandler;
 
         SDL_Rect *cameraRect;
 
