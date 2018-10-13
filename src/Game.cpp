@@ -37,7 +37,7 @@ Game::Game()
     //Load background texture
     cout << "Loading Background\n";
     mSceneLoader = new SceneLoader(SH);
-    mSceneLoader->loadScenesFromDirectory("res/png/scenes");
+    mSceneLoader->loadScenesFromDirectory("res/scenes");
     mSceneLoader->loadScene("bedroom.png");
 
     //Set game bound according to game background
@@ -62,10 +62,21 @@ Game::Game()
 
     playerChar->setPos(mSceneLoader->playerInitX, mSceneLoader->playerInitY);
     playerChar->setDimension(15, 70);
+    playerChar->getTextures("res/characters/steve");
+    playerChar->getAnimate("res/characters/steve");
 
-    playerChar->getTextures("res/png/steve");
 
-    playerChar->getAnimate("res/png/steve");
+
+    //create new char
+    CharacterObj bobChar(SH, "Bob");
+    bobChar.setPos(100, 40);
+    bobChar.setDimension(15, 70);
+    bobChar.getTextures("res/characters/bob");
+    bobChar.getAnimate("res/characters/bob");
+    bobChar.loadAnimation("walk");
+    bobChar.currScene = "hallway.png";
+
+    addCharObj(bobChar);
 
 
     //cameraRect
@@ -226,8 +237,9 @@ void Game::render()
     //Render Player
     playerChar->render(*cameraRect);
 
+    //////////////////////////
     //Render debug font
-
+    //////////////////////////
     SDL_Rect fontRect;
 
     fontRect.h = fontObj->m_height;
@@ -284,6 +296,17 @@ void Game::render()
     dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
 
 
+    //Render characters in the scene
+    //Need to get pointer to charObj due to rendering affecting the char animation
+    for(unsigned int charNum = 0; charNum < mCharObjectArray.size(); charNum++)
+    {
+        CharacterObj& charObj = mCharObjectArray[charNum];
+        if(charObj.currScene == mSceneLoader->mCurrentScene.mName)
+        {
+            charObj.render(*cameraRect);
+        }
+    }
+
     //Swap buffers
     SDL_RenderPresent(SH->renderer);
 
@@ -291,7 +314,7 @@ void Game::render()
 
 //Helper functions
 
-void Game::addGameObject(GameObj gameObj)
+void Game::addCharObj(CharacterObj charObj)
 {
-    gameObjectArray.push_back(gameObj);
+    mCharObjectArray.push_back(charObj);
 }

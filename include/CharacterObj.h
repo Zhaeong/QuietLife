@@ -27,8 +27,10 @@ class CharacterObj
         virtual ~CharacterObj();
 
         string mName;
-
         string currAnim;
+        string currScene;
+
+
         SDLHandler *mSH;
         vector<TextureObj> mTextureArray;
 
@@ -46,7 +48,6 @@ class CharacterObj
 
 
         void addTexture(TextureObj textureObj);
-        //void render(int xPos, int yPos);
 
         void render(SDL_Rect cameraRect);
 
@@ -55,7 +56,6 @@ class CharacterObj
 
         void getTextures(string dirPath);
         void getAnimate(string dirPath);
-
         void loadAnimation(string animationName);
 
     protected:

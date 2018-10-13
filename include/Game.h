@@ -55,7 +55,7 @@ class Game
         TextureObj *dialogPanel;
         GameObj *dialogText;
 
-        vector<GameObj> gameObjectArray;
+        vector<CharacterObj> mCharObjectArray;
 
         TTF_Font *gameFont;
 
@@ -65,7 +65,7 @@ class Game
         void render();
 
         //helper functions
-        void addGameObject(GameObj gameObj);
+        void addCharObj(CharacterObj charObj);
 
         //bool processTexture(GameObj *gObj);
 
