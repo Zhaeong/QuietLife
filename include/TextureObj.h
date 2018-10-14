@@ -46,6 +46,8 @@ class TextureObj
         bool mRotationDirection;
 
         void setPos(int xVal, int yVal, int rotation);
+
+        void setDim(int width, int height);
         void setRotateTargets(int Start, int End);
         void setMiddle(int xVal, int yVal);
         void getRotation();

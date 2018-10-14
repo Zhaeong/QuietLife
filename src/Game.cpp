@@ -94,7 +94,18 @@ Game::Game()
 
 
     cout << "Loading Dialog Panel";
-    dialogPanel = new TextureObj(SH, "res/png/dialogPanel.png");
+
+    TextureObj uiBackground(SH, "res/png/dialogPanel.png");
+    uiBackground.setPos(0, 240, 0);
+    uiBackground.setDim(640, 240);
+    mUIHandler->addTexture(uiBackground);
+
+
+    TextureObj leftCursor(SH, "res/png/leftCursor.png");
+    leftCursor.setPos(10, 280, 0);
+    leftCursor.setDim(50, 50);
+    mUIHandler->addTexture(leftCursor);
+
 
     dialogText = new GameObj(0,0, SH);
 
@@ -264,8 +275,8 @@ void Game::render()
 
     SDL_Rect dialogRectSrc, dialogRectTarget;
 
-    dialogRectSrc.h = dialogPanel->mHeight;
-    dialogRectSrc.w = dialogPanel->mWidth;
+    //dialogRectSrc.h = dialogPanel->mHeight;
+    //dialogRectSrc.w = dialogPanel->mWidth;
     dialogRectSrc.x = 0;
     dialogRectSrc.y = 0;
 
@@ -275,7 +286,8 @@ void Game::render()
     dialogRectTarget.x = 0;
     dialogRectTarget.y = (gameHeight / 3 ) * 2;
 
-    dialogPanel->renderTexture(dialogRectSrc, dialogRectTarget, SDL_FLIP_NONE);
+    //dialogPanel->renderTexture(dialogRectSrc, dialogRectTarget, SDL_FLIP_NONE);
+    mUIHandler->render();
 
     //Render text on top of the dialog panel
 

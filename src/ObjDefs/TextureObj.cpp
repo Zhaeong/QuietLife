@@ -143,6 +143,13 @@ void TextureObj::setPos(int xVal, int yVal, int rotation)
     mRotation = rotation;
 }
 
+void TextureObj::setDim(int width, int height)
+{
+    mWidth = width;
+    mHeight = height;
+
+}
+
 void TextureObj::getRotation()
 {
     if(mRotationDirection)
