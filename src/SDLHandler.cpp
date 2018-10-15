@@ -29,7 +29,7 @@ SDLHandler::~SDLHandler()
     SDL_Quit();
 }
 
-string SDLHandler::getEvent()
+string SDLHandler::getEvent(int *mouseXpos, int *mouseYpos)
 {
     string eventName = "NONE";
     /* Poll for events. SDL_PollEvent() returns 0 when there are no  */
@@ -37,6 +37,8 @@ string SDLHandler::getEvent()
     /* that occurs.                                                  */
     while( SDL_PollEvent( &event ) )
     {
+
+        SDL_GetMouseState( mouseXpos, mouseYpos );
     /* We are only worried about SDL_KEYDOWN and SDL_KEYUP events */
         switch( event.type )
         {
@@ -77,9 +79,15 @@ string SDLHandler::getEvent()
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
-                int x, y;
-                SDL_GetMouseState( &x, &y );
-                cout << "mouse down, x:" << x << " y:" << y;
+                //int x, y;
+                SDL_GetMouseState( mouseXpos, mouseYpos );
+                //cout << "mouse down, x:" << x << " y:" << y;
+                eventName = "MOUSEDOWN";
+                break;
+
+
+            case SDL_MOUSEBUTTONUP:
+                eventName = "MOUSEUP";
                 break;
 
             default:

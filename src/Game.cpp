@@ -93,18 +93,6 @@ Game::Game()
     cout << "player width: " << playerChar->mWidth << "\n";
 
 
-    cout << "Loading Dialog Panel";
-
-    TextureObj uiBackground(SH, "res/png/dialogPanel.png");
-    uiBackground.setPos(0, 240, 0);
-    uiBackground.setDim(640, 240);
-    mUIHandler->addTexture(uiBackground);
-
-
-    TextureObj leftCursor(SH, "res/png/leftCursor.png");
-    leftCursor.setPos(10, 280, 0);
-    leftCursor.setDim(50, 50);
-    mUIHandler->addTexture(leftCursor);
 
 
     dialogText = new GameObj(0,0, SH);
@@ -164,7 +152,7 @@ void Game::processEvents()
         playerChar->loadAnimation("walk");
     }
 
-    if(eventName == "KEYUP")
+    if(eventName == "MOVE_STOP")
     {
         playerChar->loadAnimation("idle");
     }
@@ -273,6 +261,7 @@ void Game::render()
     //Render Dialog Panel
     //////////////////////
 
+    /*
     SDL_Rect dialogRectSrc, dialogRectTarget;
 
     //dialogRectSrc.h = dialogPanel->mHeight;
@@ -287,6 +276,8 @@ void Game::render()
     dialogRectTarget.y = (gameHeight / 3 ) * 2;
 
     //dialogPanel->renderTexture(dialogRectSrc, dialogRectTarget, SDL_FLIP_NONE);
+
+    */
     mUIHandler->render();
 
     //Render text on top of the dialog panel

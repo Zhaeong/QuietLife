@@ -83,4 +83,19 @@ inline bool horizontalColDetector(int xPos1, int width1, int xPos2, int width2)
 
     return true;
 }
+
+inline bool pointInBox(int pointX, int pointY, int boxXpos, int boxYpos, int boxWidth, int boxHeight)
+{
+    if(pointX >= boxXpos &&
+       pointX <= (boxXpos + boxWidth) &&
+       pointY >= boxYpos &&
+       pointY <= (boxYpos + boxHeight))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 #endif // GAMEUTIL_H_INCLUDED

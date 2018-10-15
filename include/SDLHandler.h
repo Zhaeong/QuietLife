@@ -22,7 +22,7 @@ class SDLHandler
         SDLHandler(int screenWidth, int screenHeight);
         virtual ~SDLHandler();
 
-        string getEvent();
+        string getEvent(int *mouseXpos, int *mouseYpos);
 
         void renderTexture(SDL_Texture *texture, SDL_Rect srcRect, SDL_Rect dstRect);
 

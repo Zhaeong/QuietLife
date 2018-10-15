@@ -5,6 +5,20 @@
 UIHandler::UIHandler(SDLHandler *SH)
 {
     mSH = SH;
+
+    cout << "Loading Dialog Panel";
+
+    TextureObj uiBackground(SH, "res/png/dialogPanel.png");
+    uiBackground.setPos(0, 240, 0);
+    uiBackground.setDim(640, 240);
+    addTexture(uiBackground);
+
+
+    TextureObj leftCursor(SH, "res/png/leftCursor.png");
+    leftCursor.setPos(10, 280, 0);
+    leftCursor.setDim(50, 50);
+    addTexture(leftCursor);
+
 }
 
 UIHandler::~UIHandler()
@@ -14,7 +28,13 @@ UIHandler::~UIHandler()
 
 string UIHandler::getUserInput()
 {
-    string eventName = mSH->getEvent();
+
+    int mouseXpos, mouseYpos;
+
+    string eventName = mSH->getEvent(&mouseXpos, &mouseYpos);
+
+    cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
+
 
     if(eventName == "EXIT")
     {
@@ -30,11 +50,25 @@ string UIHandler::getUserInput()
     }
     else if(eventName == "KEYUP")
     {
-        return "KEYUP";
+        return "MOVE_STOP";
     }
     else if(eventName == "KEY_E")
     {
         return "KEY_E";
+    }
+    else if(eventName == "MOUSEDOWN")
+    {
+
+        if(pointInBox(mouseXpos, mouseYpos, mTextureArray[1].mPosition.x, mTextureArray[1].mPosition.y, mTextureArray[1].mWidth, mTextureArray[1].mHeight))
+        {
+            cout << "hit left cursor\n";
+            return "MOVE_LEFT";
+        }
+        return "MOUSEDOWN";
+    }
+    else if(eventName == "MOUSEUP")
+    {
+        return "MOVE_STOP";
     }
     else
     {

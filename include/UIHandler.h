@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "GameUtil.h"
 #include "SDLHandler.h"
 #include "TextureObj.h"
 
