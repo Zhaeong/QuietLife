@@ -33,7 +33,7 @@ string UIHandler::getUserInput()
 
     string eventName = mSH->getEvent(&mouseXpos, &mouseYpos);
 
-    cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
+    //cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
 
 
     if(eventName == "EXIT")

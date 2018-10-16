@@ -30,6 +30,8 @@ class CharacterObj
         string currAnim;
         string currScene;
 
+        string currState;
+
 
         SDLHandler *mSH;
         vector<TextureObj> mTextureArray;

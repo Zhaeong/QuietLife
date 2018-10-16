@@ -90,11 +90,6 @@ Game::Game()
     cameraRect->x = playerChar->mXpos + (playerChar->mWidth  /2) - (cameraRect->w/2);
     cameraRect->y = playerChar->mYpos + (playerChar->mHeight  /2) - (cameraRect->h/2);
 
-    cout << "player width: " << playerChar->mWidth << "\n";
-
-
-
-
     dialogText = new GameObj(0,0, SH);
 
 
@@ -140,21 +135,24 @@ void Game::processEvents()
     }
     if(eventName == "MOVE_LEFT")
     {
-        nextX = originalPlayerX - 4;
-        playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
-        playerChar->loadAnimation("walk");
+        playerChar->currState = "MOVE_LEFT";
+        //nextX = originalPlayerX - 4;
+        //playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
+        //playerChar->loadAnimation("walk");
     }
 
     if(eventName == "MOVE_RIGHT")
     {
-        nextX = originalPlayerX + 4;
-        playerChar->mFlipType = SDL_FLIP_NONE;
-        playerChar->loadAnimation("walk");
+        playerChar->currState = "MOVE_RIGHT";
+        //nextX = originalPlayerX + 4;
+        //playerChar->mFlipType = SDL_FLIP_NONE;
+        //playerChar->loadAnimation("walk");
     }
 
     if(eventName == "MOVE_STOP")
     {
-        playerChar->loadAnimation("idle");
+        //playerChar->loadAnimation("idle")
+        playerChar->currState = "MOVE_STOP";
     }
 
     if(eventName == "KEY_E")
@@ -167,22 +165,31 @@ void Game::processEvents()
 
     }
 
-    /*
-    if(eventName == "MOVE_DOWN")
+    //playerChar->mXpos = nextX;
+    //playerChar->mYpos = nextY;
+
+
+    string playerHitDirection = hitBoundary(playerChar->mXpos,
+                                      playerChar->mYpos,
+                                      playerChar->mWidth,
+                                      playerChar->mHeight,
+                                      minBoundX,
+                                      minBoundY,
+                                      maxBoundX,
+                                      maxBoundY);
+
+    if(playerChar->currState == "MOVE_LEFT")
     {
-        nextY = originalY + 4;
-        playerChar->loadAnimation("walk");
+        if(playerHitDirection != "LEFT")
+        {
+            playerChar->mXpos -= 3;
+        }
+    }
+    else if(playerChar->currState == "MOVE_RIGHT")
+    {
+        playerChar->mXpos += 3;
     }
 
-    if(eventName == "MOVE_UP")
-    {
-        playerChar->loadAnimation("idle");
-        nextY = originalY - 4;
-    }
-    */
-
-    playerChar->mXpos = nextX;
-    playerChar->mYpos = nextY;
 
     SDL_Rect playerRect;
     playerRect.x = playerChar->mXpos;
@@ -190,10 +197,13 @@ void Game::processEvents()
     playerRect.w = playerChar->mWidth;
     playerRect.h = playerChar->mHeight;
 
-
     //Check if the camera rect hits the game boundary
 
-    string playerHitDirection = hitBoundary(convertPlayerXtoCamX(&playerRect, cameraRect),
+
+
+
+
+    string cameraHitDirectrion = hitBoundary(convertPlayerXtoCamX(&playerRect, cameraRect),
                                       convertPlayerYtoCamY(&playerRect, cameraRect),
                                       cameraRect->w,
                                       cameraRect->h,
@@ -202,28 +212,22 @@ void Game::processEvents()
                                       maxBoundX,
                                       maxBoundY);
 
-    string cameraHitDirectrion = hitBoundary(cameraRect->x,
-                                      cameraRect->y,
-                                      cameraRect->w,
-                                      cameraRect->h,
-                                      minBoundX,
-                                      minBoundY,
-                                      maxBoundX,
-                                      maxBoundY);
 
-    //Depending on where it hit, revert player position to original
 
-    if(playerHitDirection == "LEFT" || playerHitDirection == "RIGHT")
+
+    if(cameraHitDirectrion == "LEFT" || cameraHitDirectrion == "RIGHT")
     {
-        //cout << "hit:" << playerHitDirection << "\n";
         cameraRect->x = originalCamX;
         cameraRect->y = originalCamY;
+
+        cout << "hitleft";
     }
     else
     {
         cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect);
         cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
     }
+
 }
 void Game::render()
 {
@@ -261,24 +265,7 @@ void Game::render()
     //Render Dialog Panel
     //////////////////////
 
-    /*
-    SDL_Rect dialogRectSrc, dialogRectTarget;
-
-    //dialogRectSrc.h = dialogPanel->mHeight;
-    //dialogRectSrc.w = dialogPanel->mWidth;
-    dialogRectSrc.x = 0;
-    dialogRectSrc.y = 0;
-
-    //make it so that it takes up a third of the bottom screen
-    dialogRectTarget.h = gameHeight / 3 ;
-    dialogRectTarget.w = gameWidth;
-    dialogRectTarget.x = 0;
-    dialogRectTarget.y = (gameHeight / 3 ) * 2;
-
-    //dialogPanel->renderTexture(dialogRectSrc, dialogRectTarget, SDL_FLIP_NONE);
-
-    */
-    mUIHandler->render();
+    //mUIHandler->render();
 
     //Render text on top of the dialog panel
 
@@ -296,7 +283,7 @@ void Game::render()
 
     dialogText->loadText(gameFont, "I live because of you o mighty creator!", textColor, gameWidth);
 
-    dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
+    //dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
 
 
     //Render characters in the scene
