@@ -40,10 +40,28 @@ inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, in
     return outPut;
 }
 
-
-inline int convertPlayerXtoCamX(SDL_Rect *playerRect, SDL_Rect *camRect)
+inline string hitBoundary1D(int xSource, int wSource, int left, int right)
 {
-    return (playerRect->x + (playerRect->w  /2)) - (camRect->w/2);
+    string outPut = "NONE";
+
+    //Check left
+    if(xSource < left)
+    {
+        outPut = "LEFT";
+    }
+
+    if(xSource + wSource > right)
+    {
+        outPut = "RIGHT";
+    }
+
+    return outPut;
+}
+
+
+inline int convertPlayerXtoCamX(int playerX, int playerWidth, SDL_Rect *camRect)
+{
+    return (playerX + (playerWidth  /2)) - (camRect->w/2);
 }
 
 inline int convertPlayerYtoCamY(SDL_Rect *playerRect, SDL_Rect *camRect)

@@ -106,11 +106,6 @@ void Game::processEvents()
 {
     string eventName = mUIHandler->getUserInput();
 
-    int originalPlayerX = playerChar->mXpos;
-    int originalPlayerY = playerChar->mYpos;
-
-    int originalCamX = cameraRect->x;
-    int originalCamY = cameraRect->y;
 
 
     //Check if player is currently over a link transition obj
@@ -119,15 +114,12 @@ void Game::processEvents()
     {
         LinkObj& lObj = mSceneLoader->mCurrentScene.mLinkObjArray[i];
 
-        if(horizontalColDetector(originalPlayerX, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
+        if(horizontalColDetector(playerChar->mXpos, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
         {
             cout << "Collided with: " << lObj.mName << "\n";
             sceneCol = lObj.mName;
         }
     }
-
-    int nextX = originalPlayerX;
-    int nextY = originalPlayerY;
 
     if(eventName == "EXIT")
     {
@@ -165,68 +157,42 @@ void Game::processEvents()
 
     }
 
-    //playerChar->mXpos = nextX;
-    //playerChar->mYpos = nextY;
 
-
-    string playerHitDirection = hitBoundary(playerChar->mXpos,
-                                      playerChar->mYpos,
-                                      playerChar->mWidth,
-                                      playerChar->mHeight,
-                                      minBoundX,
-                                      minBoundY,
-                                      maxBoundX,
-                                      maxBoundY);
+    string playerHitDirection = hitBoundary1D(playerChar->mXpos, playerChar->mWidth, minBoundX, maxBoundX);
 
     if(playerChar->currState == "MOVE_LEFT")
     {
         if(playerHitDirection != "LEFT")
         {
             playerChar->mXpos -= 3;
+            playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
+            playerChar->loadAnimation("walk");
+
         }
     }
     else if(playerChar->currState == "MOVE_RIGHT")
     {
         playerChar->mXpos += 3;
+        playerChar->mFlipType = SDL_FLIP_NONE;
+        playerChar->loadAnimation("walk");
+    }
+    else if(playerChar->currState == "MOVE_STOP")
+    {
+        playerChar->loadAnimation("idle");
     }
 
 
-    SDL_Rect playerRect;
-    playerRect.x = playerChar->mXpos;
-    playerRect.y = playerChar->mYpos;
-    playerRect.w = playerChar->mWidth;
-    playerRect.h = playerChar->mHeight;
 
     //Check if the camera rect hits the game boundary
 
+    string cameraHitDirectrion = hitBoundary1D(convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect), cameraRect->w, minBoundX, maxBoundX);
 
-
-
-
-    string cameraHitDirectrion = hitBoundary(convertPlayerXtoCamX(&playerRect, cameraRect),
-                                      convertPlayerYtoCamY(&playerRect, cameraRect),
-                                      cameraRect->w,
-                                      cameraRect->h,
-                                      minBoundX,
-                                      minBoundY,
-                                      maxBoundX,
-                                      maxBoundY);
-
-
-
-
-    if(cameraHitDirectrion == "LEFT" || cameraHitDirectrion == "RIGHT")
+    if(cameraHitDirectrion != "LEFT" && cameraHitDirectrion != "RIGHT")
     {
-        cameraRect->x = originalCamX;
-        cameraRect->y = originalCamY;
+        cameraRect->x = convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect);
 
-        cout << "hitleft";
     }
-    else
-    {
-        cameraRect->x = convertPlayerXtoCamX(&playerRect, cameraRect);
-        cameraRect->y = convertPlayerYtoCamY(&playerRect, cameraRect);
-    }
+
 
 }
 void Game::render()
@@ -265,7 +231,7 @@ void Game::render()
     //Render Dialog Panel
     //////////////////////
 
-    //mUIHandler->render();
+    mUIHandler->render();
 
     //Render text on top of the dialog panel
 
@@ -283,7 +249,7 @@ void Game::render()
 
     dialogText->loadText(gameFont, "I live because of you o mighty creator!", textColor, gameWidth);
 
-    //dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
+    dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
 
 
     //Render characters in the scene
@@ -297,7 +263,7 @@ void Game::render()
         }
     }
 
-    //Swap buffers
+    //Swap buffers to present backbuffer to screen
     SDL_RenderPresent(SH->renderer);
 
 }
