@@ -11,6 +11,9 @@
 
 const bool DEBUGMODE = true;
 
+const int GAMEWIDTH = 640;
+const int GAMEHEIGHT = 480;
+
 //Checks the source rect and see if it hits the targetrect
 inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, int xTarget, int yTarget, int wTarget, int hTarget)
 {
@@ -108,6 +111,21 @@ inline bool pointInBox(int pointX, int pointY, int boxXpos, int boxYpos, int box
        pointX <= (boxXpos + boxWidth) &&
        pointY >= boxYpos &&
        pointY <= (boxYpos + boxHeight))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+inline bool pointInTexture(int pointX, int pointY, TextureObj tObj)
+{
+    if(pointX >= tObj.mPosition.x &&
+       pointX <= (tObj.mPosition.x + tObj.mWidth) &&
+       pointY >= tObj.mPosition.y &&
+       pointY <= (tObj.mPosition.y + tObj.mHeight))
     {
         return true;
     }

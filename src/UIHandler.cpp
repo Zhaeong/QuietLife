@@ -1,7 +1,7 @@
 #include "UIHandler.h"
 
 
-#include "TextureObj.h"
+
 UIHandler::UIHandler(SDLHandler *SH)
 {
     mSH = SH;
@@ -9,15 +9,22 @@ UIHandler::UIHandler(SDLHandler *SH)
     cout << "Loading Dialog Panel";
 
     TextureObj uiBackground(SH, "res/png/dialogPanel.png");
-    uiBackground.setPos(0, 240, 0);
-    uiBackground.setDim(640, 240);
+    uiBackground.setPos(0, GAMEHEIGHT / 3 * 2, 0);
+    uiBackground.setDim(GAMEWIDTH, GAMEHEIGHT / 3);
     addTexture(uiBackground);
 
 
     TextureObj leftCursor(SH, "res/png/leftCursor.png");
     leftCursor.setPos(10, 280, 0);
     leftCursor.setDim(50, 50);
-    addTexture(leftCursor);
+    insertTexture(leftCursor, LEFTCURSOR);
+
+
+    TextureObj rightCursor(SH, "res/png/rightCursor.png");
+    rightCursor.setPos(400, 280, 0);
+    rightCursor.setDim(50, 50);
+    insertTexture(rightCursor, RIGHTCURSOR);
+
 
 }
 
@@ -34,7 +41,6 @@ string UIHandler::getUserInput()
     string eventName = mSH->getEvent(&mouseXpos, &mouseYpos);
 
     //cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
-
 
     if(eventName == "EXIT")
     {
@@ -58,12 +64,15 @@ string UIHandler::getUserInput()
     }
     else if(eventName == "MOUSEDOWN")
     {
-
-        if(pointInBox(mouseXpos, mouseYpos, mTextureArray[1].mPosition.x, mTextureArray[1].mPosition.y, mTextureArray[1].mWidth, mTextureArray[1].mHeight))
+        if(pointInTexture(mouseXpos, mouseYpos, mTextureArray[LEFTCURSOR]))
         {
-            cout << "hit left cursor\n";
             return "MOVE_LEFT";
         }
+        else if(pointInTexture(mouseXpos, mouseYpos, mTextureArray[RIGHTCURSOR]))
+        {
+            return "MOVE_RIGHT";
+        }
+
         return "MOUSEDOWN";
     }
     else if(eventName == "MOUSEUP")
@@ -80,6 +89,11 @@ string UIHandler::getUserInput()
 void UIHandler::addTexture(TextureObj textureObj)
 {
     mTextureArray.push_back(textureObj);
+}
+
+void UIHandler::insertTexture(TextureObj textureObj, int pos)
+{
+    mTextureArray.insert(mTextureArray.begin()+ pos, textureObj);
 }
 
 void UIHandler::render()

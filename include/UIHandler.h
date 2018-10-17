@@ -8,6 +8,9 @@
 #include "SDLHandler.h"
 #include "TextureObj.h"
 
+const int LEFTCURSOR = 1;
+const int RIGHTCURSOR = 2;
+
 using namespace std;
 
 class UIHandler
@@ -23,6 +26,7 @@ class UIHandler
         string getUserInput();
 
         void addTexture(TextureObj textureObj);
+        void insertTexture(TextureObj textureObj, int pos);
 
         void render();
 
