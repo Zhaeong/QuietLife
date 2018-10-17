@@ -9,9 +9,8 @@ Game::Game()
 
     bRunGame = true;
     //Temple OS H and W
-    gameWidth = 640;
-    gameHeight = 480;
-    SH = new SDLHandler(gameWidth, gameHeight);
+
+    SH = new SDLHandler(GAMEWIDTH, GAMEHEIGHT);
 
     mUIHandler = new UIHandler(SH);
 
@@ -84,8 +83,8 @@ Game::Game()
     //Load camera to be same
     cameraRect = new SDL_Rect;
 
-    cameraRect->w = gameWidth;
-    cameraRect->h = gameHeight;
+    cameraRect->w = GAMEWIDTH;
+    cameraRect->h = GAMEHEIGHT;
 
     cameraRect->x = playerChar->mXpos + (playerChar->mWidth  /2) - (cameraRect->w/2);
     cameraRect->y = playerChar->mYpos + (playerChar->mHeight  /2) - (cameraRect->h/2);
@@ -245,9 +244,9 @@ void Game::render()
     dialogFontRectTarget.h = dialogText->m_height;
     dialogFontRectTarget.w = dialogText->m_width;
     dialogFontRectTarget.x = 0;
-    dialogFontRectTarget.y = (gameHeight / 3 ) * 2;
+    dialogFontRectTarget.y = (GAMEHEIGHT / 3 ) * 2;
 
-    dialogText->loadText(gameFont, "I live because of you o mighty creator!", textColor, gameWidth);
+    dialogText->loadText(gameFont, "I live because of you o mighty creator!", textColor, GAMEWIDTH);
 
     dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
 

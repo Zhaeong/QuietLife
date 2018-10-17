@@ -37,9 +37,6 @@ class Game
         virtual ~Game();
         bool bRunGame;
 
-        int gameHeight;
-        int gameWidth;
-
         int minBoundX;
         int minBoundY;
         int maxBoundX;
