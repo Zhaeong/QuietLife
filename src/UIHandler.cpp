@@ -2,9 +2,10 @@
 
 
 
-UIHandler::UIHandler(SDLHandler *SH)
+UIHandler::UIHandler(SDLHandler *SH, CharacterObj *playerChar)
 {
     mSH = SH;
+    mPlayerChar = playerChar;
 
     cout << "Loading Dialog Panel";
 
@@ -13,17 +14,27 @@ UIHandler::UIHandler(SDLHandler *SH)
     uiBackground.setDim(GAMEWIDTH, GAMEHEIGHT / 3);
     addTexture(uiBackground);
 
-
     TextureObj leftCursor(SH, "res/png/leftCursor.png");
-    leftCursor.setPos(10, 280, 0);
+
+    int cursorHeight = (GAMEHEIGHT / 3 * 2) + (GAMEHEIGHT / 6) - (leftCursor.mHeight / 2);
+
+    leftCursor.setPos(10,cursorHeight , 0);
     leftCursor.setDim(50, 50);
     insertTexture(leftCursor, LEFTCURSOR);
 
 
     TextureObj rightCursor(SH, "res/png/rightCursor.png");
-    rightCursor.setPos(400, 280, 0);
+    rightCursor.setPos(GAMEWIDTH - 60, cursorHeight, 0);
     rightCursor.setDim(50, 50);
     insertTexture(rightCursor, RIGHTCURSOR);
+
+    //Create dialog text
+    dialogText = new GameObj(0,0,0, mSH);
+    dialogText->loadText("I live because of you o mighty creator!", GAMEWIDTH);
+
+    //Create debug text
+    debugText = new GameObj(0, 0, 0, SH);
+    debugText->loadText("Debugging", 200);
 
 
 }
@@ -119,6 +130,34 @@ void UIHandler::render()
 
 
         tObj.renderTexture(srcRect, dstRect, SDL_FLIP_NONE);
+    }
 
+    //Render dialog text
+    SDL_Rect dialogFontRectSrc, dialogFontRectTarget;
+    dialogFontRectSrc.h = dialogText->mHeight;
+    dialogFontRectSrc.w = dialogText->mWidth;
+    dialogFontRectSrc.x = 0;
+    dialogFontRectSrc.y = 0;
+
+    dialogFontRectTarget.h = dialogText->mHeight;
+    dialogFontRectTarget.w = dialogText->mWidth;
+    dialogFontRectTarget.x = 0;
+    dialogFontRectTarget.y = (GAMEHEIGHT / 3 ) * 2;
+
+
+    dialogText->render(dialogFontRectSrc, dialogFontRectTarget);
+
+    if(DEBUGMODE)
+    {
+        SDL_Rect fontRect;
+
+        fontRect.h = debugText->mHeight;
+        fontRect.w = debugText->mWidth;
+        fontRect.x = 0;
+        fontRect.y = 0;
+
+        debugText->loadText("pla - x:" + to_string(mPlayerChar->mXpos) + " y:" + to_string(mPlayerChar->mYpos), 200);
+
+        debugText->render(fontRect, fontRect);
     }
 }

@@ -52,24 +52,14 @@ class Game
 
         CharacterObj *playerChar;
 
-        GameObj *fontObj;
-
-        TextureObj *dialogPanel;
-        GameObj *dialogText;
-
         vector<CharacterObj> mCharObjectArray;
 
-        TTF_Font *gameFont;
-
         //functions
-
         void processEvents();
         void render();
 
         //helper functions
         void addCharObj(CharacterObj charObj);
-
-        //bool processTexture(GameObj *gObj);
 
 
     protected:

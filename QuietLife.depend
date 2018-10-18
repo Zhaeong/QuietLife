@@ -378,7 +378,7 @@
 	<vector>
 	<SDL.h>
 
-1537760441 d:\github\quietlife\include\gameobj.h
+1539841946 d:\github\quietlife\include\gameobj.h
 	<cstring>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -394,7 +394,7 @@
 	"SDLHandler.h"
 	<iostream>
 
-1539756642 d:\github\quietlife\include\game.h
+1539842502 d:\github\quietlife\include\game.h
 	<string>
 	<vector>
 	<algorithm>
@@ -410,7 +410,7 @@
 	"SceneLoader.h"
 	"UIHandler.h"
 
-1539756668 source:d:\github\quietlife\src\game.cpp
+1539842460 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
 1539756619 d:\github\quietlife\include\gameutil.h
@@ -977,7 +977,7 @@
 1539322230 source:d:\github\quietlife\src\objdefs\characterobj.cpp
 	"CharacterObj.h"
 
-1537760418 source:d:\github\quietlife\src\objdefs\gameobj.cpp
+1539842015 source:d:\github\quietlife\src\objdefs\gameobj.cpp
 	"GameObj.h"
 
 1539146880 source:d:\github\quietlife\src\objdefs\linkobj.cpp
@@ -995,14 +995,16 @@
 1539573090 source:d:\github\quietlife\src\objdefs\textureobj.cpp
 	"TextureObj.h"
 
-1539756012 d:\github\quietlife\include\uihandler.h
+1539842285 d:\github\quietlife\include\uihandler.h
 	<string>
 	<vector>
 	"GameUtil.h"
 	"SDLHandler.h"
 	"TextureObj.h"
+	"GameObj.h"
+	"CharacterObj.h"
 
-1539756747 source:d:\github\quietlife\src\uihandler.cpp
+1539842417 source:d:\github\quietlife\src\uihandler.cpp
 	"UIHandler.h"
 
 1539553245 d:\cbproj\quietlife\include\linkobj.h

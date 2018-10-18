@@ -17,42 +17,37 @@ class GameObj
 {
     public:
 
-        GameObj(int x_pos, int y_pos, SDLHandler *SH);
+        GameObj(int x_pos, int y_pos, int rotation, SDLHandler *SH);
 
         virtual ~GameObj();
 
-        int m_xPos;
-        int m_yPos;
+        int mXpos;
+        int mYpos;
 
-        int m_width;
-        int m_height;
+        int mWidth;
+        int mHeight;
+
+        int mRotation;
+
+
+        SDL_Color textColor;
+
+        TTF_Font *textFont;
 
 
 
-        string m_imageLocation;
+        string mImageLocation;
 
-        SDL_Texture *m_texture;
+        SDL_Texture *mTexture;
 
-        //void pointer to pixels
-        void* m_pixels;
-		int m_pitch;
-
-        int m_rotation;
-		SDLHandler *m_SH;
-
-		//Getters and setter functions
-		void* getPixels();
+		SDLHandler *mSH;
 
         //functions
-        void loadImage(string imageLocation);
-        void loadText(TTF_Font *font, string fontText, SDL_Color fontColor, int maxWidth);
 
-        void loadEditImage(string imageLocation);
+        void loadText(string fontText, int maxWidth);
 
-        bool lockTexture();
-        bool unlockTexture();
+
         void render(SDL_Rect srcRect, SDL_Rect dstRect);
-        void renderEx(SDL_Rect srcRect, SDL_Rect dstRect);
         void free();
 
     protected:

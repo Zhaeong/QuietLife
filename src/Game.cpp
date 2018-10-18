@@ -12,7 +12,7 @@ Game::Game()
 
     SH = new SDLHandler(GAMEWIDTH, GAMEHEIGHT);
 
-    mUIHandler = new UIHandler(SH);
+
 
 
     //Initialize libraries
@@ -32,7 +32,6 @@ Game::Game()
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
     }
 
-
     //Load background texture
     cout << "Loading Background\n";
     mSceneLoader = new SceneLoader(SH);
@@ -46,15 +45,6 @@ Game::Game()
     maxBoundY = mSceneLoader->maxBoundY;
 
 
-
-    //Load debug font texture
-    gameFont = TTF_OpenFont("res/fonts/AmaticSC-Regular.ttf", 28);
-    SDL_Color textColor = { 0, 0, 0 };
-
-    fontObj = new GameObj(0, 0, SH);
-    fontObj->loadText(gameFont, "heyyyyy baby", textColor, 200);
-
-
     cout << "Creating CharObj\n";
     //player char
     playerChar = new CharacterObj(SH, "Player");
@@ -65,6 +55,8 @@ Game::Game()
     playerChar->getAnimate("res/characters/steve");
 
 
+    //create UI elements
+    mUIHandler = new UIHandler(SH, playerChar);
 
     //create new char
     CharacterObj bobChar(SH, "Bob");
@@ -77,9 +69,7 @@ Game::Game()
 
     addCharObj(bobChar);
 
-
     //cameraRect
-
     //Load camera to be same
     cameraRect = new SDL_Rect;
 
@@ -88,10 +78,6 @@ Game::Game()
 
     cameraRect->x = playerChar->mXpos + (playerChar->mWidth  /2) - (cameraRect->w/2);
     cameraRect->y = playerChar->mYpos + (playerChar->mHeight  /2) - (cameraRect->h/2);
-
-    dialogText = new GameObj(0,0, SH);
-
-
 
 
 }
@@ -104,8 +90,6 @@ Game::~Game()
 void Game::processEvents()
 {
     string eventName = mUIHandler->getUserInput();
-
-
 
     //Check if player is currently over a link transition obj
     string sceneCol = "NONE";
@@ -127,22 +111,15 @@ void Game::processEvents()
     if(eventName == "MOVE_LEFT")
     {
         playerChar->currState = "MOVE_LEFT";
-        //nextX = originalPlayerX - 4;
-        //playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
-        //playerChar->loadAnimation("walk");
     }
 
     if(eventName == "MOVE_RIGHT")
     {
         playerChar->currState = "MOVE_RIGHT";
-        //nextX = originalPlayerX + 4;
-        //playerChar->mFlipType = SDL_FLIP_NONE;
-        //playerChar->loadAnimation("walk");
     }
 
     if(eventName == "MOVE_STOP")
     {
-        //playerChar->loadAnimation("idle")
         playerChar->currState = "MOVE_STOP";
     }
 
@@ -205,50 +182,12 @@ void Game::render()
     //Render Player
     playerChar->render(*cameraRect);
 
-    //////////////////////////
-    //Render debug font
-    //////////////////////////
-    SDL_Rect fontRect;
-
-    fontRect.h = fontObj->m_height;
-    fontRect.w = fontObj->m_width;
-    fontRect.x = 0;
-    fontRect.y = 0;
-
-
-    SDL_Color textColor = { 0, 0, 0 };
-    fontObj->loadText(gameFont,
-                      "pla - x:" + to_string(playerChar->mXpos) + " y:" + to_string(playerChar->mYpos) + "\n" +
-                      "cam - x:" + to_string(cameraRect->x) + " y:" + to_string(cameraRect->y),
-                      textColor,
-                      200);
-
-
-    fontObj->renderEx(fontRect, fontRect);
 
     //////////////////////
     //Render Dialog Panel
     //////////////////////
 
     mUIHandler->render();
-
-    //Render text on top of the dialog panel
-
-    SDL_Rect dialogFontRectSrc, dialogFontRectTarget;
-
-    dialogFontRectSrc.h = dialogText->m_height;
-    dialogFontRectSrc.w = dialogText->m_width;
-    dialogFontRectSrc.x = 0;
-    dialogFontRectSrc.y = 0;
-
-    dialogFontRectTarget.h = dialogText->m_height;
-    dialogFontRectTarget.w = dialogText->m_width;
-    dialogFontRectTarget.x = 0;
-    dialogFontRectTarget.y = (GAMEHEIGHT / 3 ) * 2;
-
-    dialogText->loadText(gameFont, "I live because of you o mighty creator!", textColor, GAMEWIDTH);
-
-    dialogText->renderEx(dialogFontRectSrc, dialogFontRectTarget);
 
 
     //Render characters in the scene

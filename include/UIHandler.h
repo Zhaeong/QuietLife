@@ -7,6 +7,8 @@
 #include "GameUtil.h"
 #include "SDLHandler.h"
 #include "TextureObj.h"
+#include "GameObj.h"
+#include "CharacterObj.h"
 
 const int LEFTCURSOR = 1;
 const int RIGHTCURSOR = 2;
@@ -16,12 +18,17 @@ using namespace std;
 class UIHandler
 {
     public:
-        UIHandler(SDLHandler *SH);
+        UIHandler(SDLHandler *SH, CharacterObj *playerChar);
         virtual ~UIHandler();
 
         SDLHandler *mSH;
+        CharacterObj *mPlayerChar;
 
         vector<TextureObj> mTextureArray;
+
+        GameObj *dialogText;
+
+        GameObj *debugText;
 
         string getUserInput();
 
