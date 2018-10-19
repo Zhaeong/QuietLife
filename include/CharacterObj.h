@@ -39,8 +39,12 @@ class CharacterObj
         //A vector of vector of Anim defs
         vector<AnimDef> mAnimArray;
 
+        vector<string> mDialogArray;
+
         int mXpos;
         int mYpos;
+
+        int mXRenderOffset;
 
 
         int mWidth;
@@ -59,6 +63,8 @@ class CharacterObj
         void getTextures(string dirPath);
         void getAnimate(string dirPath);
         void loadAnimation(string animationName);
+
+        void loadDialog(string dialogPath);
 
     protected:
 

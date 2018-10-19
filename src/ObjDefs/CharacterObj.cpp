@@ -9,6 +9,8 @@ CharacterObj::CharacterObj(SDLHandler *SH, string name)
 
     setPos(0,0);
 
+    mXRenderOffset = 0;
+
     mFlipType = SDL_FLIP_NONE;
 }
 
@@ -29,7 +31,6 @@ void CharacterObj::render(SDL_Rect cameraRect)
     int xPos = mXpos - cameraRect.x;
     int yPos = mYpos - cameraRect.y;
 
-
     //Render objects in game array
     for(unsigned int i = 0; i < mTextureArray.size(); i++)
     {
@@ -44,18 +45,15 @@ void CharacterObj::render(SDL_Rect cameraRect)
         srcRect.w=tObj.mWidth;
 
         //To get the position of the texture relative to the character
-        dstRect.x = xPos + tObj.mPosition.x;
+        //The mXRenderOffset offsets the position of rendering so that the character can remain in middle
+        //need to be set manually if bounding box is greater than player
+        dstRect.x = xPos + tObj.mPosition.x + mXRenderOffset;
         dstRect.y = yPos + tObj.mPosition.y;
         dstRect.h = tObj.mHeight;
         dstRect.w = tObj.mWidth;
 
-
         tObj.renderTexture(srcRect, dstRect, mFlipType);
-
-
-
     }
-
 
     if(DEBUGMODE)
     {
@@ -65,7 +63,6 @@ void CharacterObj::render(SDL_Rect cameraRect)
         SDL_RenderDrawLine(mSH->renderer, xPos, yPos, xPos, yPos + mHeight);
         SDL_RenderDrawLine(mSH->renderer, xPos + mWidth, yPos, xPos + mWidth, yPos + mHeight);
         SDL_RenderDrawLine(mSH->renderer, xPos, yPos + mHeight, xPos + mWidth, yPos + mHeight);
-
     }
 
 }
@@ -323,5 +320,28 @@ void CharacterObj::loadAnimation(string animationName)
 
         //sort the texture array by the zval so that the texture order is established
         sort(mTextureArray.begin(), mTextureArray.end(), sortByZval);
+    }
+}
+
+void CharacterObj::loadDialog(string dialogPath)
+{
+    //string fullPath = dirPath + "\\" + fileName;
+
+
+    string line;
+    ifstream myfile (dialogPath);
+    if (myfile.is_open())
+    {
+        while ( getline (myfile,line) )
+        {
+            mDialogArray.push_back(line);
+
+            cout << "LOADED:" << line;
+        }
+        myfile.close();
+    }
+    else
+    {
+        cout << "Unable to open file";
     }
 }

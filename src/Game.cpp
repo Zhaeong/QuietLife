@@ -1,8 +1,5 @@
 #include "Game.h"
 
-
-
-
 Game::Game()
 {
     cout << "Init Game\n";
@@ -12,10 +9,12 @@ Game::Game()
 
     SH = new SDLHandler(GAMEWIDTH, GAMEHEIGHT);
 
+    SDL_ShowCursor(SDL_DISABLE);
 
 
-
-    //Initialize libraries
+    ////////////////////////
+    //Initialize libraries//
+    ////////////////////////
 
     //Initialize PNG loading
     cout << "Loading IMG Lib\n";
@@ -56,16 +55,18 @@ Game::Game()
 
 
     //create UI elements
-    mUIHandler = new UIHandler(SH, playerChar);
+    mUIHandler = new UIHandler(SH, this);
 
     //create new char
     CharacterObj bobChar(SH, "Bob");
     bobChar.setPos(100, 40);
-    bobChar.setDimension(15, 70);
+    bobChar.setDimension(30, 70);
+    bobChar.mXRenderOffset = 10;
     bobChar.getTextures("res/characters/bob");
     bobChar.getAnimate("res/characters/bob");
     bobChar.loadAnimation("walk");
     bobChar.currScene = "hallway.png";
+    bobChar.loadDialog("res/characters/bob/intro.dialog");
 
     addCharObj(bobChar);
 
@@ -131,6 +132,9 @@ void Game::processEvents()
             mSceneLoader->loadScene(sceneCol);
         }
 
+        mUIHandler->bRenderDialog = true;
+        mUIHandler->setDialog("heyyy", 100, 100);
+
     }
 
 
@@ -143,7 +147,6 @@ void Game::processEvents()
             playerChar->mXpos -= 3;
             playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
             playerChar->loadAnimation("walk");
-
         }
     }
     else if(playerChar->currState == "MOVE_RIGHT")
@@ -157,8 +160,6 @@ void Game::processEvents()
         playerChar->loadAnimation("idle");
     }
 
-
-
     //Check if the camera rect hits the game boundary
 
     string cameraHitDirectrion = hitBoundary1D(convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect), cameraRect->w, minBoundX, maxBoundX);
@@ -166,7 +167,6 @@ void Game::processEvents()
     if(cameraHitDirectrion != "LEFT" && cameraHitDirectrion != "RIGHT")
     {
         cameraRect->x = convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect);
-
     }
 
 

@@ -31,6 +31,9 @@ SDLHandler::~SDLHandler()
 
 string SDLHandler::getEvent(int *mouseXpos, int *mouseYpos)
 {
+
+    SDL_GetMouseState( mouseXpos, mouseYpos );
+
     string eventName = "NONE";
     /* Poll for events. SDL_PollEvent() returns 0 when there are no  */
     /* more events on the event queue, our while loop will exit when */
@@ -38,7 +41,7 @@ string SDLHandler::getEvent(int *mouseXpos, int *mouseYpos)
     while( SDL_PollEvent( &event ) )
     {
 
-        SDL_GetMouseState( mouseXpos, mouseYpos );
+
     /* We are only worried about SDL_KEYDOWN and SDL_KEYUP events */
         switch( event.type )
         {

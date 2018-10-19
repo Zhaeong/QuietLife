@@ -28,6 +28,7 @@
 #include "UIHandler.h"
 
 
+class UIHandler;
 using namespace std;
 
 class Game

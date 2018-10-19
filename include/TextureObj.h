@@ -45,6 +45,9 @@ class TextureObj
 
         bool mRotationDirection;
 
+
+        void loadTexture(string imgLocation);
+
         void setPos(int xVal, int yVal, int rotation);
 
         void setDim(int width, int height);

@@ -6,6 +6,20 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 
     mImgLocation = imgLocation;
     mSH = SH;
+    loadTexture(mImgLocation);
+}
+
+TextureObj::~TextureObj()
+{
+    //dtor
+}
+
+
+void TextureObj::loadTexture(string imgLocation)
+{
+    cout << "Loading: " << imgLocation << "\n";
+
+    mImgLocation = imgLocation;
 
     //Make sure to initialize texture to null or else SDL_DestroyTexture will crash program
     mTexture = NULL;
@@ -15,15 +29,12 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 
     SDL_Surface* loadedSurface = IMG_Load( imgLocation.c_str() );
 
-
-
     if( loadedSurface == NULL )
 	{
 		printf( "Unable to load image %s! SDL_image Error: %s\n", imgLocation.c_str(), IMG_GetError() );
 	}
 	else
 	{
-
 		//Convert surface to display format
 		SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface,SDL_PIXELFORMAT_ARGB8888, 0 );
 		if( formattedSurface == NULL )
@@ -32,7 +43,6 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 		}
 		else
 		{
-
 			//Create blank streamable texture
 			mTexture = SDL_CreateTexture( mSH->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
 			if( mTexture == NULL )
@@ -75,11 +85,6 @@ TextureObj::TextureObj(SDLHandler *SH, string imgLocation)
 	}
 }
 
-TextureObj::~TextureObj()
-{
-    //dtor
-}
-
 void TextureObj::free()
 {
 
@@ -111,18 +116,9 @@ void TextureObj::free()
 
 void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect, SDL_RendererFlip flipType)
 {
-    //SDL_RendererFlip flipType = SDL_FLIP_NONE;
-
-
-
     getRotation();
-
     SDL_RenderCopyEx(mSH->renderer, mTexture, &srcRect, &dstRect, mRotation, &mMiddle, flipType);
-
-    //SDL_RenderCopy(mSH->renderer, mTexture, &srcRect, &dstRect);
-
 }
-
 
 void TextureObj::setRotateTargets(int Start, int End)
 {
@@ -147,7 +143,6 @@ void TextureObj::setDim(int width, int height)
 {
     mWidth = width;
     mHeight = height;
-
 }
 
 void TextureObj::getRotation()
@@ -175,7 +170,6 @@ void TextureObj::getRotation()
         }
     }
 }
-
 
 bool TextureObj::lockTexture()
 {
