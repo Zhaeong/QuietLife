@@ -15,7 +15,7 @@ UIHandler::UIHandler(SDLHandler *SH, Game *mainGame)
 
     //Load dialog Texture and text for interactions
     mBackgroundTexture = new TextureObj(mSH, "res/png/dialogPanel.png");
-    mBackgroundTexture->setDim(200, 50);
+    mBackgroundTexture->setDim(200, 500);
     mDialogText = new GameObj(0,0,0, mSH);
     bRenderDialog = false;
 
@@ -125,6 +125,7 @@ void UIHandler::setDialog(string dialogString, int xPos, int yPos)
     mDialogText->mXpos = xPos;
     mDialogText->mYpos = yPos;
     mDialogText->loadText(dialogString, mBackgroundTexture->mWidth);
+    mBackgroundTexture->mHeight = mDialogText->mHeight;
 }
 
 void UIHandler::render()
@@ -170,21 +171,32 @@ void UIHandler::render()
 
 
     //render dialog
-
     if(bRenderDialog)
     {
+        SDL_Rect dialogBckSrc, dialogBckDst;
+        dialogBckSrc.h = mBackgroundTexture->mHeight;
+        dialogBckSrc.w = mBackgroundTexture->mWidth;
+        dialogBckSrc.x = 0;
+        dialogBckSrc.y = 0;
+
+        dialogBckDst.h = mDialogText->mHeight;
+        dialogBckDst.w = mBackgroundTexture->mWidth;
+        dialogBckDst.x = mBackgroundTexture->mPosition.x;
+        dialogBckDst.y = mBackgroundTexture->mPosition.y;
+
+        mBackgroundTexture->renderTexture(dialogBckSrc, dialogBckDst, SDL_FLIP_NONE);
+
+
         SDL_Rect dialogSrc, dialogDst;
-        dialogSrc.h = mBackgroundTexture->mHeight;
-        dialogSrc.w = mBackgroundTexture->mWidth;
+        dialogSrc.h = mDialogText->mHeight;
+        dialogSrc.w = mDialogText->mWidth;
         dialogSrc.x = 0;
         dialogSrc.y = 0;
 
-        dialogDst.h = mBackgroundTexture->mHeight;
-        dialogDst.w = mBackgroundTexture->mWidth;
-        dialogDst.x = mBackgroundTexture->mPosition.x;
-        dialogDst.y = mBackgroundTexture->mPosition.y;
-
-        mBackgroundTexture->renderTexture(dialogSrc, dialogDst, SDL_FLIP_NONE);
+        dialogDst.h = mDialogText->mHeight;
+        dialogDst.w = mDialogText->mWidth;
+        dialogDst.x = mDialogText->mXpos;
+        dialogDst.y = mDialogText->mYpos;
         mDialogText->render(dialogSrc,dialogDst);
     }
 
@@ -204,9 +216,6 @@ void UIHandler::render()
     mouseDst.y = mouseCursorTexture->mPosition.y;
 
     mouseCursorTexture->renderTexture(mouseSrc, mouseDst, SDL_FLIP_NONE);
-
-
-
 
     if(DEBUGMODE)
     {

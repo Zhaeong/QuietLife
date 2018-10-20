@@ -133,7 +133,7 @@ void Game::processEvents()
         }
 
         mUIHandler->bRenderDialog = true;
-        mUIHandler->setDialog("heyyy", 100, 100);
+        mUIHandler->setDialog("hello how is it going you are really cool man", 100, 100);
 
     }
 

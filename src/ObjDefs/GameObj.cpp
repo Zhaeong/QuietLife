@@ -24,6 +24,7 @@ void GameObj::loadText(string fontText, int maxWidth)
 {
     free();
 
+    //theres a sdl bug where the string has to contain spaces for it to work
     SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped( textFont, fontText.c_str(), textColor, maxWidth );
     if( textSurface == NULL )
     {
