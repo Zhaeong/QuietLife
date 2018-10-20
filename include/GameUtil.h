@@ -9,7 +9,7 @@
 #include "PixelObj.h"
 #include "TextureObj.h"
 
-const bool DEBUGMODE = false;
+const bool DEBUGMODE = true;
 
 const int GAMEWIDTH = 640;
 const int GAMEHEIGHT = 480;

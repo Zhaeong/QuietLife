@@ -9,6 +9,8 @@ CharacterObj::CharacterObj(SDLHandler *SH, string name)
 
     setPos(0,0);
 
+    currDialogLine = 0;
+
     mXRenderOffset = 0;
 
     mFlipType = SDL_FLIP_NONE;
@@ -343,5 +345,13 @@ void CharacterObj::loadDialog(string dialogPath)
     else
     {
         cout << "Unable to open file";
+    }
+}
+
+void CharacterObj::addDialogLine()
+{
+    if(currDialogLine < mDialogArray.size() - 1)
+    {
+        currDialogLine += 1;
     }
 }

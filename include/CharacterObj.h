@@ -40,6 +40,7 @@ class CharacterObj
         vector<AnimDef> mAnimArray;
 
         vector<string> mDialogArray;
+        unsigned int currDialogLine;
 
         int mXpos;
         int mYpos;
@@ -51,7 +52,6 @@ class CharacterObj
         int mHeight;
 
         SDL_RendererFlip mFlipType;
-
 
         void addTexture(TextureObj textureObj);
 
@@ -65,6 +65,8 @@ class CharacterObj
         void loadAnimation(string animationName);
 
         void loadDialog(string dialogPath);
+
+        void addDialogLine();
 
     protected:
 

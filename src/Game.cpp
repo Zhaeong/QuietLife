@@ -94,14 +94,31 @@ void Game::processEvents()
 
     //Check if player is currently over a link transition obj
     string sceneCol = "NONE";
+
     for(unsigned int i = 0; i < mSceneLoader->mCurrentScene.mLinkObjArray.size(); i++)
     {
         LinkObj& lObj = mSceneLoader->mCurrentScene.mLinkObjArray[i];
 
         if(horizontalColDetector(playerChar->mXpos, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
         {
-            cout << "Collided with: " << lObj.mName << "\n";
             sceneCol = lObj.mName;
+        }
+    }
+
+    CharacterObj *charCol = NULL;
+    for(unsigned int i = 0; i < mCharObjectArray.size(); i++)
+    {
+        CharacterObj& charObj = mCharObjectArray[i];
+
+        if(horizontalColDetector(playerChar->mXpos, playerChar->mWidth, charObj.mXpos, charObj.mWidth))
+        {
+
+            charCol = &charObj;
+        }
+        else
+        {
+            //Reset all character dialogs to 0
+            charObj.currDialogLine = 0;
         }
     }
 
@@ -132,8 +149,26 @@ void Game::processEvents()
             mSceneLoader->loadScene(sceneCol);
         }
 
-        mUIHandler->bRenderDialog = true;
-        mUIHandler->setDialog("hello how is it going you are really cool man", 100, 100);
+        if(charCol != NULL)
+        {
+            mUIHandler->bRenderDialog = true;
+
+            int charCamXpos = charCol->mXpos - cameraRect->x;
+            int charCamYpos = charCol->mYpos - cameraRect->y;
+
+            //cout << "PlaX:" << charCol->mXpos << " Y:" << charCol->mYpos << "\n";
+            //cout << "CamX:" << cameraRect->x << " Y:" << cameraRect->y << "\n";
+            //cout << "PlaCamX:" << charCamXpos << " Y:" << charCamYpos << "\n";
+
+            mUIHandler->setDialog(charCol->mDialogArray[charCol->currDialogLine], charCamXpos, charCamYpos);
+            charCol->addDialogLine();
+        }
+        else
+        {
+            mUIHandler->bRenderDialog = false;
+        }
+
+
 
     }
 

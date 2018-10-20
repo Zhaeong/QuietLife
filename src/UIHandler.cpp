@@ -121,11 +121,16 @@ void UIHandler::insertTexture(TextureObj textureObj, int pos)
 
 void UIHandler::setDialog(string dialogString, int xPos, int yPos)
 {
-    mBackgroundTexture->setPos(xPos, yPos, 0);
-    mDialogText->mXpos = xPos;
-    mDialogText->mYpos = yPos;
+
+
     mDialogText->loadText(dialogString, mBackgroundTexture->mWidth);
     mBackgroundTexture->mHeight = mDialogText->mHeight;
+
+    //Set the dialog pos to be -10 - height of the dialog so it appears above the coords
+    int renderY = yPos - mDialogText->mHeight - 10;
+    mBackgroundTexture->setPos(xPos, renderY, 0);
+    mDialogText->mXpos = xPos;
+    mDialogText->mYpos = renderY;
 }
 
 void UIHandler::render()
