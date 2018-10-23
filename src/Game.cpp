@@ -90,7 +90,24 @@ Game::~Game()
 
 void Game::processEvents()
 {
-    string eventName = mUIHandler->getUserInput();
+    //string eventName = mUIHandler->getUserInput();
+
+
+    int mouseXpos, mouseYpos;
+
+    string eventName = SH->getEvent(&mouseXpos, &mouseYpos);
+
+    string actionName = "NONE";
+
+
+    ///////////////////////////////////////////////////////////
+    //First check which image to render as the mouse texture
+    //////////////////////////////////////////////////////////
+
+    //set mouse texture position
+    mUIHandler->mouseCursorTexture->setPos(mouseXpos, mouseYpos, 0);
+
+    //check if mouse is collided with scene transition obj
 
     //Check if player is currently over a link transition obj
     string sceneCol = "NONE";
@@ -99,11 +116,77 @@ void Game::processEvents()
     {
         LinkObj& lObj = mSceneLoader->mCurrentScene.mLinkObjArray[i];
 
+        //checks if player is collided with scene transition obj
         if(horizontalColDetector(playerChar->mXpos, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
         {
             sceneCol = lObj.mName;
         }
+
+        //checks if mouse if collided with scene transition obj
+        int mouseXWorld = mouseXpos + cameraRect->x;
+        int mouseYWorld = mouseYpos + cameraRect->y;
+
+        if(pointInBox(mouseXWorld, mouseYWorld, lObj.mXpos, lObj.mYpos, lObj.mWidth, lObj.mHeight))
+        {
+            mUIHandler->loadMouseTexture("res/png/mouseTalk.png");
+        }
+        else
+        {
+            mUIHandler->loadMouseTexture("res/png/mouseCursor.png");
+        }
+
+
     }
+
+
+    //cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
+    if(eventName == "EXIT")
+    {
+        actionName = "EXIT";
+    }
+    else if(eventName == "MOVE_LEFT")
+    {
+        actionName = "MOVE_LEFT";
+    }
+    else if(eventName == "MOVE_RIGHT")
+    {
+        actionName = "MOVE_RIGHT";
+    }
+    else if(eventName == "KEYUP")
+    {
+        actionName = "MOVE_STOP";
+    }
+    else if(eventName == "KEY_E")
+    {
+        actionName = "KEY_E";
+    }
+    else if(eventName == "MOUSEDOWN")
+    {
+        if(pointInTexture(mouseXpos, mouseYpos, mUIHandler->mTextureArray[LEFTCURSOR]))
+        {
+            actionName = "MOVE_LEFT";
+        }
+        else if(pointInTexture(mouseXpos, mouseYpos, mUIHandler->mTextureArray[RIGHTCURSOR]))
+        {
+            actionName = "MOVE_RIGHT";
+        }
+        else
+        {
+            actionName = "MOUSEDOWN";
+        }
+    }
+    else if(eventName == "MOUSEUP")
+    {
+        actionName = "MOVE_STOP";
+    }
+    else
+    {
+        actionName = "NONE";
+    }
+
+    //cout << actionName;
+
+
 
     CharacterObj *charCol = NULL;
     for(unsigned int i = 0; i < mCharObjectArray.size(); i++)
@@ -114,6 +197,7 @@ void Game::processEvents()
         {
 
             charCol = &charObj;
+
         }
         else
         {
@@ -122,26 +206,26 @@ void Game::processEvents()
         }
     }
 
-    if(eventName == "EXIT")
+    if(actionName == "EXIT")
     {
         bRunGame = false;
     }
-    if(eventName == "MOVE_LEFT")
+    if(actionName == "MOVE_LEFT")
     {
         playerChar->currState = "MOVE_LEFT";
     }
 
-    if(eventName == "MOVE_RIGHT")
+    if(actionName == "MOVE_RIGHT")
     {
         playerChar->currState = "MOVE_RIGHT";
     }
 
-    if(eventName == "MOVE_STOP")
+    if(actionName == "MOVE_STOP")
     {
         playerChar->currState = "MOVE_STOP";
     }
 
-    if(eventName == "KEY_E")
+    if(actionName == "KEY_E")
     {
         cout << "Pressed E" << "\n";
         if(sceneCol != "NONE")

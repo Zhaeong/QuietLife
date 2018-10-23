@@ -7,12 +7,15 @@ using namespace std;
 class LinkObj
 {
     public:
-        LinkObj(string name, int xPos, int width);
+        LinkObj(string name, int xPos, int yPos, int width, int height);
         virtual ~LinkObj();
 
         string mName;
         int mXpos;
+        int mYpos;
+
         int mWidth;
+        int mHeight;
 
     protected:
 

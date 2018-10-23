@@ -133,9 +133,11 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                         {
                             string linkName;
 
+                            string imgPath;
+
 
                             int xPos;
-                            int width;
+                            int yPos;
 
                             //Start Texture means getting a single texture info
                             while (line != "LINKEND" && !myfile.eof())
@@ -157,13 +159,18 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                                     {
                                         linkName = value;
                                     }
+                                    else if (param == "IMG")
+                                    {
+                                        imgPath = dirPath + "\\" + value;
+
+                                    }
                                     else if (param == "XPOS")
                                     {
                                         xPos = stoi(value);
                                     }
-                                    else if (param == "WIDTH")
+                                    else if (param == "YPOS")
                                     {
-                                        width = stoi(value);
+                                        yPos = stoi(value);
                                     }
                                     else
                                     {
@@ -181,9 +188,17 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                                 }
                             }
 
+                            //Add the img of the link
+                            TextureObj newTexObj(mSH, imgPath);
+                            newTexObj.setPos(xPos, yPos, 0);
+                            newScene.addTextureObj(newTexObj);
+
+
                             //After while loop it should contain all the relevant fields for passing into animation
-                            LinkObj newLink(linkName, xPos, width);
+                            LinkObj newLink(linkName, xPos, yPos, newTexObj.mWidth, newTexObj.mHeight);
                             newScene.addLinkObj(newLink);
+
+
                         }
                         else if(line == "TEXTURESTART")
                         {
@@ -281,10 +296,17 @@ void SceneLoader::loadScene(string sceneName)
         {
 
             backGroundTexture = new TextureObj(mSH, sObj.mPath);
-            minBoundX = sObj.mLeft;
-            minBoundY = sObj.mTop;
-            maxBoundX = sObj.mRight;
-            maxBoundY = sObj.mBottom;
+            //minBoundX = sObj.mLeft;
+            //minBoundY = sObj.mTop;
+            //maxBoundX = sObj.mRight;
+            //maxBoundY = sObj.mBottom;
+
+            //Instead of using the text defined boundaries just use the texture size
+            minBoundX = 0;
+            minBoundY = 0;
+            maxBoundX = backGroundTexture->mWidth;
+            maxBoundY = backGroundTexture->mHeight;
+
             playerInitX = sObj.mPlayerX;
             playerInitY = sObj.mPlayerY;
             cout << "Loaded Scene: " << sceneName << " Path: " + sObj.mPath << "\n";

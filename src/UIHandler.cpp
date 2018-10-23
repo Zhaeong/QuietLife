@@ -54,60 +54,6 @@ UIHandler::~UIHandler()
     //dtor
 }
 
-string UIHandler::getUserInput()
-{
-    int mouseXpos, mouseYpos;
-
-    string eventName = mSH->getEvent(&mouseXpos, &mouseYpos);
-
-    //set mouse texture position
-    mouseCursorTexture->setPos(mouseXpos, mouseYpos, 0);
-
-    //cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
-
-    if(eventName == "EXIT")
-    {
-        return "EXIT";
-    }
-    else if(eventName == "MOVE_LEFT")
-    {
-        return "MOVE_LEFT";
-    }
-    else if(eventName == "MOVE_RIGHT")
-    {
-        return "MOVE_RIGHT";
-    }
-    else if(eventName == "KEYUP")
-    {
-        return "MOVE_STOP";
-    }
-    else if(eventName == "KEY_E")
-    {
-        return "KEY_E";
-    }
-    else if(eventName == "MOUSEDOWN")
-    {
-        if(pointInTexture(mouseXpos, mouseYpos, mTextureArray[LEFTCURSOR]))
-        {
-            return "MOVE_LEFT";
-        }
-        else if(pointInTexture(mouseXpos, mouseYpos, mTextureArray[RIGHTCURSOR]))
-        {
-            return "MOVE_RIGHT";
-        }
-
-        return "MOUSEDOWN";
-    }
-    else if(eventName == "MOUSEUP")
-    {
-        return "MOVE_STOP";
-    }
-    else
-    {
-        return "NONE";
-    }
-}
-
 void UIHandler::addTexture(TextureObj textureObj)
 {
     mTextureArray.push_back(textureObj);
@@ -121,8 +67,6 @@ void UIHandler::insertTexture(TextureObj textureObj, int pos)
 
 void UIHandler::setDialog(string dialogString, int xPos, int yPos)
 {
-
-
     mDialogText->loadText(dialogString, mBackgroundTexture->mWidth);
     mBackgroundTexture->mHeight = mDialogText->mHeight;
 
@@ -235,4 +179,14 @@ void UIHandler::render()
 
         debugText->render(fontRect, fontRect);
     }
+}
+
+void UIHandler::loadMouseTexture(string texturePath)
+{
+    if(texturePath != mouseCursorTexture->mImgLocation)
+    {
+        mouseCursorTexture->loadTexture(texturePath);
+        mouseCursorTexture->removeWhitespace();
+    }
+
 }

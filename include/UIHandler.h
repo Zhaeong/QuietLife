@@ -39,11 +39,12 @@ class UIHandler
         GameObj *mBottomDialogText;
         GameObj *debugText;
 
-        string getUserInput();
 
         void setDialog(string dialogString, int xPos, int yPos);
         void addTexture(TextureObj textureObj);
         void insertTexture(TextureObj textureObj, int pos);
+
+        void loadMouseTexture(string texturePath);
 
         void render();
 
