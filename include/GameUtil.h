@@ -8,6 +8,7 @@
 #include "GameObj.h"
 #include "PixelObj.h"
 #include "TextureObj.h"
+#include "LinkObj.h"
 
 const bool DEBUGMODE = true;
 
@@ -90,14 +91,14 @@ inline string delSpaces(string &str)
    return str;
 }
 
-inline bool horizontalColDetector(int xPos1, int width1, int xPos2, int width2)
+inline bool axisColDetector(int axisPos1, int axisWidth1, int axisPos2, int axisWidth2)
 {
-    if( (xPos1 + width1) < xPos2)
+    if( (axisPos1 + axisWidth1) <= axisPos2)
     {
         return false;
     }
 
-    if ((xPos2 + width2) < xPos1)
+    if ((axisPos2 + axisWidth2) <= axisPos1)
     {
         return false;
     }
@@ -126,6 +127,34 @@ inline bool pointInTexture(int pointX, int pointY, TextureObj tObj)
        pointX <= (tObj.mPosition.x + tObj.mWidth) &&
        pointY >= tObj.mPosition.y &&
        pointY <= (tObj.mPosition.y + tObj.mHeight))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+inline bool textureCollide(TextureObj tObjA, TextureObj tObjB)
+{
+    if(axisColDetector(tObjA.mPosition.x, tObjA.mWidth, tObjB.mPosition.x, tObjB.mWidth)
+       &&
+       axisColDetector(tObjA.mPosition.y, tObjA.mHeight, tObjB.mPosition.y, tObjB.mHeight))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+inline bool boxCollideLink(int boxX, int boxWidth, int boxY, int boxHeight, LinkObj lObj)
+{
+    if(axisColDetector(boxX, boxWidth, lObj.mXpos, lObj.mWidth)
+       &&
+       axisColDetector(boxY, boxHeight, lObj.mYpos, lObj.mHeight))
     {
         return true;
     }

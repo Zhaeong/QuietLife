@@ -185,6 +185,7 @@ void UIHandler::loadMouseTexture(string texturePath)
 {
     if(texturePath != mouseCursorTexture->mImgLocation)
     {
+        cout << "Texturepath:" << texturePath << " imgloc:" << mouseCursorTexture->mImgLocation << "\n";
         mouseCursorTexture->loadTexture(texturePath);
         mouseCursorTexture->removeWhitespace();
     }

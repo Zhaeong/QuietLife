@@ -107,8 +107,30 @@ void Game::processEvents()
     //set mouse texture position
     mUIHandler->mouseCursorTexture->setPos(mouseXpos, mouseYpos, 0);
 
-    //check if mouse is collided with scene transition obj
+    string mouseTexture = "res/png/mouseLeft.png";
 
+    int mouseXWorld = mouseXpos + cameraRect->x;
+    int mouseYWorld = mouseYpos + cameraRect->y;
+
+    int playerXCam = playerChar->mXpos - cameraRect->x;
+    int playerYCam = playerChar->mYpos - cameraRect->y;
+
+    //Check if mouse is to the left or right of character
+    if((mouseXpos + mUIHandler->mouseCursorTexture->mWidth) <= playerXCam)
+    {
+        mouseTexture = "res/png/mouseLeft.png";
+    }
+    else if(mouseXpos >= (playerXCam + playerChar->mWidth))
+    {
+        mouseTexture = "res/png/mouseRight.png";
+    }
+    else
+    {
+        mouseTexture = "res/png/mouseCursor.png";
+    }
+
+
+    //check if mouse is collided with scene transition obj
     //Check if player is currently over a link transition obj
     string sceneCol = "NONE";
 
@@ -117,26 +139,28 @@ void Game::processEvents()
         LinkObj& lObj = mSceneLoader->mCurrentScene.mLinkObjArray[i];
 
         //checks if player is collided with scene transition obj
-        if(horizontalColDetector(playerChar->mXpos, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
+        if(axisColDetector(playerChar->mXpos, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
         {
             sceneCol = lObj.mName;
         }
 
         //checks if mouse if collided with scene transition obj
-        int mouseXWorld = mouseXpos + cameraRect->x;
-        int mouseYWorld = mouseYpos + cameraRect->y;
 
-        if(pointInBox(mouseXWorld, mouseYWorld, lObj.mXpos, lObj.mYpos, lObj.mWidth, lObj.mHeight))
+        if(sceneCol != "NONE")
         {
-            mUIHandler->loadMouseTexture("res/png/mouseTalk.png");
+            if(boxCollideLink(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight, lObj))
+            {
+                mouseTexture = "res/png/mouseTalk.png";
+            }
         }
-        else
-        {
-            mUIHandler->loadMouseTexture("res/png/mouseCursor.png");
-        }
+
 
 
     }
+
+
+
+     mUIHandler->loadMouseTexture(mouseTexture);
 
 
     //cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
@@ -170,6 +194,19 @@ void Game::processEvents()
         {
             actionName = "MOVE_RIGHT";
         }
+        else if(mouseTexture == "res/png/mouseLeft.png")
+        {
+            cout << "moveleft\n";
+            actionName = "MOVE_LEFT";
+        }
+        else if(mouseTexture == "res/png/mouseRight.png")
+        {
+            actionName = "MOVE_RIGHT";
+        }
+        else if(mouseTexture == "res/png/mouseTalk.png")
+        {
+            actionName = "KEY_E";
+        }
         else
         {
             actionName = "MOUSEDOWN";
@@ -184,16 +221,20 @@ void Game::processEvents()
         actionName = "NONE";
     }
 
+
+    if(mouseTexture == "res/png/mouseCursor.png")
+    {
+        actionName = "MOVE_STOP";
+    }
+
     //cout << actionName;
-
-
 
     CharacterObj *charCol = NULL;
     for(unsigned int i = 0; i < mCharObjectArray.size(); i++)
     {
         CharacterObj& charObj = mCharObjectArray[i];
 
-        if(horizontalColDetector(playerChar->mXpos, playerChar->mWidth, charObj.mXpos, charObj.mWidth))
+        if(axisColDetector(playerChar->mXpos, playerChar->mWidth, charObj.mXpos, charObj.mWidth))
         {
 
             charCol = &charObj;

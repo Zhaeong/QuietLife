@@ -410,16 +410,17 @@
 	"SceneLoader.h"
 	"UIHandler.h"
 
-1540274524 source:d:\github\quietlife\src\game.cpp
+1540359912 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1540188644 d:\github\quietlife\include\gameutil.h
+1540358583 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
 	"GameObj.h"
 	"PixelObj.h"
 	"TextureObj.h"
+	"LinkObj.h"
 
 1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -968,7 +969,7 @@
 1539146880 source:d:\github\quietlife\src\objs\linkobj.cpp
 	"LinkObj.h"
 
-1540276280 d:\github\quietlife\include\linkobj.h
+1540358040 d:\github\quietlife\include\linkobj.h
 	<string>
 
 1537326221 source:d:\github\quietlife\src\objdefs\animdef.cpp
@@ -1005,7 +1006,7 @@
 	"GameObj.h"
 	"CharacterObj.h"
 
-1540274790 source:d:\github\quietlife\src\uihandler.cpp
+1540358987 source:d:\github\quietlife\src\uihandler.cpp
 	"UIHandler.h"
 
 1539553245 d:\cbproj\quietlife\include\linkobj.h

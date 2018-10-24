@@ -2,6 +2,7 @@
 #define LINKOBJ_H
 
 #include <string>
+
 using namespace std;
 
 class LinkObj
@@ -16,6 +17,8 @@ class LinkObj
 
         int mWidth;
         int mHeight;
+
+
 
     protected:
 
