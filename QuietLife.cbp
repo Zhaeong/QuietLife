@@ -56,7 +56,6 @@
 		<Unit filename="include/AnimDef.h" />
 		<Unit filename="include/CharacterObj.h" />
 		<Unit filename="include/Game.h" />
-		<Unit filename="include/GameDefs.h" />
 		<Unit filename="include/GameObj.h" />
 		<Unit filename="include/GameUtil.h" />
 		<Unit filename="include/LinkObj.h" />
