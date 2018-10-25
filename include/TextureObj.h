@@ -12,12 +12,15 @@
 #include "PixelObj.h"
 
 
+
 class TextureObj
 {
     public:
         TextureObj(SDLHandler *SH, string imgLocation);
         virtual ~TextureObj();
 
+        //alpha
+        static Uint8 alphaValue;
 
         string mImgLocation;
         SDLHandler *mSH;

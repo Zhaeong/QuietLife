@@ -5,11 +5,13 @@ Game::Game()
     cout << "Init Game\n";
 
     bRunGame = true;
-    //Temple OS H and W
+
 
     SH = new SDLHandler(GAMEWIDTH, GAMEHEIGHT);
 
     SDL_ShowCursor(SDL_DISABLE);
+
+
 
 
     ////////////////////////
@@ -31,17 +33,18 @@ Game::Game()
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
     }
 
+
+    ////////////////////////////////
+    //Initialize game intial state//
+    ////////////////////////////////
+
+    bMouseDown = false;
+
     //Load background texture
     cout << "Loading Background\n";
     mSceneLoader = new SceneLoader(SH);
     mSceneLoader->loadScenesFromDirectory("res/scenes");
     mSceneLoader->loadScene("bedroom.png");
-
-    //Set game bound according to game background
-    minBoundX = mSceneLoader->minBoundX;
-    minBoundY = mSceneLoader->minBoundY;
-    maxBoundX = mSceneLoader->maxBoundX;
-    maxBoundY = mSceneLoader->maxBoundY;
 
 
     cout << "Creating CharObj\n";
@@ -113,7 +116,6 @@ void Game::processEvents()
     int mouseYWorld = mouseYpos + cameraRect->y;
 
     int playerXCam = playerChar->mXpos - cameraRect->x;
-    int playerYCam = playerChar->mYpos - cameraRect->y;
 
     //Check if mouse is to the left or right of character
     if((mouseXpos + mUIHandler->mouseCursorTexture->mWidth) <= playerXCam)
@@ -128,7 +130,6 @@ void Game::processEvents()
     {
         mouseTexture = "res/png/mouseCursor.png";
     }
-
 
     //check if mouse is collided with scene transition obj
     //Check if player is currently over a link transition obj
@@ -154,47 +155,39 @@ void Game::processEvents()
             }
         }
 
-
-
     }
-
-
 
      mUIHandler->loadMouseTexture(mouseTexture);
 
+
+    //////////////////////////////////////////////////////////////////////
+    //Then set states depending on if user mouse down on certain texture//
+    //////////////////////////////////////////////////////////////////////
 
     //cout << "mouse down, x:" << mouseXpos << " y:" << mouseYpos << "\n";
     if(eventName == "EXIT")
     {
         actionName = "EXIT";
     }
-    else if(eventName == "MOVE_LEFT")
-    {
-        actionName = "MOVE_LEFT";
-    }
-    else if(eventName == "MOVE_RIGHT")
-    {
-        actionName = "MOVE_RIGHT";
-    }
-    else if(eventName == "KEYUP")
-    {
-        actionName = "MOVE_STOP";
-    }
-    else if(eventName == "KEY_E")
-    {
-        actionName = "KEY_E";
-    }
     else if(eventName == "MOUSEDOWN")
     {
-        if(pointInTexture(mouseXpos, mouseYpos, mUIHandler->mTextureArray[LEFTCURSOR]))
-        {
-            actionName = "MOVE_LEFT";
-        }
-        else if(pointInTexture(mouseXpos, mouseYpos, mUIHandler->mTextureArray[RIGHTCURSOR]))
-        {
-            actionName = "MOVE_RIGHT";
-        }
-        else if(mouseTexture == "res/png/mouseLeft.png")
+        bMouseDown = true;
+    }
+    else if(eventName == "MOUSEUP")
+    {
+        bMouseDown = false;
+        actionName = "MOVE_STOP";
+    }
+    else
+    {
+        actionName = "NONE";
+    }
+
+    //Handle cases when mouse up or down
+    if(bMouseDown)
+    {
+        TextureObj::alphaValue -= 1;
+        if(mouseTexture == "res/png/mouseLeft.png")
         {
             cout << "moveleft\n";
             actionName = "MOVE_LEFT";
@@ -207,27 +200,15 @@ void Game::processEvents()
         {
             actionName = "KEY_E";
         }
-        else
-        {
-            actionName = "MOUSEDOWN";
-        }
-    }
-    else if(eventName == "MOUSEUP")
-    {
-        actionName = "MOVE_STOP";
     }
     else
     {
-        actionName = "NONE";
-    }
-
-
-    if(mouseTexture == "res/png/mouseCursor.png")
-    {
         actionName = "MOVE_STOP";
     }
 
-    //cout << actionName;
+    /////////////////////////////////////////
+    //Now update game based on player input//
+    /////////////////////////////////////////
 
     CharacterObj *charCol = NULL;
     for(unsigned int i = 0; i < mCharObjectArray.size(); i++)
@@ -281,9 +262,6 @@ void Game::processEvents()
             int charCamXpos = charCol->mXpos - cameraRect->x;
             int charCamYpos = charCol->mYpos - cameraRect->y;
 
-            //cout << "PlaX:" << charCol->mXpos << " Y:" << charCol->mYpos << "\n";
-            //cout << "CamX:" << cameraRect->x << " Y:" << cameraRect->y << "\n";
-            //cout << "PlaCamX:" << charCamXpos << " Y:" << charCamYpos << "\n";
 
             mUIHandler->setDialog(charCol->mDialogArray[charCol->currDialogLine], charCamXpos, charCamYpos);
             charCol->addDialogLine();
@@ -292,13 +270,9 @@ void Game::processEvents()
         {
             mUIHandler->bRenderDialog = false;
         }
-
-
-
     }
 
-
-    string playerHitDirection = hitBoundary1D(playerChar->mXpos, playerChar->mWidth, minBoundX, maxBoundX);
+    string playerHitDirection = hitBoundary1D(playerChar->mXpos, playerChar->mWidth, mSceneLoader->minBoundX, mSceneLoader->maxBoundX);
 
     if(playerChar->currState == "MOVE_LEFT")
     {
@@ -322,7 +296,7 @@ void Game::processEvents()
 
     //Check if the camera rect hits the game boundary
 
-    string cameraHitDirectrion = hitBoundary1D(convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect), cameraRect->w, minBoundX, maxBoundX);
+    string cameraHitDirectrion = hitBoundary1D(convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect), cameraRect->w, mSceneLoader->minBoundX, mSceneLoader->maxBoundX);
 
     if(cameraHitDirectrion != "LEFT" && cameraHitDirectrion != "RIGHT")
     {
@@ -333,15 +307,20 @@ void Game::processEvents()
 }
 void Game::render()
 {
+
+    //The color at which the screen will be if alpha = 0 on all textures
+    SDL_SetRenderDrawColor(SH->renderer, 0, 0, 0, 255);
+
     SDL_RenderClear(SH->renderer);
 
     //Render background and Scene Textures
 
     mSceneLoader->renderScene(*cameraRect);
 
+    //////////////////////
     //Render Player
+    //////////////////////
     playerChar->render(*cameraRect);
-
 
     //////////////////////
     //Render Dialog Panel

@@ -14,33 +14,12 @@ UIHandler::UIHandler(SDLHandler *SH, Game *mainGame)
     mouseCursorTexture->removeWhitespace();
 
     //Load dialog Texture and text for interactions
+
     mBackgroundTexture = new TextureObj(mSH, "res/png/dialogPanel.png");
     mBackgroundTexture->setDim(200, 500);
     mDialogText = new GameObj(0,0,0, mSH);
     bRenderDialog = false;
 
-    TextureObj uiBackground(SH, "res/png/dialogPanel.png");
-    uiBackground.setPos(0, GAMEHEIGHT / 3 * 2, 0);
-    uiBackground.setDim(GAMEWIDTH, GAMEHEIGHT / 3);
-    addTexture(uiBackground);
-
-    TextureObj leftCursor(SH, "res/png/leftCursor.png");
-
-    int cursorHeight = (GAMEHEIGHT / 3 * 2) + (GAMEHEIGHT / 6) - (leftCursor.mHeight / 2);
-
-    leftCursor.setPos(10,cursorHeight , 0);
-    leftCursor.setDim(50, 50);
-    insertTexture(leftCursor, LEFTCURSOR);
-
-
-    TextureObj rightCursor(SH, "res/png/rightCursor.png");
-    rightCursor.setPos(GAMEWIDTH - 60, cursorHeight, 0);
-    rightCursor.setDim(50, 50);
-    insertTexture(rightCursor, RIGHTCURSOR);
-
-    //Create dialog text
-    mBottomDialogText = new GameObj(0,0,0, mSH);
-    mBottomDialogText->loadText("I live because of you o mighty creator!", GAMEWIDTH);
 
     //Create debug text
     debugText = new GameObj(0, 0, 0, SH);
@@ -102,20 +81,6 @@ void UIHandler::render()
         tObj.renderTexture(srcRect, dstRect, SDL_FLIP_NONE);
     }
 
-    //Render dialog text
-    SDL_Rect dialogFontRectSrc, dialogFontRectTarget;
-    dialogFontRectSrc.h = mBottomDialogText->mHeight;
-    dialogFontRectSrc.w = mBottomDialogText->mWidth;
-    dialogFontRectSrc.x = 0;
-    dialogFontRectSrc.y = 0;
-
-    dialogFontRectTarget.h = mBottomDialogText->mHeight;
-    dialogFontRectTarget.w = mBottomDialogText->mWidth;
-    dialogFontRectTarget.x = 0;
-    dialogFontRectTarget.y = (GAMEHEIGHT / 3 ) * 2;
-
-
-    mBottomDialogText->render(dialogFontRectSrc, dialogFontRectTarget);
 
 
 

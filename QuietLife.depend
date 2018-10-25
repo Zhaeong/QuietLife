@@ -367,7 +367,7 @@
 	<string>
 	"SDLHandler.h"
 
-1538451588 source:d:\github\quietlife\main.cpp
+1540446796 source:d:\github\quietlife\main.cpp
 	<SDL.h>
 	<string>
 	<iostream>
@@ -390,11 +390,11 @@
 1537760418 source:d:\github\quietlife\src\gameobj.cpp
 	"GameObj.h"
 
-1539921279 source:d:\github\quietlife\src\sdlhandler.cpp
+1540446421 source:d:\github\quietlife\src\sdlhandler.cpp
 	"SDLHandler.h"
 	<iostream>
 
-1539926482 d:\github\quietlife\include\game.h
+1540445833 d:\github\quietlife\include\game.h
 	<string>
 	<vector>
 	<algorithm>
@@ -410,10 +410,10 @@
 	"SceneLoader.h"
 	"UIHandler.h"
 
-1540359912 source:d:\github\quietlife\src\game.cpp
+1540446771 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1540358583 d:\github\quietlife\include\gameutil.h
+1540445850 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -817,7 +817,7 @@
 1532204188 source:d:\cbproj\quietlife\src\pixelobj.cpp
 	"PixelObj.h"
 
-1539921548 d:\github\quietlife\include\textureobj.h
+1540445791 d:\github\quietlife\include\textureobj.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_image.h>
@@ -993,10 +993,10 @@
 1537849077 source:d:\github\quietlife\src\objdefs\spriteanimdef.cpp
 	"SpriteAnimDef.h"
 
-1539921810 source:d:\github\quietlife\src\objdefs\textureobj.cpp
+1540446127 source:d:\github\quietlife\src\objdefs\textureobj.cpp
 	"TextureObj.h"
 
-1540274796 d:\github\quietlife\include\uihandler.h
+1540443578 d:\github\quietlife\include\uihandler.h
 	<string>
 	<vector>
 	"Game.h"
@@ -1006,7 +1006,7 @@
 	"GameObj.h"
 	"CharacterObj.h"
 
-1540358987 source:d:\github\quietlife\src\uihandler.cpp
+1540443598 source:d:\github\quietlife\src\uihandler.cpp
 	"UIHandler.h"
 
 1539553245 d:\cbproj\quietlife\include\linkobj.h
@@ -1056,4 +1056,6 @@
 
 1539925408 source:d:\github\quietlife\src\dialoghandler.cpp
 	"DialogHandler.h"
+
+1540445512 d:\github\quietlife\include\gamedefs.h
 

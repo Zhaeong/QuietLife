@@ -38,11 +38,6 @@ class Game
         virtual ~Game();
         bool bRunGame;
 
-        int minBoundX;
-        int minBoundY;
-        int maxBoundX;
-        int maxBoundY;
-
         SDLHandler *SH;
 
         SceneLoader *mSceneLoader;
@@ -54,6 +49,8 @@ class Game
         CharacterObj *playerChar;
 
         vector<CharacterObj> mCharObjectArray;
+
+        bool bMouseDown;
 
         //functions
         void processEvents();

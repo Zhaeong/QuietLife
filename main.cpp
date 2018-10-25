@@ -5,10 +5,15 @@
 
 #include "Game.h"
 
+Uint8 TextureObj::alphaValue = 255;
+
 int main(int argc, char *argv[])
 {
 
     Game* mainGame = new Game();
+
+
+
 
     const int FPS = 60;
 

@@ -36,7 +36,6 @@ class UIHandler
         TextureObj *mBackgroundTexture;
         GameObj *mDialogText;
 
-        GameObj *mBottomDialogText;
         GameObj *debugText;
 
 

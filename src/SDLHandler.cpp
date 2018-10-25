@@ -17,9 +17,6 @@ SDLHandler::SDLHandler(int screenWidth, int screenHeight)
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window and renderer: %s", SDL_GetError());
     }
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
-
 }
 
 SDLHandler::~SDLHandler()
@@ -40,7 +37,6 @@ string SDLHandler::getEvent(int *mouseXpos, int *mouseYpos)
     /* that occurs.                                                  */
     while( SDL_PollEvent( &event ) )
     {
-
 
     /* We are only worried about SDL_KEYDOWN and SDL_KEYUP events */
         switch( event.type )

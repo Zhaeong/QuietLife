@@ -117,6 +117,11 @@ void TextureObj::free()
 void TextureObj::renderTexture(SDL_Rect srcRect, SDL_Rect dstRect, SDL_RendererFlip flipType)
 {
     getRotation();
+
+    SDL_SetTextureBlendMode(mTexture, SDL_BLENDMODE_BLEND);
+
+    SDL_SetTextureAlphaMod(mTexture, alphaValue);
+
     SDL_RenderCopyEx(mSH->renderer, mTexture, &srcRect, &dstRect, mRotation, &mMiddle, flipType);
 }
 
