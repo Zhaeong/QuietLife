@@ -410,10 +410,10 @@
 	"SceneLoader.h"
 	"UIHandler.h"
 
-1540446771 source:d:\github\quietlife\src\game.cpp
+1540607865 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1540445850 d:\github\quietlife\include\gameutil.h
+1540607543 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>

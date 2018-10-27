@@ -16,7 +16,6 @@ const bool DEBUGMODE = true;
 const int GAMEWIDTH = 640;
 const int GAMEHEIGHT = 480;
 
-class TextureObj;
 
 
 //Checks the source rect and see if it hits the targetrect
@@ -159,6 +158,21 @@ inline bool boxCollideLink(int boxX, int boxWidth, int boxY, int boxHeight, Link
     if(axisColDetector(boxX, boxWidth, lObj.mXpos, lObj.mWidth)
        &&
        axisColDetector(boxY, boxHeight, lObj.mYpos, lObj.mHeight))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
+inline bool boxCollide2D(int boxX, int boxWidth, int boxY, int boxHeight, int box2X, int box2Width, int box2Y, int box2Height)
+{
+    if(axisColDetector(boxX, boxWidth, box2X, box2Width)
+       &&
+       axisColDetector(boxY, boxHeight, box2Y, box2Height))
     {
         return true;
     }
