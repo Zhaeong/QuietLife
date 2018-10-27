@@ -93,11 +93,6 @@ Game::~Game()
 
 void Game::processEvents()
 {
-    //string eventName = mUIHandler->getUserInput();
-
-
-    int mouseXpos, mouseYpos;
-
     string eventName = SH->getEvent(&mouseXpos, &mouseYpos);
 
     string actionName = "NONE";
@@ -142,30 +137,34 @@ void Game::processEvents()
     }
 
     //Check if player is over a charobj so playe can talk
+    //make sure to check that char is suppose to be rendered in current scene
     CharacterObj *charCol = NULL;
     for(unsigned int i = 0; i < mCharObjectArray.size(); i++)
     {
         CharacterObj& charObj = mCharObjectArray[i];
 
-        if(axisColDetector(playerChar->mXpos, playerChar->mWidth, charObj.mXpos, charObj.mWidth))
+        if(charObj.currScene == mSceneLoader->mCurrentScene.mName)
         {
-            charCol = &charObj;
-        }
-        else
-        {
-            //Reset all character dialogs to 0
-            charObj.currDialogLine = 0;
-            mUIHandler->bRenderDialog = false;
-        }
-
-        //if the current player is collided with another char, check if mouse is also within that char boundary
-        //and change the mouse texture accordingly
-        if(charCol != NULL)
-        {
-            if(boxCollide2D(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight,
-                            charCol->mXpos, charCol->mWidth, charCol->mYpos, charCol->mHeight ))
+            if(axisColDetector(playerChar->mXpos, playerChar->mWidth, charObj.mXpos, charObj.mWidth))
             {
-                mouseTexture = "res/png/mouseTalk.png";
+                charCol = &charObj;
+            }
+            else
+            {
+                //Reset all character dialogs to 0
+                charObj.currDialogLine = 0;
+                mUIHandler->bRenderDialog = false;
+            }
+
+            //if the current player is collided with another char, check if mouse is also within that char boundary
+            //and change the mouse texture accordingly
+            if(charCol != NULL)
+            {
+                if(boxCollide2D(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight,
+                                charCol->mXpos, charCol->mWidth, charCol->mYpos, charCol->mHeight ))
+                {
+                    mouseTexture = "res/png/mouseTalk.png";
+                }
             }
         }
     }
@@ -204,7 +203,7 @@ void Game::processEvents()
     {
         bMouseDown = true;
 
-        TextureObj::alphaValue -= 1;
+        //TextureObj::alphaValue -= 1;
         if(mouseTexture == "res/png/mouseLeft.png")
         {
             cout << "moveleft\n";
@@ -285,12 +284,24 @@ void Game::processEvents()
             playerChar->mFlipType = SDL_FLIP_HORIZONTAL;
             playerChar->loadAnimation("walk");
         }
+        else
+        {
+            playerChar->loadAnimation("idle");
+        }
+
     }
     else if(playerChar->currState == "MOVE_RIGHT")
     {
-        playerChar->mXpos += 3;
-        playerChar->mFlipType = SDL_FLIP_NONE;
-        playerChar->loadAnimation("walk");
+        if(playerHitDirection != "RIGHT")
+        {
+            playerChar->mXpos += 3;
+            playerChar->mFlipType = SDL_FLIP_NONE;
+            playerChar->loadAnimation("walk");
+        }
+        else
+        {
+            playerChar->loadAnimation("idle");
+        }
     }
     else if(playerChar->currState == "MOVE_STOP")
     {

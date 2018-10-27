@@ -140,7 +140,11 @@ void UIHandler::render()
         fontRect.x = 0;
         fontRect.y = 0;
 
-        debugText->loadText("pla - x:" + to_string(mMainGame->playerChar->mXpos) + " y:" + to_string(mMainGame->playerChar->mYpos), 200);
+        debugText->loadText("pla - x:" + to_string(mMainGame->playerChar->mXpos)
+                            + " y:" + to_string(mMainGame->playerChar->mYpos)
+                            + "\n" + "mou - x: " + to_string(mMainGame->mouseXpos)
+                            + " y:" + to_string(mMainGame->mouseYpos)
+                            , 200);
 
         debugText->render(fontRect, fontRect);
     }

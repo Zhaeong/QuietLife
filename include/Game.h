@@ -52,6 +52,8 @@ class Game
 
         bool bMouseDown;
 
+        int mouseXpos, mouseYpos;
+
         //functions
         void processEvents();
         void render();

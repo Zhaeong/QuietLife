@@ -52,12 +52,12 @@ inline string hitBoundary1D(int xSource, int wSource, int left, int right)
     string outPut = "NONE";
 
     //Check left
-    if(xSource < left)
+    if(xSource <= left)
     {
         outPut = "LEFT";
     }
 
-    if(xSource + wSource > right)
+    if(xSource + wSource >= right)
     {
         outPut = "RIGHT";
     }

@@ -13,8 +13,6 @@
 #include "CharacterObj.h"
 
 class Game;
-const int LEFTCURSOR = 1;
-const int RIGHTCURSOR = 2;
 
 using namespace std;
 
