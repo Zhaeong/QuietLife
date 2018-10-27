@@ -124,16 +124,19 @@ void Game::processEvents()
         if(axisColDetector(playerChar->mXpos, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
         {
             sceneCol = lObj.mName;
+
+            //checks if mouse if collided with scene transition obj
+            if(sceneCol != "NONE")
+            {
+                if(boxCollideLink(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight, lObj))
+                {
+                    mouseTexture = "res/png/mouseTalk.png";
+                }
+            }
+
         }
 
-        //checks if mouse if collided with scene transition obj
-        if(sceneCol != "NONE")
-        {
-            if(boxCollideLink(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight, lObj))
-            {
-                mouseTexture = "res/png/mouseTalk.png";
-            }
-        }
+
     }
 
     //Check if player is over a charobj so playe can talk
@@ -274,7 +277,10 @@ void Game::processEvents()
 
     }
 
-    string playerHitDirection = hitBoundary1D(playerChar->mXpos, playerChar->mWidth, mSceneLoader->minBoundX, mSceneLoader->maxBoundX);
+    string playerHitDirection = hitBoundary1D(playerChar->mXpos,
+                                              playerChar->mWidth,
+                                              mSceneLoader->mCurrentScene.mLeft,
+                                              mSceneLoader->mCurrentScene.mRight);
 
     if(playerChar->currState == "MOVE_LEFT")
     {
@@ -310,7 +316,12 @@ void Game::processEvents()
 
     //Check if the camera rect hits the game boundary
 
-    string cameraHitDirectrion = hitBoundary1D(convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect), cameraRect->w, mSceneLoader->minBoundX, mSceneLoader->maxBoundX);
+    string cameraHitDirectrion = hitBoundary1D(convertPlayerXtoCamX(playerChar->mXpos,
+                                                                    playerChar->mWidth,
+                                                                    cameraRect),
+                                               cameraRect->w,
+                                               mSceneLoader->mCurrentScene.mLeft,
+                                               mSceneLoader->mCurrentScene.mRight);
 
     if(cameraHitDirectrion != "LEFT" && cameraHitDirectrion != "RIGHT")
     {

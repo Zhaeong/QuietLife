@@ -27,11 +27,6 @@ class SceneLoader
 
         SceneObj mCurrentScene;
 
-        int minBoundX;
-        int minBoundY;
-        int maxBoundX;
-        int maxBoundY;
-
         int playerInitX;
         int playerInitY;
 

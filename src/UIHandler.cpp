@@ -114,8 +114,6 @@ void UIHandler::render()
         mDialogText->render(dialogSrc,dialogDst);
     }
 
-
-
     //Render mouse cursor
     SDL_Rect mouseSrc, mouseDst;
 
@@ -142,11 +140,46 @@ void UIHandler::render()
 
         debugText->loadText("pla - x:" + to_string(mMainGame->playerChar->mXpos)
                             + " y:" + to_string(mMainGame->playerChar->mYpos)
+
+                            + "\n" + "plaCam - x:" + to_string(mMainGame->playerChar->mXpos - mMainGame->cameraRect->x)
+                            + " y:" + to_string(mMainGame->playerChar->mYpos - mMainGame->cameraRect->y)
+
                             + "\n" + "mou - x: " + to_string(mMainGame->mouseXpos)
                             + " y:" + to_string(mMainGame->mouseYpos)
                             , 200);
 
         debugText->render(fontRect, fontRect);
+
+        //Drawing scene bounding box
+        int camLeft = mMainGame->mSceneLoader->mCurrentScene.mLeft - mMainGame->cameraRect->x;
+        int camRight = mMainGame->mSceneLoader->mCurrentScene.mRight - mMainGame->cameraRect->x;
+        int camTop = mMainGame->mSceneLoader->mCurrentScene.mTop - mMainGame->cameraRect->y;
+        int camBot = mMainGame->mSceneLoader->mCurrentScene.mBottom - mMainGame->cameraRect->y;
+
+        SDL_SetRenderDrawColor(mSH->renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+        SDL_RenderDrawLine(mSH->renderer,
+                           camLeft,
+                           camTop,
+                           camRight,
+                           camTop);
+
+        SDL_RenderDrawLine(mSH->renderer,
+                           camLeft,
+                           camTop,
+                           camLeft,
+                           camBot);
+
+        SDL_RenderDrawLine(mSH->renderer,
+                           camRight,
+                           camTop,
+                           camRight,
+                           camBot);
+
+        SDL_RenderDrawLine(mSH->renderer,
+                           camRight,
+                           camBot,
+                           camLeft,
+                           camBot);
     }
 }
 

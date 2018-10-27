@@ -296,18 +296,9 @@ void SceneLoader::loadScene(string sceneName)
         {
 
             backGroundTexture = new TextureObj(mSH, sObj.mPath);
-            minBoundX = sObj.mLeft;
-            minBoundY = sObj.mTop;
-            maxBoundX = sObj.mRight;
-            maxBoundY = sObj.mBottom;
+
 
             //Instead of using the text defined boundaries just use the texture size
-            /*
-            minBoundX = 0;
-            minBoundY = 0;
-            maxBoundX = backGroundTexture->mWidth;
-            maxBoundY = backGroundTexture->mHeight;
-            */
 
             playerInitX = sObj.mPlayerX;
             playerInitY = sObj.mPlayerY;

@@ -1,26 +1,19 @@
 STARTDEF
-NAME:hallway.png
+NAME:outside.png
 TOP:20
 BOTTOM:220
 LEFT:20
-RIGHT:550
+RIGHT:950
 PLAYERX:200
 PLAYERY:40
 ENDDEF
 
 LINKSTART
-NAME:bedroom.png
-IMG:bedroomDoor.png
-XPOS:220
-YPOS:37
-LINKEND
-
-
-LINKSTART
-NAME:outside.png
+NAME:hallway.png
 IMG:bedroomDoor.png
 XPOS:320
 YPOS:37
 LINKEND
+
 
 
