@@ -16,8 +16,6 @@ const bool DEBUGMODE = true;
 const int GAMEWIDTH = 640;
 const int GAMEHEIGHT = 480;
 
-
-
 //Checks the source rect and see if it hits the targetrect
 inline string hitBoundary(int xSource, int ySource, int wSource, int hSource, int xTarget, int yTarget, int wTarget, int hTarget)
 {
