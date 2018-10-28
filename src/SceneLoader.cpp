@@ -3,6 +3,9 @@
 SceneLoader::SceneLoader(SDLHandler *SH)
 {
     mSH = SH;
+
+    leftBound = new TextureObj(mSH, "res/png/boundTexture.png");
+    rightBound = new TextureObj(mSH, "res/png/boundTexture.png");
 }
 
 SceneLoader::~SceneLoader()
@@ -326,6 +329,34 @@ void SceneLoader::renderScene(SDL_Rect cameraRect)
 
     backGroundTexture->renderTexture(cameraRect, dstRectBckObj, SDL_FLIP_NONE);
 
+    //Render left and right boundaries
+    //The boundaries are so that its mapped to the boundaries of the scene
+    //This avoids messy stuff that requires mapping each pixel in background texture
+    //with the scene boundaries
+
+    SDL_Rect boundSrc;
+    boundSrc.h = rightBound->mHeight;
+    boundSrc.w = rightBound->mWidth;
+    boundSrc.x = 0;
+    boundSrc.y = 0;
+
+    SDL_Rect rightBoundDst;
+    rightBoundDst.h = 480;
+    rightBoundDst.w = 320;
+    rightBoundDst.x = mCurrentScene.mRight - cameraRect.x;
+    rightBoundDst.y = 0;
+
+    rightBound->renderTexture(boundSrc, rightBoundDst, SDL_FLIP_NONE);
+
+    SDL_Rect leftBoundDst;
+    leftBoundDst.h = 480;
+    leftBoundDst.w = 320;
+    leftBoundDst.x = mCurrentScene.mLeft - cameraRect.x - 320;
+    leftBoundDst.y = 0;
+
+    leftBound->renderTexture(boundSrc, leftBoundDst, SDL_FLIP_NONE);
+
+    //Then render rest of the objects in the scene
     for(TextureObj tObj : mCurrentScene.mTextureObjectArray)
     {
         //should do a boundary check to see if object is in view before rendering

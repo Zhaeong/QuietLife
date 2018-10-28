@@ -68,7 +68,7 @@ Game::Game()
     bobChar.getTextures("res/characters/bob");
     bobChar.getAnimate("res/characters/bob");
     bobChar.loadAnimation("walk");
-    bobChar.currScene = "hallway.png";
+    bobChar.currScene = "outside.png";
     bobChar.loadDialog("res/characters/bob/intro.dialog");
 
     addCharObj(bobChar);

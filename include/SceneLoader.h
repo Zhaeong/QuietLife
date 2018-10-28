@@ -25,6 +25,9 @@ class SceneLoader
 
         TextureObj *backGroundTexture;
 
+        TextureObj *leftBound;
+        TextureObj *rightBound;
+
         SceneObj mCurrentScene;
 
         int playerInitX;
