@@ -13,14 +13,17 @@ NAME:bedroom.png
 IMG:bedroomDoor.png
 XPOS:220
 YPOS:37
+PLAYERX:220
+PLAYERY:40
 LINKEND
-
 
 LINKSTART
 NAME:outside.png
 IMG:bedroomDoor.png
 XPOS:320
 YPOS:37
+PLAYERX:320
+PLAYERY:40
 LINKEND
 
 

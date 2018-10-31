@@ -394,7 +394,7 @@
 	"SDLHandler.h"
 	<iostream>
 
-1540445833 d:\github\quietlife\include\game.h
+1540948618 d:\github\quietlife\include\game.h
 	<string>
 	<vector>
 	<algorithm>
@@ -410,10 +410,10 @@
 	"SceneLoader.h"
 	"UIHandler.h"
 
-1540607865 source:d:\github\quietlife\src\game.cpp
+1540948500 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1540607543 d:\github\quietlife\include\gameutil.h
+1540946274 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -902,10 +902,10 @@
 1538198016 source:d:\cbproj\quietlife\src\spriteanimdef.cpp
 	"SpriteAnimDef.h"
 
-1540276274 source:d:\github\quietlife\src\sceneloader.cpp
+1540948823 source:d:\github\quietlife\src\sceneloader.cpp
 	"SceneLoader.h"
 
-1539319920 d:\github\quietlife\include\sceneloader.h
+1540947784 d:\github\quietlife\include\sceneloader.h
 	<vector>
 	<string>
 	<dirent.h>
@@ -914,6 +914,7 @@
 	"TextureObj.h"
 	"SceneObj.h"
 	"LinkObj.h"
+	"Game.h"
 
 1538628102 source:d:\github\quietlife\src\sceneobj.cpp
 	"SceneObj.h"
@@ -970,7 +971,7 @@
 1539146880 source:d:\github\quietlife\src\objs\linkobj.cpp
 	"LinkObj.h"
 
-1540358040 d:\github\quietlife\include\linkobj.h
+1540946879 d:\github\quietlife\include\linkobj.h
 	<string>
 
 1537326221 source:d:\github\quietlife\src\objdefs\animdef.cpp
@@ -982,7 +983,7 @@
 1540188644 source:d:\github\quietlife\src\objdefs\gameobj.cpp
 	"GameObj.h"
 
-1540276243 source:d:\github\quietlife\src\objdefs\linkobj.cpp
+1540946867 source:d:\github\quietlife\src\objdefs\linkobj.cpp
 	"LinkObj.h"
 
 1539146739 source:d:\github\quietlife\src\objdefs\pixelobj.cpp
@@ -997,7 +998,7 @@
 1540446127 source:d:\github\quietlife\src\objdefs\textureobj.cpp
 	"TextureObj.h"
 
-1540443578 d:\github\quietlife\include\uihandler.h
+1540947239 d:\github\quietlife\include\uihandler.h
 	<string>
 	<vector>
 	"Game.h"
@@ -1007,7 +1008,7 @@
 	"GameObj.h"
 	"CharacterObj.h"
 
-1540443598 source:d:\github\quietlife\src\uihandler.cpp
+1540946274 source:d:\github\quietlife\src\uihandler.cpp
 	"UIHandler.h"
 
 1540618200 d:\cbproj\quietlife\include\linkobj.h

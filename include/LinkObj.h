@@ -8,7 +8,7 @@ using namespace std;
 class LinkObj
 {
     public:
-        LinkObj(string name, int xPos, int yPos, int width, int height);
+        LinkObj(string name, int xPos, int yPos, int width, int height, int playerX, int playerY);
         virtual ~LinkObj();
 
         string mName;
@@ -18,7 +18,8 @@ class LinkObj
         int mWidth;
         int mHeight;
 
-
+        int mPlayerX;
+        int mPlayerY;
 
     protected:
 

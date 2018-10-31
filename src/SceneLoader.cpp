@@ -1,8 +1,10 @@
 #include "SceneLoader.h"
 
-SceneLoader::SceneLoader(SDLHandler *SH)
+SceneLoader::SceneLoader(SDLHandler *SH, Game *mainGame)
 {
     mSH = SH;
+
+    mMainGame = mainGame;
 
     leftBound = new TextureObj(mSH, "res/png/boundTexture.png");
     rightBound = new TextureObj(mSH, "res/png/boundTexture.png");
@@ -52,8 +54,8 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                             int bottom;
                             int left;
                             int right;
-                            int playerX;
-                            int playerY;
+                            int playerX = 0;
+                            int playerY = 0;
 
                             //Start Texture means getting a single texture info
                             while (line != "ENDDEF" && !myfile.eof())
@@ -138,9 +140,11 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
 
                             string imgPath;
 
+                            int xPos = 0;
+                            int yPos = 0;
 
-                            int xPos;
-                            int yPos;
+                            int playerLinkX = 0;
+                            int playerLinkY = 0;
 
                             //Start Texture means getting a single texture info
                             while (line != "LINKEND" && !myfile.eof())
@@ -175,6 +179,14 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                                     {
                                         yPos = stoi(value);
                                     }
+                                    else if (param == "PLAYERX")
+                                    {
+                                        playerLinkX = stoi(value);
+                                    }
+                                    else if (param == "PLAYERY")
+                                    {
+                                        playerLinkY = stoi(value);
+                                    }
                                     else
                                     {
                                         cout << "Warning INVALID Param" + param + "\n";
@@ -198,7 +210,7 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
 
 
                             //After while loop it should contain all the relevant fields for passing into animation
-                            LinkObj newLink(linkName, xPos, yPos, newTexObj.mWidth, newTexObj.mHeight);
+                            LinkObj newLink(linkName, xPos, yPos, newTexObj.mWidth, newTexObj.mHeight, playerLinkX, playerLinkY);
                             newScene.addLinkObj(newLink);
 
 
@@ -305,6 +317,19 @@ void SceneLoader::loadScene(string sceneName)
 
             playerInitX = sObj.mPlayerX;
             playerInitY = sObj.mPlayerY;
+
+            if(mMainGame->playerChar != NULL)
+            {
+                cout << "playerX: " << mMainGame->playerChar->mXpos << "\n";
+                cout << "playerY: " << mMainGame->playerChar->mYpos << "\n";
+
+                cout << "playerXset: " << sObj.mPlayerX << "\n";
+                cout << "playerYset: " << sObj.mPlayerY << "\n";
+
+                mMainGame->playerChar->mXpos = sObj.mPlayerX + (mMainGame->playerChar->mWidth / 2);
+                mMainGame->playerChar->mYpos = sObj.mPlayerY;
+            }
+
             cout << "Loaded Scene: " << sceneName << " Path: " + sObj.mPath << "\n";
             mCurrentScene = sObj;
             return;
@@ -314,6 +339,23 @@ void SceneLoader::loadScene(string sceneName)
     cout << "Couldn't find scene:" << sceneName << "\n";
 
 
+}
+
+SceneObj* SceneLoader::getScene(string sceneName)
+{
+    //SceneObj sObj;
+    for(unsigned int i = 0; i < mSceneObjArray.size(); i++)
+    {
+
+        if(sceneName == mSceneObjArray[i].mName)
+        {
+            //sObj = mSceneObjArray[i];
+            return &mSceneObjArray[i];
+        }
+    }
+
+    cout << "Couldn't find scene in getScene:" << sceneName << "\n";
+    return NULL;
 }
 
 void SceneLoader::renderScene(SDL_Rect cameraRect)

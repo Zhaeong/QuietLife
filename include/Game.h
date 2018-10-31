@@ -29,6 +29,7 @@
 
 
 class UIHandler;
+class SceneLoader;
 using namespace std;
 
 class Game
@@ -38,15 +39,15 @@ class Game
         virtual ~Game();
         bool bRunGame;
 
-        SDLHandler *SH;
+        SDLHandler *SH = NULL;
 
-        SceneLoader *mSceneLoader;
+        SceneLoader *mSceneLoader = NULL;
 
-        UIHandler *mUIHandler;
+        UIHandler *mUIHandler= NULL;
 
-        SDL_Rect *cameraRect;
+        SDL_Rect *cameraRect = NULL;
 
-        CharacterObj *playerChar;
+        CharacterObj *playerChar = NULL;
 
         vector<CharacterObj> mCharObjectArray;
 

@@ -13,15 +13,22 @@
 
 #include "LinkObj.h"
 
+#include "Game.h"
+
 using namespace std;
+
+class Game;
+
 
 class SceneLoader
 {
     public:
-        SceneLoader(SDLHandler *SH);
+        SceneLoader(SDLHandler *SH, Game *mainGame);
         virtual ~SceneLoader();
 
         SDLHandler *mSH;
+
+        Game *mMainGame;
 
         TextureObj *backGroundTexture;
 
@@ -40,6 +47,8 @@ class SceneLoader
         void loadScenesFromDirectory(string dirPath);
 
         void loadScene(string sceneName);
+
+        SceneObj* getScene(string sceneName);
 
         void renderScene(SDL_Rect cameraRect);
 

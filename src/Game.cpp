@@ -11,9 +11,6 @@ Game::Game()
 
     SDL_ShowCursor(SDL_DISABLE);
 
-
-
-
     ////////////////////////
     //Initialize libraries//
     ////////////////////////
@@ -33,7 +30,6 @@ Game::Game()
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
     }
 
-
     ////////////////////////////////
     //Initialize game intial state//
     ////////////////////////////////
@@ -42,7 +38,7 @@ Game::Game()
 
     //Load background texture
     cout << "Loading Background\n";
-    mSceneLoader = new SceneLoader(SH);
+    mSceneLoader = new SceneLoader(SH, this);
     mSceneLoader->loadScenesFromDirectory("res/scenes");
     mSceneLoader->loadScene("bedroom.png");
 
@@ -131,6 +127,11 @@ void Game::processEvents()
                 if(boxCollideLink(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight, lObj))
                 {
                     mouseTexture = "res/png/mouseTalk.png";
+
+                    SceneObj *sceneObj = mSceneLoader->getScene(sceneCol);
+                    sceneObj->mPlayerX = lObj.mPlayerX;
+                    sceneObj->mPlayerY = lObj.mPlayerY;
+
                 }
             }
 
