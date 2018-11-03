@@ -47,6 +47,7 @@ class SceneLoader
         void loadScenesFromDirectory(string dirPath);
 
         void loadScene(string sceneName);
+        void loadScene(LinkObj linkCol);
 
         SceneObj* getScene(string sceneName);
 

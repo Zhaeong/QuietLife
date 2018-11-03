@@ -144,6 +144,10 @@ void UIHandler::render()
                             + "\n" + "plaCam - x:" + to_string(mMainGame->playerChar->mXpos - mMainGame->cameraRect->x)
                             + " y:" + to_string(mMainGame->playerChar->mYpos - mMainGame->cameraRect->y)
 
+                            + "\n" + "Cam - x:" + to_string(mMainGame->cameraRect->x)
+                            + " y:" + to_string(mMainGame->cameraRect->y)
+
+
                             + "\n" + "mou - x: " + to_string(mMainGame->mouseXpos)
                             + " y:" + to_string(mMainGame->mouseYpos)
                             , 200);

@@ -34,14 +34,27 @@ Game::Game()
     //Initialize game intial state//
     ////////////////////////////////
 
+    cout << "\n\n=========================================\n";
+    cout << "=========================================\n";
+    cout << "Setting up game state";
     bMouseDown = false;
 
+    //Load camera
+    cameraRect = new SDL_Rect;
+
+    cameraRect->w = GAMEWIDTH;
+    cameraRect->h = GAMEHEIGHT;
+
     //Load background texture
-    cout << "Loading Background\n";
     mSceneLoader = new SceneLoader(SH, this);
     mSceneLoader->loadScenesFromDirectory("res/scenes");
+
+
+    cout << "Loading bedroom scene\n";
     mSceneLoader->loadScene("bedroom.png");
 
+    cout << "\n\n=========================================\n";
+    cout << "=========================================\n";
 
     cout << "Creating CharObj\n";
     //player char
@@ -51,7 +64,6 @@ Game::Game()
     playerChar->setDimension(15, 70);
     playerChar->getTextures("res/characters/steve");
     playerChar->getAnimate("res/characters/steve");
-
 
     //create UI elements
     mUIHandler = new UIHandler(SH, this);
@@ -69,17 +81,9 @@ Game::Game()
 
     addCharObj(bobChar);
 
-    //cameraRect
-    //Load camera to be same
-    cameraRect = new SDL_Rect;
-
-    cameraRect->w = GAMEWIDTH;
-    cameraRect->h = GAMEHEIGHT;
-
-    cameraRect->x = playerChar->mXpos + (playerChar->mWidth  /2) - (cameraRect->w/2);
-    cameraRect->y = playerChar->mYpos + (playerChar->mHeight  /2) - (cameraRect->h/2);
 
 
+    //centerCamOnPlayer();
 }
 
 Game::~Game()
@@ -110,7 +114,9 @@ void Game::processEvents()
 
     //check if mouse is collided with scene transition obj
     //Check if player is currently over a link transition obj
-    string sceneCol = "NONE";
+
+
+    LinkObj *linkCol = NULL;
 
     for(unsigned int i = 0; i < mSceneLoader->mCurrentScene.mLinkObjArray.size(); i++)
     {
@@ -119,25 +125,13 @@ void Game::processEvents()
         //checks if player is collided with scene transition obj
         if(axisColDetector(playerChar->mXpos, playerChar->mWidth, lObj.mXpos, lObj.mWidth))
         {
-            sceneCol = lObj.mName;
-
-            //checks if mouse if collided with scene transition obj
-            if(sceneCol != "NONE")
+            if(boxCollideLink(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight, lObj))
             {
-                if(boxCollideLink(mouseXWorld, mUIHandler->mouseCursorTexture->mWidth, mouseYWorld, mUIHandler->mouseCursorTexture->mHeight, lObj))
-                {
-                    mouseTexture = "res/png/mouseTalk.png";
+                mouseTexture = "res/png/mouseTalk.png";
+                linkCol = &lObj;
 
-                    SceneObj *sceneObj = mSceneLoader->getScene(sceneCol);
-                    sceneObj->mPlayerX = lObj.mPlayerX;
-                    sceneObj->mPlayerY = lObj.mPlayerY;
-
-                }
             }
-
         }
-
-
     }
 
     //Check if player is over a charobj so playe can talk
@@ -259,9 +253,9 @@ void Game::processEvents()
     if(actionName == "KEY_E")
     {
         cout << "Pressed E" << "\n";
-        if(sceneCol != "NONE")
+        if(linkCol != NULL)
         {
-            mSceneLoader->loadScene(sceneCol);
+            mSceneLoader->loadScene(*linkCol);
         }
 
         if(charCol != NULL)
@@ -326,7 +320,7 @@ void Game::processEvents()
 
     if(cameraHitDirectrion != "LEFT" && cameraHitDirectrion != "RIGHT")
     {
-        cameraRect->x = convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect);
+        centerCamOnPlayer();
     }
 
 
@@ -376,4 +370,16 @@ void Game::render()
 void Game::addCharObj(CharacterObj charObj)
 {
     mCharObjectArray.push_back(charObj);
+}
+
+void Game::centerCamOnPlayer()
+{
+    cameraRect->x = convertPlayerXtoCamX(playerChar->mXpos, playerChar->mWidth, cameraRect);
+    cameraRect->y = playerChar->mYpos + (playerChar->mHeight  /2) - (cameraRect->h/2);
+}
+
+void Game::setCamPos(int x, int y)
+{
+    cameraRect->x = x;
+    cameraRect->y = y;
 }

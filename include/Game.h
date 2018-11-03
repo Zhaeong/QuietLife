@@ -63,6 +63,10 @@ class Game
         void addCharObj(CharacterObj charObj);
 
 
+        void centerCamOnPlayer();
+        void setCamPos(int x, int y);
+
+
     protected:
 
     private:

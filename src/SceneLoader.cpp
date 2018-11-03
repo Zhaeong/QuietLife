@@ -57,6 +57,9 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                             int playerX = 0;
                             int playerY = 0;
 
+                            int camX = 0;
+                            int camY = 0;
+
                             //Start Texture means getting a single texture info
                             while (line != "ENDDEF" && !myfile.eof())
                             {
@@ -102,6 +105,14 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                                     {
                                         playerY = stoi(value);
                                     }
+                                    else if (param == "CAMX")
+                                    {
+                                        camX = stoi(value);
+                                    }
+                                    else if (param == "CAMY")
+                                    {
+                                        camY = stoi(value);
+                                    }
                                     else
                                     {
                                         cout << "Warning INVALID Param" + param + "\n";
@@ -128,10 +139,8 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                             newScene.mRight = right;
                             newScene.mPlayerX = playerX;
                             newScene.mPlayerY = playerY;
-
-
-
-
+                            newScene.mCamX = camX;
+                            newScene.mCamY = camY;
 
                         }
                         else if(line == "LINKSTART")
@@ -145,6 +154,9 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
 
                             int playerLinkX = 0;
                             int playerLinkY = 0;
+
+                            int camX = 0;
+                            int camY = 0;
 
                             //Start Texture means getting a single texture info
                             while (line != "LINKEND" && !myfile.eof())
@@ -187,6 +199,14 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
                                     {
                                         playerLinkY = stoi(value);
                                     }
+                                    else if (param == "CAMX")
+                                    {
+                                        camX = stoi(value);
+                                    }
+                                    else if (param == "CAMY")
+                                    {
+                                        camY = stoi(value);
+                                    }
                                     else
                                     {
                                         cout << "Warning INVALID Param" + param + "\n";
@@ -210,7 +230,15 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
 
 
                             //After while loop it should contain all the relevant fields for passing into animation
-                            LinkObj newLink(linkName, xPos, yPos, newTexObj.mWidth, newTexObj.mHeight, playerLinkX, playerLinkY);
+                            LinkObj newLink(linkName,
+                                            xPos,
+                                            yPos,
+                                            newTexObj.mWidth,
+                                            newTexObj.mHeight,
+                                            playerLinkX,
+                                            playerLinkY,
+                                            camX,
+                                            camY);
                             newScene.addLinkObj(newLink);
 
 
@@ -301,8 +329,11 @@ void SceneLoader::loadScenesFromDirectory(string dirPath)
 
 }
 
-void SceneLoader::loadScene(string sceneName)
+
+void SceneLoader::loadScene(LinkObj linkCol)
 {
+
+    string sceneName = linkCol.mName;
     for(unsigned int i = 0; i < mSceneObjArray.size(); i++)
     {
         SceneObj& sObj = mSceneObjArray[i];
@@ -315,6 +346,48 @@ void SceneLoader::loadScene(string sceneName)
 
             //Instead of using the text defined boundaries just use the texture size
 
+            if(mMainGame->playerChar != NULL)
+            {
+                cout << "playerX: " << mMainGame->playerChar->mXpos << "\n";
+                cout << "playerY: " << mMainGame->playerChar->mYpos << "\n";
+
+                cout << "playerXset: " << linkCol.mPlayerX << "\n";
+                cout << "playerYset: " << linkCol.mPlayerY << "\n";
+
+
+
+                mMainGame->playerChar->mXpos = linkCol.mPlayerX + (mMainGame->playerChar->mWidth / 2);
+                mMainGame->playerChar->mYpos = linkCol.mPlayerY;
+
+            }
+            if(mMainGame->cameraRect != NULL)
+            {
+                cout << "camXset: " << linkCol.mCamX << "\n";
+                cout << "camYset: " << linkCol.mCamY << "\n";
+                mMainGame->setCamPos(linkCol.mCamX, linkCol.mCamY);
+            }
+
+            cout << "Loaded Scene: " << sceneName << " Path: " + sObj.mPath << "\n";
+            mCurrentScene = sObj;
+            return;
+        }
+    }
+
+    cout << "Couldn't find scene:" << sceneName << "\n";
+}
+
+void SceneLoader::loadScene(string sceneName)
+{
+    for(unsigned int i = 0; i < mSceneObjArray.size(); i++)
+    {
+        SceneObj& sObj = mSceneObjArray[i];
+        string sObjName = sObj.mName;
+        if(sceneName == sObjName)
+        {
+
+            backGroundTexture = new TextureObj(mSH, sObj.mPath);
+
+            //Instead of using the text defined boundaries just use the texture size
             playerInitX = sObj.mPlayerX;
             playerInitY = sObj.mPlayerY;
 
@@ -330,6 +403,13 @@ void SceneLoader::loadScene(string sceneName)
                 mMainGame->playerChar->mYpos = sObj.mPlayerY;
             }
 
+            if(mMainGame->cameraRect != NULL)
+            {
+                cout << "camXset: " << sObj.mCamX << "\n";
+                cout << "camYset: " << sObj.mCamY << "\n";
+                mMainGame->setCamPos(sObj.mCamX, sObj.mCamY);
+            }
+
             cout << "Loaded Scene: " << sceneName << " Path: " + sObj.mPath << "\n";
             mCurrentScene = sObj;
             return;
@@ -343,13 +423,11 @@ void SceneLoader::loadScene(string sceneName)
 
 SceneObj* SceneLoader::getScene(string sceneName)
 {
-    //SceneObj sObj;
     for(unsigned int i = 0; i < mSceneObjArray.size(); i++)
     {
 
         if(sceneName == mSceneObjArray[i].mName)
         {
-            //sObj = mSceneObjArray[i];
             return &mSceneObjArray[i];
         }
     }
@@ -360,8 +438,6 @@ SceneObj* SceneLoader::getScene(string sceneName)
 
 void SceneLoader::renderScene(SDL_Rect cameraRect)
 {
-    //cout << "rendering scene" << backGroundTexture->mImgLocation << " here";
-    //Render background
     SDL_Rect dstRectBckObj;
 
     dstRectBckObj.h = cameraRect.h;
@@ -421,8 +497,5 @@ void SceneLoader::renderScene(SDL_Rect cameraRect)
 
         tObj.renderTexture(srcRect, dstRectObj, SDL_FLIP_NONE);
     }
-
-
-
 
 }

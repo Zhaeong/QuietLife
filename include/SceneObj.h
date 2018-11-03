@@ -27,6 +27,9 @@ class SceneObj
         int mPlayerX;
         int mPlayerY;
 
+        int mCamX;
+        int mCamY;
+
         vector<LinkObj> mLinkObjArray;
 
         vector<TextureObj> mTextureObjectArray;

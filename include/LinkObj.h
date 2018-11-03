@@ -8,7 +8,15 @@ using namespace std;
 class LinkObj
 {
     public:
-        LinkObj(string name, int xPos, int yPos, int width, int height, int playerX, int playerY);
+        LinkObj(string name,
+                int xPos,
+                int yPos,
+                int width,
+                int height,
+                int playerX,
+                int playerY,
+                int camX,
+                int camY);
         virtual ~LinkObj();
 
         string mName;
@@ -20,6 +28,9 @@ class LinkObj
 
         int mPlayerX;
         int mPlayerY;
+
+        int mCamX;
+        int mCamY;
 
     protected:
 
