@@ -367,18 +367,18 @@
 	<string>
 	"SDLHandler.h"
 
-1540446796 source:d:\github\quietlife\main.cpp
+1540443196 source:d:\github\quietlife\main.cpp
 	<SDL.h>
 	<string>
 	<iostream>
 	"Game.h"
 
-1539581476 d:\github\quietlife\include\sdlhandler.h
+1539577876 d:\github\quietlife\include\sdlhandler.h
 	<string>
 	<vector>
 	<SDL.h>
 
-1539841946 d:\github\quietlife\include\gameobj.h
+1539838346 d:\github\quietlife\include\gameobj.h
 	<cstring>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -390,11 +390,11 @@
 1537760418 source:d:\github\quietlife\src\gameobj.cpp
 	"GameObj.h"
 
-1540446867 source:d:\github\quietlife\src\sdlhandler.cpp
+1540443267 source:d:\github\quietlife\src\sdlhandler.cpp
 	"SDLHandler.h"
 	<iostream>
 
-1540948618 d:\github\quietlife\include\game.h
+1541723310 d:\github\quietlife\include\game.h
 	<string>
 	<vector>
 	<algorithm>
@@ -410,10 +410,10 @@
 	"SceneLoader.h"
 	"UIHandler.h"
 
-1540948500 source:d:\github\quietlife\src\game.cpp
+1541723310 source:d:\github\quietlife\src\game.cpp
 	"Game.h"
 
-1540946274 d:\github\quietlife\include\gameutil.h
+1540942674 d:\github\quietlife\include\gameutil.h
 	<string>
 	<SDL.h>
 	<SDL_ttf.h>
@@ -422,7 +422,7 @@
 	"TextureObj.h"
 	"LinkObj.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -454,12 +454,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_main.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -488,34 +488,34 @@
 	<stdlib.h>
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_config.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\begin_code.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\begin_code.h
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\close_code.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\close_code.h
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_assert.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	<mbarrier.h>
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_audio.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -525,24 +525,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_error.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_endian.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_thread.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -553,18 +553,18 @@
 	<stdlib.h>
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -578,7 +578,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_events.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -592,7 +592,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_video.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -600,13 +600,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rect.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -614,7 +614,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_surface.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -623,11 +623,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -635,27 +635,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -663,11 +663,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_quit.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -675,60 +675,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_touch.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_hints.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_log.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_power.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_render.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_shape.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -737,7 +737,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_system.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -745,13 +745,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_timer.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519925811 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_version.h
+1519922211 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -767,12 +767,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1454366533 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+1454362933 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
 
-1519936451 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_image.h
+1519932851 d:\mingwlibs\sdl2-2.0.8\i686-w64-mingw32\include\sdl2\sdl_image.h
 	"SDL.h"
 	"SDL_version.h"
 	"begin_code.h"
@@ -809,7 +809,7 @@
 1531974907 source:d:\github\quietlife\src\pixelobj.cpp
 	"PixelObj.h"
 
-1531974876 d:\github\quietlife\include\pixelobj.h
+1531971276 d:\github\quietlife\include\pixelobj.h
 	<SDL.h>
 
 1532204188 d:\cbproj\quietlife\include\pixelobj.h
@@ -818,7 +818,7 @@
 1532204188 source:d:\cbproj\quietlife\src\pixelobj.cpp
 	"PixelObj.h"
 
-1540445791 d:\github\quietlife\include\textureobj.h
+1540442191 d:\github\quietlife\include\textureobj.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<SDL_image.h>
@@ -833,7 +833,7 @@
 1539035892 source:d:\github\quietlife\src\characterobj.cpp
 	"CharacterObj.h"
 
-1540188644 d:\github\quietlife\include\characterobj.h
+1540185044 d:\github\quietlife\include\characterobj.h
 	<vector>
 	<string>
 	<iostream>
@@ -877,12 +877,12 @@
 1537326221 source:d:\github\quietlife\src\animdef.cpp
 	"AnimDef.h"
 
-1537326140 d:\github\quietlife\include\animdef.h
+1537322540 d:\github\quietlife\include\animdef.h
 	<string>
 	<vector>
 	"SpriteAnimDef.h"
 
-1537849107 d:\github\quietlife\include\spriteanimdef.h
+1537845507 d:\github\quietlife\include\spriteanimdef.h
 	<string>
 
 1537849077 source:d:\github\quietlife\src\spriteanimdef.cpp
@@ -902,10 +902,10 @@
 1538198016 source:d:\cbproj\quietlife\src\spriteanimdef.cpp
 	"SpriteAnimDef.h"
 
-1540948823 source:d:\github\quietlife\src\sceneloader.cpp
+1541723310 source:d:\github\quietlife\src\sceneloader.cpp
 	"SceneLoader.h"
 
-1540947784 d:\github\quietlife\include\sceneloader.h
+1541723310 d:\github\quietlife\include\sceneloader.h
 	<vector>
 	<string>
 	<dirent.h>
@@ -919,7 +919,7 @@
 1538628102 source:d:\github\quietlife\src\sceneobj.cpp
 	"SceneObj.h"
 
-1539320102 d:\github\quietlife\include\sceneobj.h
+1541723310 d:\github\quietlife\include\sceneobj.h
 	<string>
 	<vector>
 	"LinkObj.h"
@@ -972,34 +972,34 @@
 1539146880 source:d:\github\quietlife\src\objs\linkobj.cpp
 	"LinkObj.h"
 
-1540946879 d:\github\quietlife\include\linkobj.h
+1541723310 d:\github\quietlife\include\linkobj.h
 	<string>
 
-1537326221 source:d:\github\quietlife\src\objdefs\animdef.cpp
+1537322621 source:d:\github\quietlife\src\objdefs\animdef.cpp
 	"AnimDef.h"
 
-1540188644 source:d:\github\quietlife\src\objdefs\characterobj.cpp
+1540185044 source:d:\github\quietlife\src\objdefs\characterobj.cpp
 	"CharacterObj.h"
 
-1540188644 source:d:\github\quietlife\src\objdefs\gameobj.cpp
+1540185044 source:d:\github\quietlife\src\objdefs\gameobj.cpp
 	"GameObj.h"
 
-1540946867 source:d:\github\quietlife\src\objdefs\linkobj.cpp
+1541723310 source:d:\github\quietlife\src\objdefs\linkobj.cpp
 	"LinkObj.h"
 
-1539146739 source:d:\github\quietlife\src\objdefs\pixelobj.cpp
+1539143139 source:d:\github\quietlife\src\objdefs\pixelobj.cpp
 	"PixelObj.h"
 
-1539320136 source:d:\github\quietlife\src\objdefs\sceneobj.cpp
+1539316536 source:d:\github\quietlife\src\objdefs\sceneobj.cpp
 	"SceneObj.h"
 
-1537849077 source:d:\github\quietlife\src\objdefs\spriteanimdef.cpp
+1537845477 source:d:\github\quietlife\src\objdefs\spriteanimdef.cpp
 	"SpriteAnimDef.h"
 
-1540446127 source:d:\github\quietlife\src\objdefs\textureobj.cpp
+1540442527 source:d:\github\quietlife\src\objdefs\textureobj.cpp
 	"TextureObj.h"
 
-1540947239 d:\github\quietlife\include\uihandler.h
+1540943639 d:\github\quietlife\include\uihandler.h
 	<string>
 	<vector>
 	"Game.h"
@@ -1009,7 +1009,7 @@
 	"GameObj.h"
 	"CharacterObj.h"
 
-1540946274 source:d:\github\quietlife\src\uihandler.cpp
+1541723310 source:d:\github\quietlife\src\uihandler.cpp
 	"UIHandler.h"
 
 1541280299 d:\cbproj\quietlife\include\linkobj.h
