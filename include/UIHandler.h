@@ -27,6 +27,8 @@ class UIHandler
         SDLHandler *mSH;
         Game *mMainGame;
 
+
+
         vector<TextureObj> mTextureArray;
 
         TextureObj *mouseCursorTexture;

@@ -138,7 +138,8 @@ void UIHandler::render()
         fontRect.x = 0;
         fontRect.y = 0;
 
-        debugText->loadText("pla - x:" + to_string(mMainGame->playerChar->mXpos)
+        debugText->loadText("Time:" + to_string(mMainGame->mTimePassed)
+                            + "\npla - x:" + to_string(mMainGame->playerChar->mXpos)
                             + " y:" + to_string(mMainGame->playerChar->mYpos)
 
                             + "\n" + "plaCam - x:" + to_string(mMainGame->playerChar->mXpos - mMainGame->cameraRect->x)

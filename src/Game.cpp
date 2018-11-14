@@ -53,7 +53,7 @@ Game::Game()
     cout << "Loading bedroom scene\n";
     mSceneLoader->loadScene("bedroom.png");
 
-    cout << "\n\n=========================================\n";
+    cout << "\n=========================================\n";
     cout << "=========================================\n";
 
     cout << "Creating CharObj\n";
@@ -94,6 +94,8 @@ Game::~Game()
 void Game::processEvents()
 {
     string eventName = SH->getEvent(&mouseXpos, &mouseYpos);
+
+    mTimePassed = SDL_GetTicks()/1000;
 
     string actionName = "NONE";
 

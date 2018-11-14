@@ -51,6 +51,9 @@ class Game
 
         vector<CharacterObj> mCharObjectArray;
 
+        Uint32 mTimePassed;
+
+
         bool bMouseDown;
 
         int mouseXpos, mouseYpos;
@@ -61,8 +64,6 @@ class Game
 
         //helper functions
         void addCharObj(CharacterObj charObj);
-
-
         void centerCamOnPlayer();
         void setCamPos(int x, int y);
 
