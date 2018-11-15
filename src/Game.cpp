@@ -68,10 +68,10 @@ Game::Game()
     //create UI elements
     mUIHandler = new UIHandler(SH, this);
 
-    //create new char
+    //create bob
     CharacterObj bobChar(SH, "Bob");
-    bobChar.setPos(200, 40);
-    bobChar.setDimension(30, 70);
+    bobChar.setPos(200, 45);
+    bobChar.setDimension(50, 60);
     bobChar.mXRenderOffset = 10;
     bobChar.getTextures("res/characters/bob");
     bobChar.getAnimate("res/characters/bob");
@@ -81,9 +81,18 @@ Game::Game()
 
     addCharObj(bobChar);
 
+    //create manager
+    CharacterObj managerChar(SH, "Manager");
+    managerChar.setPos(200, 35);
+    managerChar.setDimension(50, 60);
+    managerChar.mXRenderOffset = 10;
+    managerChar.getTextures("res/characters/manager");
+    managerChar.getAnimate("res/characters/manager");
+    managerChar.loadAnimation("walk");
+    managerChar.currScene = "workMain.png";
+    managerChar.loadDialog("res/characters/manager/intro.dialog");
 
-
-    //centerCamOnPlayer();
+    addCharObj(managerChar);
 }
 
 Game::~Game()
@@ -99,7 +108,6 @@ void Game::processEvents()
 
     string actionName = "NONE";
 
-
     ///////////////////////////////////////////////////////////
     //First check which image to render as the mouse texture
     //////////////////////////////////////////////////////////
@@ -113,11 +121,8 @@ void Game::processEvents()
     int mouseYWorld = mouseYpos + cameraRect->y;
 
 
-
     //check if mouse is collided with scene transition obj
     //Check if player is currently over a link transition obj
-
-
     LinkObj *linkCol = NULL;
 
     for(unsigned int i = 0; i < mSceneLoader->mCurrentScene.mLinkObjArray.size(); i++)
@@ -131,7 +136,6 @@ void Game::processEvents()
             {
                 mouseTexture = "res/png/mouseTalk.png";
                 linkCol = &lObj;
-
             }
         }
     }
